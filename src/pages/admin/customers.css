@@ -1,0 +1,48 @@
+/* Mobile-friendly styles for admin customers page */
+.customers-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  padding: 32px;
+  box-sizing: border-box;
+}
+.customers-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+}
+.customers-table th, .customers-table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+.customers-table th {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+.customers-table tr:last-child td {
+  border-bottom: none;
+}
+.customers-actions {
+  display: flex;
+  gap: 8px;
+}
+@media (max-width: 768px) {
+  .customers-container {
+    max-width: 100%;
+    margin: 12px 0;
+    padding: 12px 4px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .customers-table th, .customers-table td {
+    padding: 8px 4px;
+    font-size: 0.98rem;
+  }
+  .customers-actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+}

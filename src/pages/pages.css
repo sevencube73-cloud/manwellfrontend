@@ -1,0 +1,120 @@
+/* pages.css */
+
+.page-container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #1e1e1e;
+  color: #f1f1f1;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.page-container h1 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #ffcc00; /* gold/yellow */
+}
+
+.page-container p {
+  line-height: 1.6;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.page-container ul {
+  list-style: disc;
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.page-container a {
+  color: #ffcc00;
+  text-decoration: none;
+}
+
+.page-container a:hover {
+  text-decoration: underline;
+}
+.page-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.page-container h2 {
+  color: #f68b1e;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.page-container p {
+  text-align: center;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+
+.return-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.flex-row-form .form-flex-group {
+  display: flex;
+  gap: 15px;
+}
+
+.flex-row-form .form-flex-group > * {
+  flex: 1;
+}
+
+.form-message {
+  margin-bottom: 15px;
+  margin-top: 0;
+  text-align: center;
+  font-weight: bold;
+  color: green;
+}
+
+.return-form input,
+.return-form select,
+.return-form textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.return-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.return-form button {
+  padding: 14px;
+  background: #f68b1e;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.return-form button:hover {
+  background: #d97706;
+}
+
+.form-message {
+  margin-top: 15px;
+  text-align: center;
+  font-weight: bold;
+  color: green;
+}

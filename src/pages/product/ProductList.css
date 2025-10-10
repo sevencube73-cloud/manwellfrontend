@@ -1,0 +1,9 @@
+/* Basic grid and card styles for category product list */
+.product-list-page {
+  padding: 24px 0;
+}
+.product-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
