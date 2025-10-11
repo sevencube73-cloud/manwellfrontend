@@ -112,7 +112,6 @@ const CheckoutPage = () => {
               <label style={{ fontWeight: 600, fontSize: '1.1rem' }}>Payment Method</label>
               <select value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)} style={{ background: '#f7f7f7', borderRadius: 8, padding: '8px 14px', border: '1px solid #ccc', fontSize: '1.1rem' }}>
                 <option value="Mpesa">M-PESA</option>
-                <option value="Pesapal">Pesapal</option>
                 <option value="Pay on Delivery">Pay on Delivery</option>
               </select>
             </div>
