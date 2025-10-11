@@ -22,11 +22,10 @@
   max-width: 320px;
   margin: 40px auto;
   padding: 20px 16px;
-  background: rgba(255,255,255,0.85);
+  background: rgba(226, 226, 226, 0.85);
   border-radius: 14px;
   box-shadow: 0 4px 18px rgba(0,0,0,0.13);
   position: relative;
-  overflow: hidden;
   backdrop-filter: blur(10px) saturate(1.1);
   border: 1px solid rgba(200,220,255,0.14);
   animation: fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) both;
@@ -46,7 +45,7 @@
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 1.2em;
 }
 
 
@@ -69,13 +68,20 @@
   border-radius: 7px;
   border: 1px solid #e0e0e0;
   font-size: 15px;
-  background: #f7f8fa;
+  background: #f7f8f9;
   transition: box-shadow 0.2s, border-color 0.2s;
   outline: none;
   width: 100%;
   max-width: 260px;
   margin: 0 auto;
 }
+
+@media (max-width: 768px) {
+	.auth-form input{
+		width: 80%;
+	}
+}
+
 .auth-form input:focus {
   border-color: #007bff;
   box-shadow: 0 0 0 2px #e3f0ff;
@@ -177,5 +183,5 @@
   font-size: 15px;
   color: #333;
   margin-bottom: 4px;
-  text-align: left;
+  text-align: left;
 }
