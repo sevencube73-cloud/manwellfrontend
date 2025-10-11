@@ -98,6 +98,15 @@ function App() {
 
             {/* Protected routes */}
             <Route
+              path="/admin/orders/:orderId"
+              element={
+                <PrivateRoute roles={["admin"]}>
+                  <OrderDetails />
+                </PrivateRoute>
+              }
+            />
+
+            <Route
               path="/profile"
               element={
                 <PrivateRoute>
