@@ -1,29 +1,48 @@
-/* AdminDashboard.css - Refined Modern UI for Admin Pages */
+/* =========================================================================
+   AdminDashboard.css - Modern Admin UI
+   Clean, responsive, card-based, render-ready
+   ========================================================================= */
 
-/* =====================================
-   Global Styles
-===================================== */
+/* ==========================
+   Base Styles
+   ========================== */
 body, html {
-  background: #f5f6fa;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   margin: 0;
   padding: 0;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background: #f5f6fa;
+  color: #222;
 }
 
+a {
+  text-decoration: none;
+}
+
+/* ==========================
+   Layout Containers
+   ========================== */
 .admin-dashboard {
   max-width: 1200px;
   margin: 40px auto;
+  padding: 32px 40px;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  padding: 32px 40px;
 }
 
-/* Titles */
+.admin-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  min-height: 40vh;
+}
+
+/* ==========================
+   Titles & Headings
+   ========================== */
 .admin-title {
   font-size: 2rem;
   font-weight: 700;
-  color: #222;
   margin-bottom: 24px;
   text-align: center;
 }
@@ -32,271 +51,19 @@ body, html {
   font-size: 1rem;
   color: #555;
   margin-bottom: 30px;
-  text-align: center;
 }
 
-/* =====================================
-   Navigation
-===================================== */
-.admin-nav ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.admin-nav li {
-  flex: 1 1 220px;
-  display: flex;
-  justify-content: center;
-}
-
-.admin-link {
-  display: inline-block;
-  padding: 12px 25px;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #fff;
-  background: linear-gradient(90deg, #007bff, #00c6ff);
-  border-radius: 8px;
-  text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.admin-link:hover {
-  transform: translateY(-3px);
-  box-shadow: 0px 6px 12px rgba(0,0,0,0.15);
-}
-
-/* =====================================
-   Forms & Cards
-===================================== */
-.admin-form, .admin-customers, .admin-products, .form-card {
-  background: #f8fafc;
-  border-radius: 12px;
-  padding: 24px;
+.admin-page-title {
+  font-weight: 700;
+  font-size: 1.75rem;
   margin-bottom: 32px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-
-form input, form textarea, .admin-input, .admin-textarea, .admin-select {
-  width: 100%;
-  padding: 10px 14px;
-  margin-bottom: 16px;
-  border: 1px solid #e0e3ea;
-  border-radius: 8px;
-  font-size: 1rem;
-  background: #fff;
-  transition: border 0.2s;
-}
-
-.admin-input:focus, .admin-textarea:focus, .admin-select:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-.admin-textarea {
-  min-height: 60px;
-  resize: vertical;
-}
-
-.form-actions {
-  display: flex;
-  gap: 10px;
-}
-
-/* Buttons */
-.admin-btn, .admin-link, form button {
-  background: linear-gradient(90deg, #007bff, #00c6ff);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 22px;
-  font-weight: 500;
-  font-size: 1rem;
-  margin-right: 8px;
-  cursor: pointer;
-  transition: box-shadow 0.2s, transform 0.2s;
-}
-
-.admin-btn:hover, .admin-link:hover, form button:hover {
-  box-shadow: 0 2px 8px rgba(0,123,255,0.15);
-  transform: translateY(-2px);
-}
-
-.admin-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-form button.cancel {
-  background: #6c757d;
-}
-
-form button.cancel:hover {
-  background: #565e64;
-}
-
-/* Success/Error/Loading */
-.admin-success {
-  color: #22c55e;
-  background: #f0fdf4;
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 16px;
-}
-
-.admin-error {
-  color: #ef4444;
-  background: #fff1f2;
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 16px;
-}
-
-.admin-loading {
-  color: #3b82f6;
-  background: #eff6ff;
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 16px;
-}
-
-/* =====================================
-   Tables
-===================================== */
-.admin-table-wrapper, .admin-customers, .admin-products {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.admin-table, .customers-table, .products-table, .orders-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  font-size: 1rem;
-  min-width: 650px;
-}
-
-.admin-table th, .admin-table td, .customers-table th, .customers-table td, .products-table th, .products-table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.admin-table th, .customers-table th, .products-table th {
-  background: #007bff;
-  color: #fff;
-  font-weight: 600;
-}
-
-.admin-table tr:hover, .customers-table tr:hover, .products-table tr:hover {
-  background-color: #f9f9f9;
-}
-
-/* Status Badges */
-.admin-status {
-  display: inline-block;
-  padding: 6px 18px;
-  border-radius: 20px;
-  font-size: 0.95rem;
-  font-weight: 600;
+  color: #1e293b;
   text-align: center;
-  color: #fff;
 }
 
-.admin-status-Accepted, .admin-status-Completed, .admin-status-Active {
-  background: #22c55e;
-}
-
-.admin-status-Pending {
-  background: #fbbf24;
-  color: #222;
-}
-
-.admin-status-Rejected, .admin-status-Cancelled {
-  background: #ef4444;
-}
-
-.admin-status-Processing {
-  background: #3b82f6;
-}
-
-.admin-status-Inactive {
-  background: #a1a1aa;
-}
-
-/* =====================================
-   Summary Cards
-===================================== */
-.admin-summary-cards, .orders-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
-  justify-content: center;
-}
-
-.admin-summary-card, .order-summary-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.admin-summary-card:hover, .order-summary-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-}
-
-.admin-summary-title {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 6px;
-}
-
-.admin-summary-value {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #222;
-}
-
-/* Special Revenue Card */
-.revenue-card {
-  background: linear-gradient(135deg, #4f46e5, #3b82f6);
-  color: white;
-}
-
-.revenue-card h3 {
-  color: #e0e7ff;
-}
-
-.revenue-card p {
-  color: white;
-}
-
-/* =====================================
-   Header & Navbar
-===================================== */
-.admin-header {
-  background: #fff;
-  padding: 24px 40px;
-  border-bottom: 1px solid #e0e3ea;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.admin-header-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #222;
-}
-
-/* Flex Navbar */
+/* ==========================
+   Navbar
+   ========================== */
 .admin-navbar-flex {
   display: flex;
   align-items: center;
@@ -325,7 +92,6 @@ form button.cancel:hover {
 
 .admin-navbar-links-flex li a {
   color: #222;
-  text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
   padding: 8px 0;
@@ -341,97 +107,9 @@ form button.cancel:hover {
   color: #1565c0;
 }
 
-/* =====================================
-   Mobile Responsiveness
-===================================== */
-@media (max-width: 768px) {
-  .admin-dashboard {
-    max-width: 100%;
-    margin: 15px 10px;
-    padding: 20px 15px;
-  }
-
-  .admin-content {
-    padding: 20px 10px;
-  }
-
-  .admin-title {
-    font-size: 1.75rem;
-  }
-
-  .admin-nav li {
-    flex: 1 1 45%;
-  }
-
-  .admin-sidebar {
-    display: none;
-  }
-
-  .admin-summary-cards, .orders-grid {
-    gap: 15px;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  }
-
-  .form-actions {
-    flex-direction: column;
-  }
-  .form-actions button {
-    width: 100%;
-  }
-
-  .admin-search-bar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .admin-search-input, .admin-filter-select {
-    width: 100%;
-  }
-
-  .admin-navbar-flex {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0 10px;
-    height: auto;
-  }
-  .admin-navbar-links-flex {
-    flex-wrap: wrap;
-    gap: 15px;
-    padding: 10px 0;
-  }
-}
-
-@media (max-width: 600px) {
-  .admin-dashboard {
-    padding: 15px 10px;
-    margin: 10px;
-  }
-
-  .admin-title {
-    font-size: 1.5rem;
-  }
-
-  .admin-nav li {
-    flex: 1 1 100%;
-  }
-
-  form input, form textarea, .admin-input, .admin-textarea, .admin-select {
-    margin-bottom: 10px;
-    padding: 12px;
-  }
-
-  .customers-table td .btn, .products-table td .btn {
-    padding: 4px 8px;
-    margin: 2px 1px;
-    font-size: 0.75rem;
-  }
-
-  .admin-summary-cards, .orders-grid {
-    grid-template-columns: 1fr;
-  }
-}
-/* =====================================
-   Sidebar Toggle (Mobile)
-===================================== */
+/* ==========================
+   Sidebar
+   ========================== */
 .admin-sidebar {
   position: fixed;
   left: 0;
@@ -442,13 +120,6 @@ form button.cancel:hover {
   border-right: 1px solid #e0e3ea;
   padding: 32px 0;
   box-shadow: 2px 0 8px rgba(0,0,0,0.04);
-  transform: translateX(0);
-  transition: transform 0.3s ease;
-  z-index: 1000;
-}
-
-.admin-sidebar.hidden {
-  transform: translateX(-100%);
 }
 
 .admin-sidebar ul {
@@ -462,55 +133,275 @@ form button.cancel:hover {
 }
 
 .admin-sidebar a {
-  color: #222;
-  text-decoration: none;
+  display: block;
   font-size: 1.1rem;
   padding: 10px 24px;
-  display: block;
   border-radius: 8px;
+  color: #222;
   transition: background 0.2s;
 }
 
-.admin-sidebar a.active,
-.admin-sidebar a:hover {
+.admin-sidebar a:hover,
+.admin-sidebar a.active {
   background: #f5f6fa;
   color: #007bff;
 }
 
-/* Overlay when sidebar is open */
-.admin-sidebar-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.3);
-  z-index: 999;
+/* ==========================
+   Summary Cards
+   ========================== */
+.admin-summary-cards {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
 }
 
-.admin-sidebar-overlay.active {
-  display: block;
+.admin-summary-card {
+  flex: 1;
+  min-width: 180px;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 18px 28px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  text-align: left;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* Sidebar toggle button */
-.sidebar-toggle-btn {
-  display: none;
-  background: #007bff;
+.admin-summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+.admin-summary-title {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.admin-summary-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #222;
+}
+
+/* ==========================
+   Forms
+   ========================== */
+.admin-form,
+.admin-customers,
+.admin-products,
+.form-card {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.admin-input,
+.admin-textarea,
+.admin-select,
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  border: 1px solid #e0e3ea;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fff;
+  transition: border 0.2s;
+}
+
+.admin-input:focus,
+.admin-textarea:focus,
+.admin-select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.admin-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.admin-btn,
+.admin-link,
+form button {
+  background: linear-gradient(90deg, #007bff, #00c6ff);
   color: #fff;
   border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-weight: 500;
   font-size: 1rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
-/* =====================================
-   Mobile Adjustments
-===================================== */
-@media (max-width: 768px) {
-  .admin-sidebar {
-    transform: translateX(-100%);
-  }
+.admin-btn:hover,
+.admin-link:hover,
+form button:hover {
+  box-shadow: 0 2px 8px rgba(0,123,255,0.15);
+  transform: translateY(-2px);
+}
 
-  .sidebar-toggle-btn {
-    display: block;
-  }
+.admin-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+form button.cancel {
+  background: #6c757d;
+}
+
+form button.cancel:hover {
+  background: #565e64;
+}
+
+/* ==========================
+   Tables
+   ========================== */
+.admin-table-wrapper,
+.admin-customers,
+.admin-products {
+  overflow-x: auto;
+}
+
+.admin-table,
+.customers-table,
+.products-table,
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.admin-table th,
+.admin-table td,
+.customers-table th,
+.customers-table td,
+.products-table th,
+.products-table td,
+.orders-table th,
+.orders-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.admin-table th {
+  background: #f5f6fa;
+  font-weight: 600;
+  color: #222;
+}
+
+.admin-table tr:hover,
+.customers-table tr:hover,
+.products-table tr:hover,
+.orders-table tr:hover {
+  background: #f9f9f9;
+}
+
+.btn {
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: none;
+  margin-right: 5px;
+}
+
+.btn.edit { background: #28a745; color: #fff; }
+.btn.edit:hover { background: #218838; }
+.btn.delete { background: #dc3545; color: #fff; }
+.btn.delete:hover { background: #c82333; }
+.btn.deactivate { background: #f0ad4e; color: #fff; }
+.btn.deactivate:hover { background: #ec971f; }
+.btn.add { background: #28a745; color: #fff; font-weight: bold; }
+.btn.add:hover { background: #218838; }
+
+/* ==========================
+   Status Labels
+   ========================== */
+.admin-status {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+}
+.admin-status-Accepted,
+.admin-status-Completed,
+.admin-status-Active { background: #22c55e; }
+.admin-status-Pending { background: #fbbf24; color: #222; }
+.admin-status-Rejected,
+.admin-status-Cancelled { background: #ef4444; }
+.admin-status-Processing { background: #3b82f6; }
+.admin-status-Inactive { background: #a1a1aa; }
+
+/* ==========================
+   Loading & Errors
+   ========================== */
+.admin-loading,
+.loading {
+  color: #3b82f6;
+  background: #eff6ff;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.admin-success,
+.success { color: #22c55e; margin-bottom: 10px; }
+.admin-error,
+.error,
+.error-message { color: #ef4444; margin-bottom: 10px; }
+
+/* ==========================
+   Responsive Grid for Cards
+   ========================== */
+.orders-grid,
+.admin-summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+/* Revenue Card Special Styling */
+.revenue-card {
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
+  color: #fff;
+}
+
+/* ==========================
+   Responsive Media Queries
+   ========================== */
+@media (max-width: 768px) {
+  .admin-dashboard { padding: 20px 15px; margin: 15px 10px; }
+  .admin-title { font-size: 1.75rem; }
+  .admin-summary-cards,
+  .orders-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+  .admin-sidebar { display: none; }
+  .form-actions { flex-direction: column; }
+  .form-actions button { width: 100%; }
+  .admin-search-bar { flex-direction: column; align-items: stretch; }
+}
+
+@media (max-width: 600px) {
+  .admin-dashboard { padding: 15px 10px; margin: 10px; }
+  .admin-title { font-size: 1.5rem; }
+  .admin-nav li { flex: 1 1 100%; }
+  .admin-summary-cards,
+  .orders-grid { grid-template-columns: 1fr; }
+  .btn { padding: 4px 8px; font-size: 0.75rem; margin: 2px 1px; }
 }
