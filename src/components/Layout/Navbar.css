@@ -1,407 +1,210 @@
-/* =========================================================================
-   AdminDashboard.css - Modern Admin UI
-   Clean, responsive, card-based, render-ready
-   ========================================================================= */
-
-/* ==========================
-   Base Styles
-   ========================== */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  background: #f5f6fa;
-  color: #222;
-}
-
-a {
-  text-decoration: none;
-}
-
-/* ==========================
-   Layout Containers
-   ========================== */
-.admin-dashboard {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 32px 40px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-}
-
-.admin-content {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 32px 24px;
-  min-height: 40vh;
-}
-
-/* ==========================
-   Titles & Headings
-   ========================== */
-.admin-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 24px;
-  text-align: center;
-}
-
-.admin-subtitle {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 30px;
-}
-
-.admin-page-title {
-  font-weight: 700;
-  font-size: 1.75rem;
-  margin-bottom: 32px;
-  color: #1e293b;
-  text-align: center;
-}
-
-/* ==========================
-   Navbar
-   ========================== */
-.admin-navbar-flex {
+/* General navbar container */
+.navbar {
+  
+  top: 0;
+  left: 0;
+  height: 65px;
+  
+  z-index: 1000;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fff;
-  border-bottom: 1px solid #e5e7eb;
-  padding: 0 32px;
-  height: 60px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-  z-index: 10;
+  padding: 0.8rem 2rem;
+  background: rgba(141, 210, 238, 0.7);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  font-family: 'Inter', sans-serif;
 }
 
-.admin-navbar-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #222;
-}
-
-.admin-navbar-links-flex {
+/* Logo */
+.navbar-left {
   display: flex;
-  gap: 32px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  align-items: center;
 }
 
-.admin-navbar-links-flex li a {
-  color: #222;
-  font-size: 1rem;
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 50px;       /* bigger and visible */
+  width: auto;        /* keeps proportions */
+  object-fit: contain;
+}
+
+
+/* Nav links (center) */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  margin: 0 auto;
+}
+.nav-links a {
+  text-decoration: none;
+  color: #111;
   font-weight: 500;
-  padding: 8px 0;
-  transition: color 0.2s;
+  font-size: 0.95rem;
+  position: relative;
+  transition: color 0.2s ease;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  right: 1rem;
+  top:1rem;
+  bottom: -4px;
+  height: 2px;
+  width: 100%;
+  background: #111;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.nav-links a:hover {
+  color: #000;
+}
+.nav-links a:hover::after {
+  transform: scaleX(1);
 }
 
-.admin-navbar-links-flex li a.active {
-  color: #1976d2;
-  border-bottom: 2px solid #1976d2;
+/* Right side controls */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  
+  position: relative;
 }
 
-.admin-navbar-links-flex li a:hover {
-  color: #1565c0;
+/* Account dropdown */
+.nav-user-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  position: relative;
+}
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #007bff;
+}
+.user-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.chevron {
+  font-size: 0.7rem;
+  margin-left: 2px;
 }
 
-/* ==========================
-   Sidebar
-   ========================== */
-.admin-sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 220px;
-  background: #fff;
-  border-right: 1px solid #e0e3ea;
-  padding: 32px 0;
-  box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+/* Dropdown menu */
+.dropdown-content {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: white;
+  border-radius: 10px;
+  padding: 0.8rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 180px;
+  animation: fadeIn 0.2s ease;
 }
-
-.admin-sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.dropdown-content a,
+.dropdown-content button {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.9rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  padding: 0.4rem 0;
+  transition: color 0.2s ease;
 }
-
-.admin-sidebar li {
-  margin-bottom: 18px;
-}
-
-.admin-sidebar a {
-  display: block;
-  font-size: 1.1rem;
-  padding: 10px 24px;
-  border-radius: 8px;
-  color: #222;
-  transition: background 0.2s;
-}
-
-.admin-sidebar a:hover,
-.admin-sidebar a.active {
-  background: #f5f6fa;
+.dropdown-content a:hover,
+.dropdown-content button:hover {
   color: #007bff;
 }
 
-/* ==========================
-   Summary Cards
-   ========================== */
-.admin-summary-cards {
-  display: flex;
-  gap: 24px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-}
-
-.admin-summary-card {
-  flex: 1;
-  min-width: 180px;
-  background: #f8fafc;
-  border-radius: 12px;
-  padding: 18px 28px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  text-align: left;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.admin-summary-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-}
-
-.admin-summary-title {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 6px;
-}
-
-.admin-summary-value {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #222;
-}
-
-/* ==========================
-   Forms
-   ========================== */
-.admin-form,
-.admin-customers,
-.admin-products,
-.form-card {
-  background: #f8fafc;
-  border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 32px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-
-.admin-input,
-.admin-textarea,
-.admin-select,
-form input,
-form textarea {
-  width: 100%;
-  padding: 10px 14px;
-  margin-bottom: 16px;
-  border: 1px solid #e0e3ea;
-  border-radius: 8px;
-  font-size: 1rem;
-  background: #fff;
-  transition: border 0.2s;
-}
-
-.admin-input:focus,
-.admin-textarea:focus,
-.admin-select:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-.admin-textarea {
-  min-height: 80px;
-  resize: vertical;
-}
-
-.admin-btn,
-.admin-link,
-form button {
-  background: linear-gradient(90deg, #007bff, #00c6ff);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 22px;
-  font-weight: 500;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: box-shadow 0.2s, transform 0.2s;
-}
-
-.admin-btn:hover,
-.admin-link:hover,
-form button:hover {
-  box-shadow: 0 2px 8px rgba(0,123,255,0.15);
-  transform: translateY(-2px);
-}
-
-.admin-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.form-actions {
-  display: flex;
-  gap: 10px;
-}
-
-form button.cancel {
-  background: #6c757d;
-}
-
-form button.cancel:hover {
-  background: #565e64;
-}
-
-/* ==========================
-   Tables
-   ========================== */
-.admin-table-wrapper,
-.admin-customers,
-.admin-products {
-  overflow-x: auto;
-}
-
-.admin-table,
-.customers-table,
-.products-table,
-.orders-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.95rem;
-}
-
-.admin-table th,
-.admin-table td,
-.customers-table th,
-.customers-table td,
-.products-table th,
-.products-table td,
-.orders-table th,
-.orders-table td {
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
-}
-
-.admin-table th {
-  background: #f5f6fa;
+/* Logout button */
+.logout-btn {
   font-weight: 600;
-  color: #222;
+  color: red !important;
 }
 
-.admin-table tr:hover,
-.customers-table tr:hover,
-.products-table tr:hover,
-.orders-table tr:hover {
-  background: #f9f9f9;
+/* Cart */
+.nav-cart {
+  position: relative;
+  color: #111;
 }
-
-.btn {
-  padding: 6px 12px;
-  border-radius: 5px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  border: none;
-  margin-right: 5px;
-}
-
-.btn.edit { background: #28a745; color: #fff; }
-.btn.edit:hover { background: #218838; }
-.btn.delete { background: #dc3545; color: #fff; }
-.btn.delete:hover { background: #c82333; }
-.btn.deactivate { background: #f0ad4e; color: #fff; }
-.btn.deactivate:hover { background: #ec971f; }
-.btn.add { background: #28a745; color: #fff; font-weight: bold; }
-.btn.add:hover { background: #218838; }
-
-/* ==========================
-   Status Labels
-   ========================== */
-.admin-status {
-  display: inline-block;
-  padding: 6px 18px;
-  border-radius: 20px;
-  font-size: 0.95rem;
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #ff3b30;
+  color: white;
+  font-size: 0.75rem;
   font-weight: 600;
-  text-align: center;
-  color: #fff;
-}
-.admin-status-Accepted,
-.admin-status-Completed,
-.admin-status-Active { background: #22c55e; }
-.admin-status-Pending { background: #fbbf24; color: #222; }
-.admin-status-Rejected,
-.admin-status-Cancelled { background: #ef4444; }
-.admin-status-Processing { background: #3b82f6; }
-.admin-status-Inactive { background: #a1a1aa; }
-
-/* ==========================
-   Loading & Errors
-   ========================== */
-.admin-loading,
-.loading {
-  color: #3b82f6;
-  background: #eff6ff;
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 16px;
-  text-align: center;
+  padding: 2px 6px;
+  border-radius: 50%;
 }
 
-.admin-success,
-.success { color: #22c55e; margin-bottom: 10px; }
-.admin-error,
-.error,
-.error-message { color: #ef4444; margin-bottom: 10px; }
+/* Mobile toggle */
+/* .mobile-toggle {
+  background: none;
+  border: none;
+  display: none;
+  cursor: pointer;
+  color: #111;
+} */
 
-/* ==========================
-   Responsive Grid for Cards
-   ========================== */
-.orders-grid,
-.admin-summary-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
-}
-
-/* Revenue Card Special Styling */
-.revenue-card {
-  background: linear-gradient(135deg, #4f46e5, #3b82f6);
-  color: #fff;
-}
-
-/* ==========================
-   Responsive Media Queries
-   ========================== */
+/* Mobile menu overlay */
 @media (max-width: 768px) {
-  .admin-dashboard { padding: 20px 15px; margin: 15px 10px; }
-  .admin-title { font-size: 1.75rem; }
-  .admin-summary-cards,
-  .orders-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
-  .admin-sidebar { display: none; }
-  .form-actions { flex-direction: column; }
-  .form-actions button { width: 100%; }
-  .admin-search-bar { flex-direction: column; align-items: stretch; }
+  .navbar {
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 2rem;
+  background: #fff;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  font-family: 'Inter', sans-serif;
+}
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    height: 100%;
+    width: 70%;
+    background: white;
+    flex-direction: column;
+    padding: 2rem;
+    transition: left 0.3s ease;
+    gap: 1.5rem;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  }
+  .nav-links.open {
+    left: 0;
+  }
+  .mobile-toggle {
+    display: block;
+  }
 }
 
-@media (max-width: 600px) {
-  .admin-dashboard { padding: 15px 10px; margin: 10px; }
-  .admin-title { font-size: 1.5rem; }
-  .admin-nav li { flex: 1 1 100%; }
-  .admin-summary-cards,
-  .orders-grid { grid-template-columns: 1fr; }
-  .btn { padding: 4px 8px; font-size: 0.75rem; margin: 2px 1px; }
+/* Animations */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-5px);}
+  to {opacity: 1; transform: translateY(0);}
 }
