@@ -16,7 +16,9 @@
   border-bottom: 1px solid rgba(0,0,0,0.05);
   font-family: 'Inter', sans-serif;
 }
-
+.nav-login-link{
+  width: 50px;
+}
 /* Logo */
 .navbar-left {
   display: flex;
