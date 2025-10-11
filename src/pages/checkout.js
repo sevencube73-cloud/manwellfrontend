@@ -22,11 +22,12 @@ const CheckoutPage = () => {
       if (paymentMethod === 'Pay on Delivery') {
         const orderPayload = {
           orderItems: cartItems.map(i => ({ product: i.product._id, qty: i.qty })),
+          shippingAddress: {},
           paymentMethod,
           totalPrice,
         };
         await api.post('/orders', orderPayload);
-        setMessage('✅ Order placed successfully! You can pay upon delivery.');
+        setMessage('✅ Order placed. Admin will process and deliver your order.');
         clearCart();
       } else {
         await api.post('/payments/mpesa', {
@@ -34,7 +35,7 @@ const CheckoutPage = () => {
           amount: totalPrice,
           items: cartItems.map(i => ({ productId: i.product._id, qty: i.qty })),
         });
-        setMessage('✅ Payment request sent to your phone.');
+        setMessage('✅ Payment request sent. Complete it on your phone.');
         clearCart();
       }
     } catch (err) {
@@ -47,8 +48,8 @@ const CheckoutPage = () => {
   if (cartItems.length === 0) {
     return (
       <div className="empty-checkout">
-        <p>Success! Your order is being processed.</p>
-        <button className="back-btn" onClick={() => window.location.href = '/cart'}>
+        <p>✅ Your order is being processed.</p>
+        <button className="btn-back" onClick={() => (window.location.href = '/cart')}>
           ⬅️ Back to Cart
         </button>
       </div>
@@ -60,74 +61,81 @@ const CheckoutPage = () => {
       <h2>Checkout</h2>
 
       <div className="checkout-summary">
-        <p><strong>Total Amount:</strong> Ksh {(Number(totalPrice) || 0).toFixed(2)}</p>
+        <p><strong>Total Amount:</strong> ${(Number(totalPrice) || 0).toFixed(2)}</p>
       </div>
 
-      <div className="checkout-form">
-        <div className="form-group">
-          <label>Item’s Retail Price</label>
-          <input type="number" value={totalPrice} readOnly />
+      <div className="checkout-main">
+        <div className="checkout-left">
+          <button className="btn-back" onClick={() => (window.location.href = '/cart')}>
+            ⬅️ Back to Cart
+          </button>
+
+          <form className="checkout-form">
+            <div className="form-group">
+              <label>Item’s Retail Price</label>
+              <input type="number" value={totalPrice} readOnly />
+            </div>
+
+            <div className="form-group">
+              <label>Payment Method</label>
+              <div className="payment-options">
+                <label
+                  className={`payment-option ${paymentMethod === 'Mpesa' ? 'active' : ''}`}
+                >
+                  <input
+                    type="radio"
+                    value="Mpesa"
+                    checked={paymentMethod === 'Mpesa'}
+                    onChange={() => setPaymentMethod('Mpesa')}
+                  />
+                  <span>M-PESA</span>
+                </label>
+
+                <label
+                  className={`payment-option ${paymentMethod === 'Pay on Delivery' ? 'active' : ''}`}
+                >
+                  <input
+                    type="radio"
+                    value="Pay on Delivery"
+                    checked={paymentMethod === 'Pay on Delivery'}
+                    onChange={() => setPaymentMethod('Pay on Delivery')}
+                  />
+                  <span>Pay on Delivery</span>
+                </label>
+              </div>
+            </div>
+
+            {paymentMethod !== 'Pay on Delivery' && (
+              <div className="form-group">
+                <label>Phone Number</label>
+                <input
+                  type="tel"
+                  placeholder="Enter mobile phone number"
+                  value={phone}
+                  onChange={e => setPhone(e.target.value)}
+                />
+              </div>
+            )}
+
+            {paymentMethod === 'Pay on Delivery' && (
+              <div className="delivery-info">
+                🚚 You have selected <b>Pay on Delivery</b>. Pay when your items arrive.
+              </div>
+            )}
+
+            <button
+              type="button"
+              className={`next-btn ${loading ? 'loading' : ''}`}
+              onClick={handlePayment}
+            >
+              {loading ? 'Processing...' : paymentMethod === 'Pay on Delivery'
+                ? 'Place Order & Pay on Delivery'
+                : 'Next'}
+            </button>
+          </form>
+
+          {message && <div className="message-box">{message}</div>}
         </div>
-
-        <div className="form-group">
-          <label>Payment Method</label>
-          <div className="payment-options">
-            <label className={`payment-option ${paymentMethod === 'Mpesa' ? 'active' : ''}`}>
-              <input
-                type="radio"
-                value="Mpesa"
-                checked={paymentMethod === 'Mpesa'}
-                onChange={e => setPaymentMethod(e.target.value)}
-              />
-              <span>M-PESA</span>
-            </label>
-            <label className={`payment-option ${paymentMethod === 'Pay on Delivery' ? 'active' : ''}`}>
-              <input
-                type="radio"
-                value="Pay on Delivery"
-                checked={paymentMethod === 'Pay on Delivery'}
-                onChange={e => setPaymentMethod(e.target.value)}
-              />
-              <span>Pay on Delivery</span>
-            </label>
-          </div>
-        </div>
-
-        {paymentMethod !== 'Pay on Delivery' && (
-          <div className="form-group">
-            <label>Phone Number</label>
-            <input
-              type="tel"
-              placeholder="Enter your M-PESA number"
-              value={phone}
-              onChange={e => setPhone(e.target.value)}
-            />
-          </div>
-        )}
-
-        {paymentMethod === 'Pay on Delivery' && (
-          <div className="delivery-info">
-            🚚 You selected <b>Pay on Delivery</b>. Pay when your items arrive.
-          </div>
-        )}
-
-        {message && <div className="checkout-message">{message}</div>}
-
-        <button
-          className="checkout-btn"
-          onClick={handlePayment}
-          disabled={loading}
-        >
-          {loading
-            ? 'Processing...'
-            : paymentMethod === 'Pay on Delivery'
-            ? 'Place Order'
-            : 'Pay Now'}
-        </button>
-
-        <button className="back-btn" onClick={() => window.location.href = '/cart'}>
-          ⬅️ Back to Cart
-        </button>
       </div>
     </div>
   );
