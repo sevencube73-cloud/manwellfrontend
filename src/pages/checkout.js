@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ShippingAddressForm from "./ShippingAddressForm";
 import Payment from "./Payment";
-import "./Checkout.css";
+import "./checkout.css";
 
 const Checkout = () => {
   const [shippingData, setShippingData] = useState(null);
