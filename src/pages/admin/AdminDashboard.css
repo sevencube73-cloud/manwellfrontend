@@ -1,8 +1,5 @@
 /* AdminDashboard.css - Modern UI for admin pages */
-body, html {
-  
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-}
+
 
 .admin-dashboard {
   max-width: 1200px;
