@@ -1,3 +1,8 @@
+body{
+  box-sizing: border-box;
+  margin: 0; padding: 0;
+}
+
 .home-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -62,18 +67,17 @@
 
 
 /* Full page centering */
-.login-page {
+.login-page, .register-page {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start;
+  height: 80vh;
   background: #f5f7fa;
-  padding: 20px;
 }
 
 /* Card container */
-.login-card {
-  background: #ffffff;
+.login-card, .register-card {
+  background: #cfcfcf;
   padding: 30px 40px;
   border-radius: 12px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
@@ -86,13 +90,13 @@
   font-size: 1.8rem;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
   color: #333;
+  text-transform: uppercase;
 }
 
 /* Form inputs (affects inputs inside LoginForm) */
 .login-card input {
-  width: 100%;
+  width: 90%;
   padding: 12px;
   margin: 10px 0;
   border-radius: 8px;
@@ -120,47 +124,19 @@
 }
 
 
-
-/*  */
-
 /* Full page centering */
-.register-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: #f5f7fa;
-  padding: 20px;
-}
-
-/* Card container */
-.register-card {
-  background: #ffffff;
-  padding: 30px 40px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 450px;
-}
+ .register-page {
+     height: 90vh;
+} 
 
 /* Title */
 .register-title {
   font-size: 1.8rem;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
   color: #333;
 }
 
-/* Form inputs (affects inputs inside RegisterForm) */
-.register-card input {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
 
 /* Button */
 .register-card button {
@@ -181,6 +157,24 @@
   background: #1e7e34;
 }
 
+
+@media (max-width: 768px) {
+	.login-page, .register-page{
+          position: relative;
+          left: 5%;
+          right: 5%;
+          width: 90%;
+     }
+     .login-card, .register-card{
+          padding: 0 .5em 0 .5em;
+     }
+     .login-card input{
+          width: 80%;
+     }
+     .login-title, .register-title{
+          padding: 0; margin: 0;
+     }
+}
 
 /*  */
 
@@ -274,5 +268,5 @@
   text-align: center;
   margin-top: 50px;
   font-size: 1.1rem;
-  color: #444;
+  color: #444;
 }
