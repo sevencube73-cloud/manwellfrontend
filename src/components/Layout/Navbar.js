@@ -138,8 +138,8 @@ const Navbar = () => {
         //   className="mobile-toggle"
         //   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         // >
-          {mobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-        </button>
+        //   {mobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+        // </button>
       </div>
     </nav>
   );
