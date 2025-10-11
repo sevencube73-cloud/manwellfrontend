@@ -134,12 +134,12 @@ const Navbar = () => {
         </Link>
 
         {/* Mobile Toggle */}
-        // <button
-        //   className="mobile-toggle"
-        //   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        // >
-        //   {mobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-        // </button>
+        <button
+          className="mobile-toggle"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          
+        </button>
       </div>
     </nav>
   );
