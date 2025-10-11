@@ -1,60 +1,37 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import api from "../utils/api";
+import React, { useContext, useState } from "react";
+import { CartContext } from "../context/CartContext";
+import api from "../../utils/api";
 import "./Payment.css";
 
-const Payment = ({ shippingAddress, orderItems, totalPrice }) => {
-  const [showOptions, setShowOptions] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
+const Payment = ({ shippingAddress }) => {
+  const { cartItems, clearCart } = useContext(CartContext);
+  const [paymentMethod, setPaymentMethod] = useState("Mpesa");
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
-  const handlePayNow = () => {
-    setShowOptions(true);
-  };
+  const totalPrice = cartItems.reduce((a, c) => a + c.product.price * c.qty, 0);
 
-  const handleSelect = (option) => {
-    setSelectedOption(option);
-  };
-
-  const handleConfirm = async () => {
-    if (!selectedOption) {
-      setMessage("Please select a payment method.");
-      return;
-    }
-
-    setLoading(true);
-    setMessage("");
-
+  const handlePayment = async () => {
     try {
-      // ✅ create the order in backend
-      const { data } = await api.post("/orders", {
-        orderItems,
+      const orderPayload = {
+        orderItems: cartItems.map(i => ({
+          product: i.product._id,
+          qty: i.qty,
+        })),
         shippingAddress,
-        paymentMethod: selectedOption,
+        paymentMethod,
         totalPrice,
-      });
+      };
 
-      if (selectedOption === "M-PESA") {
-        // 🔹 Optionally trigger your M-PESA STK push here
-        setMessage("Processing M-PESA payment...");
-        setTimeout(() => {
-          navigate(`/order-success/${data._id}`);
-        }, 2000);
-      } else {
-        // Pay on Delivery
-        setMessage("Order placed successfully. Pay on delivery.");
-        setTimeout(() => {
-          navigate(`/order-success/${data._id}`);
-        }, 1500);
-      }
-    } catch (error) {
-      console.error("Payment error:", error);
-      setMessage("Something went wrong while placing your order.");
-    } finally {
-      setLoading(false);
-      setShowOptions(false);
+      const token = localStorage.getItem("token"); // adjust to your auth key
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+
+      const { data } = await api.post("/orders", orderPayload, config);
+
+      setMessage("✅ Order placed successfully!");
+      clearCart();
+    } catch (err) {
+      console.error("Payment error:", err);
+      setMessage(`❌ ${err.response?.data?.message || "Payment failed"}`);
     }
   };
 
@@ -67,63 +44,32 @@ const Payment = ({ shippingAddress, orderItems, totalPrice }) => {
         {shippingAddress.country}
       </p>
 
-      <button className="pay-btn" onClick={handlePayNow} disabled={loading}>
-        {loading ? "Processing..." : "Pay Now"}
-      </button>
+      <div className="payment-options">
+        <label>
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="Mpesa"
+            checked={paymentMethod === "Mpesa"}
+            onChange={e => setPaymentMethod(e.target.value)}
+          />
+          M-PESA
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="Pay on Delivery"
+            checked={paymentMethod === "Pay on Delivery"}
+            onChange={e => setPaymentMethod(e.target.value)}
+          />
+          Pay on Delivery
+        </label>
+      </div>
 
-      {showOptions && (
-        <div className="payment-modal">
-          <div className="payment-modal-content">
-            <h3>Select Payment Method</h3>
-            <div className="payment-options">
-              <div
-                className={`payment-option ${
-                  selectedOption === "M-PESA" ? "active" : ""
-                }`}
-                onClick={() => handleSelect("M-PESA")}
-              >
-                <input
-                  type="radio"
-                  name="payment"
-                  checked={selectedOption === "M-PESA"}
-                  readOnly
-                />
-                <span>M-PESA</span>
-              </div>
+      <button className="pay-btn" onClick={handlePayment}>Pay Now</button>
 
-              <div
-                className={`payment-option ${
-                  selectedOption === "Pay on Delivery" ? "active" : ""
-                }`}
-                onClick={() => handleSelect("Pay on Delivery")}
-              >
-                <input
-                  type="radio"
-                  name="payment"
-                  checked={selectedOption === "Pay on Delivery"}
-                  readOnly
-                />
-                <span>Pay on Delivery</span>
-              </div>
-            </div>
-
-            <div className="payment-actions">
-              <button className="confirm-btn" onClick={handleConfirm} disabled={loading}>
-                {loading ? "Placing..." : "Confirm"}
-              </button>
-              <button
-                className="cancel-btn"
-                onClick={() => setShowOptions(false)}
-                disabled={loading}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {message && <div className="payment-message">{message}</div>}
+      {message && <p className="status-message">{message}</p>}
     </div>
   );
 };
