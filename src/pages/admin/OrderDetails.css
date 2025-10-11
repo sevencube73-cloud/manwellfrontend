@@ -1,145 +1,92 @@
-/* Base Styles for the entire page */
 .order-details-container {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 30px auto;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Loading State Style */
-.order-details-loading {
-  text-align: center;
-  padding: 50px;
-  font-size: 1.2em;
-  color: #555;
-}
-
-/* Title Styling */
 .order-details-title {
-  color: #333;
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-  font-size: 1.8em;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 24px;
+  color: #1f4068;
 }
 
-/* Card Styles (Customer Info and Products List) */
-.customer-info-card,
-.products-list-card {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 6px;
-  margin-bottom: 25px;
-  border: 1px solid #eee;
+.order-section {
+  margin-bottom: 24px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fafbff;
 }
 
-/* Headings inside cards */
-.customer-info-card h3,
-.products-list-card h3 {
-  color: #007bff; /* Primary brand color */
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 1.4em;
+.order-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: #374151;
 }
 
-/* Customer Info Paragraphs */
-.customer-info-card p {
-  line-height: 1.6;
-  margin: 8px 0;
-  color: #555;
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
 }
 
-.customer-info-card strong {
-  color: #333;
-  display: inline-block;
-  min-width: 90px;
-}
-
-/* Product List Styling */
 .order-items-list {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .order-item {
   display: flex;
   justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px dashed #ddd;
-  font-size: 1em;
+  padding: 10px 14px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 1rem;
 }
 
 .order-item:last-child {
-  border-bottom: none; /* No border for the last item */
+  border-bottom: none;
 }
 
 .item-name {
-  font-weight: bold;
-  color: #333;
-  flex-grow: 1; /* Allows the name to take up available space */
+  font-weight: 500;
+  color: #111827;
 }
 
 .item-details {
-  color: #777;
-  white-space: nowrap; /* Keeps the details together */
+  color: #4b5563;
 }
 
-.item-qty {
-  color: #007bff;
-  font-weight: bold;
+.order-details-loading {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 1.2rem;
+  color: #4b5563;
 }
 
-.item-price {
-  color: #28a745; /* Green for price */
-  font-weight: bold;
-  margin-left: 5px;
-}
-
-/* ----------------------------------
- * MOBILE RESPONSIVENESS (Media Query)
- * Styles for screens smaller than 600px
- * ---------------------------------- */
-@media (max-width: 600px) {
+/* 📱 Mobile Responsiveness */
+@media (max-width: 768px) {
   .order-details-container {
     margin: 10px;
-    padding: 15px;
+    padding: 16px;
   }
 
   .order-details-title {
-    font-size: 1.5em;
-    text-align: center;
-  }
-  
-  /* Stack the customer info on mobile for better readability */
-  .customer-info-card strong {
-    display: block; /* Makes the label take full width */
-    min-width: unset;
-  }
-  
-  .customer-info-card p {
-    margin-bottom: 15px;
-    padding-bottom: 5px;
-    border-bottom: 1px dotted #eee;
+    font-size: 1.3rem;
   }
 
   .order-item {
-    flex-direction: column; /* Stacks name and details vertically */
+    flex-direction: column;
     align-items: flex-start;
-    padding: 10px 0;
   }
 
-  .item-name {
-    margin-bottom: 5px;
-    font-size: 1.1em;
-  }
-}
-
-/* Optional: Tablet/Mid-size screen adjustments */
-@media (min-width: 601px) and (max-width: 1024px) {
-  .order-details-container {
-    margin: 20px;
+  .item-details {
+    margin-top: 4px;
   }
 }

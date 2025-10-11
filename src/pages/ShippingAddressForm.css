@@ -1,0 +1,85 @@
+.shipping-form-container {
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+.shipping-title {
+  text-align: center;
+  font-size: 1.6rem;
+  color: #222;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.shipping-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.form-row input {
+  flex: 1;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #f9fafb;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+  outline: none;
+}
+
+.shipping-btn {
+  background-color: #4f46e5;
+  color: white;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.shipping-btn:hover {
+  background-color: #3730a3;
+}
+
+/* 📱 Mobile Responsive */
+@media (max-width: 768px) {
+  .shipping-form-container {
+    padding: 20px;
+    margin: 15px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .shipping-title {
+    font-size: 1.3rem;
+  }
+
+  .shipping-btn {
+    width: 100%;
+  }
+}
