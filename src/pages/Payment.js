@@ -1,21 +1,29 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
-import api from "../utils/api";
+import api from "../../utils/api";
 import "./Payment.css";
 
 const Payment = ({ shippingAddress }) => {
   const { cartItems, clearCart } = useContext(CartContext);
   const [paymentMethod, setPaymentMethod] = useState("Mpesa");
+  const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const totalPrice = cartItems.reduce((a, c) => a + c.product.price * c.qty, 0);
 
+  const validatePhone = (num) => /^(07|01)\d{8}$/.test(num);
+
   const handlePayment = async () => {
     if (!cartItems.length) {
       setMessage("⚠️ No items in cart");
+      return;
+    }
+
+    if (paymentMethod === "Mpesa" && !validatePhone(phone)) {
+      setMessage("⚠️ Please enter a valid M-PESA number (07xxxxxxxx or 01xxxxxxxx)");
       return;
     }
 
@@ -29,6 +37,7 @@ const Payment = ({ shippingAddress }) => {
         shippingAddress,
         paymentMethod,
         totalPrice,
+        phone: paymentMethod === "Mpesa" ? phone : undefined,
       };
 
       const token = localStorage.getItem("token");
@@ -39,12 +48,18 @@ const Payment = ({ shippingAddress }) => {
       }
 
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await api.post("/orders", orderPayload, config);
+      const response = await api.post("/orders", orderPayload, config);
 
-      setMessage("✅ Order placed successfully!");
+      // If M-PESA selected → trigger STK push
+      if (paymentMethod === "Mpesa") {
+        setMessage("📲 Sending M-PESA STK push...");
+        await api.post("/mpesa/stkpush", { phone, amount: totalPrice }, config);
+        setMessage("✅ STK push sent. Complete payment on your phone!");
+      } else {
+        setMessage("✅ Order placed successfully!");
+      }
+
       clearCart();
-
-      // Redirect after short delay
       setTimeout(() => navigate("/"), 2000);
     } catch (err) {
       console.error("Payment error:", err);
@@ -88,6 +103,19 @@ const Payment = ({ shippingAddress }) => {
           <span>Pay on Delivery</span>
         </label>
       </div>
+
+      {paymentMethod === "Mpesa" && (
+        <div className="mpesa-input-box">
+          <label>Enter M-PESA Number</label>
+          <input
+            type="tel"
+            placeholder="07XXXXXXXX"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            maxLength={10}
+          />
+        </div>
+      )}
 
       <button
         className="pay-btn"
