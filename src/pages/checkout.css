@@ -62,13 +62,16 @@
 
 .form-group input,
 .form-group select {
-  padding: 12px 14px;
+  width: 100%;
+  max-width: 300px;       /* 👈 caps the width */
+  padding: 6px 12px;
   border: 1px solid #d1d5db;
   border-radius: 10px;
   background: #f9fafb;
   font-size: 1rem;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
+
 
 .form-group input:focus,
 .form-group select:focus {
