@@ -1,6 +1,6 @@
 /* General navbar container */
 .navbar {
-  position: sticky;
+  
   top: 0;
   left: 0;
   height: 65px;
@@ -168,8 +168,6 @@
 /* Mobile menu overlay */
 @media (max-width: 768px) {
   .navbar {
-  position: sticky;
-  position: absolute;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -178,7 +176,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.8rem 2rem;
-  background: rgba(114, 195, 209, 0.7);
+  background: #fff;
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0,0,0,0.05);
   font-family: 'Inter', sans-serif;
