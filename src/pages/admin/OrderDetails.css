@@ -1,0 +1,145 @@
+/* Base Styles for the entire page */
+.order-details-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading State Style */
+.order-details-loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.2em;
+  color: #555;
+}
+
+/* Title Styling */
+.order-details-title {
+  color: #333;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+}
+
+/* Card Styles (Customer Info and Products List) */
+.customer-info-card,
+.products-list-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 6px;
+  margin-bottom: 25px;
+  border: 1px solid #eee;
+}
+
+/* Headings inside cards */
+.customer-info-card h3,
+.products-list-card h3 {
+  color: #007bff; /* Primary brand color */
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.4em;
+}
+
+/* Customer Info Paragraphs */
+.customer-info-card p {
+  line-height: 1.6;
+  margin: 8px 0;
+  color: #555;
+}
+
+.customer-info-card strong {
+  color: #333;
+  display: inline-block;
+  min-width: 90px;
+}
+
+/* Product List Styling */
+.order-items-list {
+  list-style: none;
+  padding: 0;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px dashed #ddd;
+  font-size: 1em;
+}
+
+.order-item:last-child {
+  border-bottom: none; /* No border for the last item */
+}
+
+.item-name {
+  font-weight: bold;
+  color: #333;
+  flex-grow: 1; /* Allows the name to take up available space */
+}
+
+.item-details {
+  color: #777;
+  white-space: nowrap; /* Keeps the details together */
+}
+
+.item-qty {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.item-price {
+  color: #28a745; /* Green for price */
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+/* ----------------------------------
+ * MOBILE RESPONSIVENESS (Media Query)
+ * Styles for screens smaller than 600px
+ * ---------------------------------- */
+@media (max-width: 600px) {
+  .order-details-container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .order-details-title {
+    font-size: 1.5em;
+    text-align: center;
+  }
+  
+  /* Stack the customer info on mobile for better readability */
+  .customer-info-card strong {
+    display: block; /* Makes the label take full width */
+    min-width: unset;
+  }
+  
+  .customer-info-card p {
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #eee;
+  }
+
+  .order-item {
+    flex-direction: column; /* Stacks name and details vertically */
+    align-items: flex-start;
+    padding: 10px 0;
+  }
+
+  .item-name {
+    margin-bottom: 5px;
+    font-size: 1.1em;
+  }
+}
+
+/* Optional: Tablet/Mid-size screen adjustments */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .order-details-container {
+    margin: 20px;
+  }
+}
