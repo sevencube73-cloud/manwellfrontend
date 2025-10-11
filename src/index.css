@@ -38,7 +38,7 @@ code {
 /* when navbar is fixed, push main content down so it isn't hidden */
 .app-content {
   /* use dynamic navbar height if provided, otherwise fall back to sensible defaults */
-  padding-top: calc(var(--navbar-height, 76px) + 8px);
+  
   transition: padding-top 160ms ease;
 }
 
