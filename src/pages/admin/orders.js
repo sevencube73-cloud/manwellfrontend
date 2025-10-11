@@ -7,6 +7,7 @@ import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { Link } from 'react-router-dom';
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -52,7 +53,12 @@ const AdminOrders = () => {
     doc.text('Orders List', 14, 16);
     autoTable(doc, {
       head: [['Order ID', 'Customer', 'Status', 'Total (KES)']],
-  body: orders.map(o => [order.orderId || o.orderId, o.user?.name || 'N/A', o.status, `KES ${(Number(o?.totalPrice) || 0).toFixed(2)}`]),
+      body: orders.map(o => [
+        o.orderId || o._id,
+        o.user?.name || 'N/A',
+        o.status,
+        `KES ${(Number(o?.totalPrice) || 0).toFixed(2)}`
+      ]),
       startY: 22,
     });
     doc.save('orders.pdf');
@@ -82,6 +88,7 @@ const AdminOrders = () => {
     <div className="admin-orders-bg">
       <AdminNavbar />
       <main className="admin-content" style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px', minHeight: '80vh' }}>
+        {/* Header */}
         <section className="orders-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 32 }}>
           <div>
             <h2 className="admin-page-title" style={{ fontWeight: 700, fontSize: '1.5rem', marginBottom: 8 }}>Orders List</h2>
@@ -113,9 +120,10 @@ const AdminOrders = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <button className="admin-btn-secondary" onClick={handleDownloadExcel}>Download Excel</button>
             <button className="admin-btn-secondary" onClick={handleDownloadPDF}>Download PDF</button>
-            <button className="admin-btn-secondary">More Actions</button>
           </div>
         </section>
+
+        {/* Orders Table */}
         <section className="orders-table-section">
           <table className="orders-table" style={{ width: '100%', background: 'transparent', borderCollapse: 'collapse' }}>
             <thead>
@@ -138,8 +146,8 @@ const AdminOrders = () => {
                       {o.status}
                     </span>
                   </td>
-                  <td>${(Number(o?.totalPrice) || 0).toFixed(2)}</td>
-                  <td>
+                  <td>KES {(Number(o?.totalPrice) || 0).toFixed(2)}</td>
+                  <td style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                     <select
                       className="admin-select"
                       value={o.status}
@@ -152,6 +160,11 @@ const AdminOrders = () => {
                       <option value="Cancelled">Cancelled</option>
                       <option value="Returned">Returned</option>
                     </select>
+
+                    {/* View Button */}
+                    <Link to={`/admin/orders/${o._id}`}>
+                      <button className="admin-btn-primary">View</button>
+                    </Link>
                   </td>
                 </tr>
               ))}
