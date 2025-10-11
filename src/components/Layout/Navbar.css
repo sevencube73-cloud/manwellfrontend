@@ -1,26 +1,50 @@
-/* AdminDashboard.css - Modern UI for admin pages */
+/* =========================================================================
+   AdminDashboard.css - Modern Admin UI
+   Clean, responsive, card-based, render-ready
+   ========================================================================= */
 
-/* Base Styles */
+/* ==========================
+   Base Styles
+   ========================== */
 body, html {
-  background: #f5f6fa;
+  margin: 0;
+  padding: 0;
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background: #f5f6fa;
+  color: #222;
 }
 
-/* Dashboard Container */
+a {
+  text-decoration: none;
+}
+
+/* ==========================
+   Layout Containers
+   ========================== */
 .admin-dashboard {
   max-width: 1200px;
   margin: 40px auto;
+  padding: 32px 40px;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  padding: 32px 40px;
 }
 
+.admin-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  min-height: 40vh;
+}
+
+/* ==========================
+   Titles & Headings
+   ========================== */
 .admin-title {
   font-size: 2rem;
   font-weight: 700;
-  color: #222;
   margin-bottom: 24px;
+  text-align: center;
 }
 
 .admin-subtitle {
@@ -29,42 +53,145 @@ body, html {
   margin-bottom: 30px;
 }
 
-/* Navigation */
-.admin-nav ul {
+.admin-page-title {
+  font-weight: 700;
+  font-size: 1.75rem;
+  margin-bottom: 32px;
+  color: #1e293b;
+  text-align: center;
+}
+
+/* ==========================
+   Navbar
+   ========================== */
+.admin-navbar-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0 32px;
+  height: 60px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  z-index: 10;
+}
+
+.admin-navbar-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.admin-navbar-links-flex {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-navbar-links-flex li a {
+  color: #222;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+.admin-navbar-links-flex li a.active {
+  color: #1976d2;
+  border-bottom: 2px solid #1976d2;
+}
+
+.admin-navbar-links-flex li a:hover {
+  color: #1565c0;
+}
+
+/* ==========================
+   Sidebar
+   ========================== */
+.admin-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 220px;
+  background: #fff;
+  border-right: 1px solid #e0e3ea;
+  padding: 32px 0;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+}
+
+.admin-sidebar ul {
   list-style: none;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.admin-nav li {
   margin: 0;
-  flex: 1 1 220px;
-  display: flex;
-  justify-content: center;
 }
 
-.admin-link {
-  display: inline-block;
-  padding: 12px 25px;
+.admin-sidebar li {
+  margin-bottom: 18px;
+}
+
+.admin-sidebar a {
+  display: block;
   font-size: 1.1rem;
-  font-weight: 500;
-  color: #fff;
-  background: linear-gradient(90deg, #007bff, #00c6ff);
+  padding: 10px 24px;
   border-radius: 8px;
-  text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: #222;
+  transition: background 0.2s;
 }
 
-.admin-link:hover {
-  transform: translateY(-3px);
-  box-shadow: 0px 6px 12px rgba(0,0,0,0.15);
+.admin-sidebar a:hover,
+.admin-sidebar a.active {
+  background: #f5f6fa;
+  color: #007bff;
 }
 
-/* Forms */
-.admin-form, .admin-customers, .admin-products {
+/* ==========================
+   Summary Cards
+   ========================== */
+.admin-summary-cards {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.admin-summary-card {
+  flex: 1;
+  min-width: 180px;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 18px 28px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  text-align: left;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.admin-summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+.admin-summary-title {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.admin-summary-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #222;
+}
+
+/* ==========================
+   Forms
+   ========================== */
+.admin-form,
+.admin-customers,
+.admin-products,
+.form-card {
   background: #f8fafc;
   border-radius: 12px;
   padding: 24px;
@@ -72,7 +199,11 @@ body, html {
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
-.admin-input, .admin-textarea, .admin-select {
+.admin-input,
+.admin-textarea,
+.admin-select,
+form input,
+form textarea {
   width: 100%;
   padding: 10px 14px;
   margin-bottom: 16px;
@@ -83,58 +214,21 @@ body, html {
   transition: border 0.2s;
 }
 
-.admin-input:focus, .admin-textarea:focus, .admin-select:focus {
+.admin-input:focus,
+.admin-textarea:focus,
+.admin-select:focus {
   border-color: #007bff;
   outline: none;
 }
 
 .admin-textarea {
-  min-height: 60px;
-  resize: vertical;
-}
-
-form input, form textarea {
-  display: block;
-  width: 100%;
-  margin-bottom: 12px;
-  padding: 10px;
-  font-size: 0.95rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-form textarea {
   min-height: 80px;
   resize: vertical;
 }
 
-.admin-add-product-form label, .admin-form label, .admin-input-label {
-  display: block;
-  margin-bottom: 6px;
-  color: #000;
-  font-weight: 600;
-}
-
-.form-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.form-card {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.form-card h2 {
-  margin-bottom: 15px;
-  color: #2c3e50;
-}
-
-/* Buttons */
-.admin-btn, .admin-link {
+.admin-btn,
+.admin-link,
+form button {
   background: linear-gradient(90deg, #007bff, #00c6ff);
   color: #fff;
   border: none;
@@ -142,12 +236,13 @@ form textarea {
   padding: 10px 22px;
   font-weight: 500;
   font-size: 1rem;
-  margin-right: 8px;
   cursor: pointer;
   transition: box-shadow 0.2s, transform 0.2s;
 }
 
-.admin-btn:hover, .admin-link:hover {
+.admin-btn:hover,
+.admin-link:hover,
+form button:hover {
   box-shadow: 0 2px 8px rgba(0,123,255,0.15);
   transform: translateY(-2px);
 }
@@ -157,74 +252,9 @@ form textarea {
   cursor: not-allowed;
 }
 
-.btn {
-  padding: 6px 12px;
-  margin: 0 5px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: all 0.2s ease;
-}
-
-.btn.deactivate {
-  background: #f0ad4e;
-  color: #fff;
-}
-
-.btn.deactivate:hover {
-  background: #ec971f;
-}
-
-.btn.delete {
-  background: #d9534f;
-  color: #fff;
-}
-
-.btn.delete:hover {
-  background: #c9302c;
-}
-
-.btn.edit {
-  background: #28a745;
-  color: #fff;
-}
-
-.btn.edit:hover {
-  background: #218838;
-}
-
-.btn.add {
-  background-color: #28a745;
-  color: white;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s;
-  position: relative;
-  right: -900px;
-  top: -30px;
-}
-
-.btn.add:hover {
-  background-color: #218838;
-}
-
-form button {
-  background: #007bff;
-  border: none;
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  transition: background 0.2s;
-}
-
-form button:hover {
-  background: #0056b3;
+.form-actions {
+  display: flex;
+  gap: 10px;
 }
 
 form button.cancel {
@@ -235,232 +265,143 @@ form button.cancel:hover {
   background: #565e64;
 }
 
-.admin-btn-primary {
-  background: #1976d2;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 18px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(25,118,210,0.08);
-  transition: background 0.2s;
+/* ==========================
+   Tables
+   ========================== */
+.admin-table-wrapper,
+.admin-customers,
+.admin-products {
+  overflow-x: auto;
 }
 
-.admin-btn-primary:hover {
-  background: #1565c0;
-}
-
-.admin-btn-secondary {
-  background: #29b6f6;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 18px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(41,182,246,0.08);
-  transition: background 0.2s;
-}
-
-.admin-btn-secondary:hover {
-  background: #0288d1;
-}
-
-.admin-details-btn {
-  background: #fff;
-  color: #007bff;
-  border: 1px solid #007bff;
-  border-radius: 8px;
-  padding: 8px 18px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.admin-details-btn:hover {
-  background: #007bff;
-  color: #fff;
-}
-
-/* Tables */
-.admin-table-wrapper {
-  margin-top: 24px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  padding: 16px;
-}
-
-.admin-table, .customers-table, .products-table, .orders-table {
+.admin-table,
+.customers-table,
+.products-table,
+.orders-table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  font-size: 1rem;
+  border-collapse: collapse;
+  font-size: 0.95rem;
 }
 
-.admin-table th, .admin-table td, .customers-table th, .customers-table td, .products-table th, .products-table td, .orders-table th, .orders-table td {
-  padding: 14px 12px;
+.admin-table th,
+.admin-table td,
+.customers-table th,
+.customers-table td,
+.products-table th,
+.products-table td,
+.orders-table th,
+.orders-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
   text-align: left;
-  border-bottom: 1px solid #e0e3ea;
 }
 
-.admin-table th, .customers-table th, .products-table th, .orders-table th {
+.admin-table th {
   background: #f5f6fa;
   font-weight: 600;
   color: #222;
 }
 
-.admin-table tr:last-child td, .customers-table tr:last-child td, .products-table tr:last-child td, .orders-table tr:last-child td {
-  border-bottom: none;
+.admin-table tr:hover,
+.customers-table tr:hover,
+.products-table tr:hover,
+.orders-table tr:hover {
+  background: #f9f9f9;
 }
 
-.admin-table tr, .customers-table tr, .products-table tr, .orders-table tr {
-  transition: background 0.2s;
+.btn {
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: none;
+  margin-right: 5px;
 }
 
-.admin-table tr:hover, .customers-table tr:hover, .products-table tr:hover, .orders-table tr:hover {
-  background: #f8fafc;
-}
+.btn.edit { background: #28a745; color: #fff; }
+.btn.edit:hover { background: #218838; }
+.btn.delete { background: #dc3545; color: #fff; }
+.btn.delete:hover { background: #c82333; }
+.btn.deactivate { background: #f0ad4e; color: #fff; }
+.btn.deactivate:hover { background: #ec971f; }
+.btn.add { background: #28a745; color: #fff; font-weight: bold; }
+.btn.add:hover { background: #218838; }
 
-.orders-table-section {
-  margin-top: 32px;
-}
-
-/* Status */
+/* ==========================
+   Status Labels
+   ========================== */
 .admin-status {
   display: inline-block;
   padding: 6px 18px;
   border-radius: 20px;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #fff;
   text-align: center;
+  color: #fff;
 }
+.admin-status-Accepted,
+.admin-status-Completed,
+.admin-status-Active { background: #22c55e; }
+.admin-status-Pending { background: #fbbf24; color: #222; }
+.admin-status-Rejected,
+.admin-status-Cancelled { background: #ef4444; }
+.admin-status-Processing { background: #3b82f6; }
+.admin-status-Inactive { background: #a1a1aa; }
 
-.admin-status-Accepted, .admin-status-Completed, .admin-status-Active {
-  background: #22c55e;
-}
-
-.admin-status-Pending {
-  background: #fbbf24;
-  color: #222;
-}
-
-.admin-status-Rejected, .admin-status-Cancelled {
-  background: #ef4444;
-}
-
-.admin-status-Processing {
-  background: #3b82f6;
-}
-
-.admin-status-Inactive {
-  background: #a1a1aa;
-}
-
-/* Notifications */
-.admin-error {
-  color: #ef4444;
-  background: #fff1f2;
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 16px;
-}
-
-.admin-success {
-  color: #22c55e;
-  background: #f0fdf4;
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 16px;
-}
-
-.admin-loading {
+/* ==========================
+   Loading & Errors
+   ========================== */
+.admin-loading,
+.loading {
   color: #3b82f6;
   background: #eff6ff;
   border-radius: 8px;
   padding: 12px;
   margin-bottom: 16px;
-}
-
-.success {
-  color: green;
-  margin-bottom: 10px;
-}
-
-.error, .error-message {
-  color: red;
-  margin-bottom: 10px;
-  font-weight: bold;
   text-align: center;
 }
 
-.loading {
-  text-align: center;
-  color: #007bff;
-  font-size: 1.1rem;
+.admin-success,
+.success { color: #22c55e; margin-bottom: 10px; }
+.admin-error,
+.error,
+.error-message { color: #ef4444; margin-bottom: 10px; }
+
+/* ==========================
+   Responsive Grid for Cards
+   ========================== */
+.orders-grid,
+.admin-summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
 }
 
-.no-data {
-  text-align: center;
-  color: #555;
-  margin-top: 20px;
-}
-
-/* Pagination */
-.admin-pagination {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 8px;
-  margin-top: 18px;
-}
-
-.admin-pagination button {
-  background: #fff;
-  border: 1px solid #e0e3ea;
-  border-radius: 6px;
-  padding: 6px 14px;
-  font-size: 1rem;
-  color: #222;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.admin-pagination button.active, .admin-pagination button:focus {
-  background: #007bff;
+/* Revenue Card Special Styling */
+.revenue-card {
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
   color: #fff;
-  border-color: #007bff;
 }
 
-.admin-pagination button:hover {
-  background: #f5f6fa;
+/* ==========================
+   Responsive Media Queries
+   ========================== */
+@media (max-width: 768px) {
+  .admin-dashboard { padding: 20px 15px; margin: 15px 10px; }
+  .admin-title { font-size: 1.75rem; }
+  .admin-summary-cards,
+  .orders-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+  .admin-sidebar { display: none; }
+  .form-actions { flex-direction: column; }
+  .form-actions button { width: 100%; }
+  .admin-search-bar { flex-direction: column; align-items: stretch; }
 }
 
-/* Search & Filter */
-.admin-search-bar {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 18px;
-  align-items: center;
-}
-
-.admin-search-input {
-  flex: 1;
-  padding: 10px 14px;
-  border: 1px solid #e0e3ea;
-  border-radius: 8px;
-  font-size: 1rem;
-  background: #fff;
-}
-
-.admin-filter-select {
-  padding: 10px 14px;
-  border: 1px solid #e0e3ea;
-  border-radius: 8px;
-  font-size: 1rem;
-  background: #fff;
+@media (max-width: 600px) {
+  .admin-dashboard { padding: 15px 10px; margin: 10px; }
+  .admin-title { font-size: 1.5rem; }
+  .admin-nav li { flex: 1 1 100%; }
+  .admin-summary-cards,
+  .orders-grid { grid-template-columns: 1fr; }
+  .btn { padding: 4px 8px; font-size: 0.75rem; margin: 2px 1px; }
 }
