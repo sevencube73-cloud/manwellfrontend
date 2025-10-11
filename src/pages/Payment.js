@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
-import api from "../../utils/api";
+import api from "../utils/api";
 import "./Payment.css";
 
 const Payment = ({ shippingAddress }) => {
