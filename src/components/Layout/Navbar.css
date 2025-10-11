@@ -40,6 +40,8 @@
 .nav-links {
   display: flex;
   gap: 2rem;
+  right: 1rem;
+  top:1rem;
   margin: 0 auto;
 }
 .nav-links a {
