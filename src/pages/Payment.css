@@ -71,4 +71,117 @@
   outline: none;
 }
 
-/* ===== Payment Metho*
+/* ===== Payment Method (Radio Style) ===== */
+.payment-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f1f5f9;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.payment-option input {
+  display: none;
+}
+
+.payment-option.active {
+  background: linear-gradient(90deg, #1f4068, #00e0ff);
+  color: #fff;
+  border-color: #1f4068;
+}
+
+/* ===== Success & Info Messages ===== */
+.message-box {
+  background: #e6f7e6;
+  color: #2e7d32;
+  font-weight: 500;
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-top: 16px;
+  box-shadow: 0 2px 6px rgba(46, 125, 50, 0.15);
+}
+
+.message-box.error {
+  background: #ffe6e6;
+  color: #b71c1c;
+}
+
+/* ===== Buttons ===== */
+.checkout-btn,
+.next-btn {
+  background: linear-gradient(90deg, #1f4068 0%, #00e0ff 100%);
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 12px 28px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(31, 64, 104, 0.2);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.checkout-btn:hover,
+.next-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, #00e0ff 0%, #1f4068 100%);
+}
+
+.checkout-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== Shipping Section ===== */
+.shipping-section {
+  margin-top: 24px;
+  background: #f9f9fb;
+  border-radius: 12px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+}
+
+.shipping-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: #1f4068;
+  font-weight: 700;
+}
+
+/* ===== Mobile Responsive ===== */
+@media (max-width: 768px) {
+  .checkout-container {
+    margin: 20px 10px;
+    padding: 16px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    max-width: 100%;
+  }
+
+  .payment-options {
+    flex-direction: column;
+  }
+
+  .checkout-btn,
+  .next-btn {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .checkout-summary {
+    padding: 14px;
+  }
+}
