@@ -50,12 +50,13 @@ const CheckoutPage = () => {
   if (cartItems.length === 0) {
     return (
       <div className="empty-checkout">
-        🛒 Your order is being processed.<br />
+        Success, 
+         Your order is being processed.<br />
         <button
           style={{
             marginTop: 20,
-            background: 'linear-gradient(90deg, #1f4068 0%, #00e0ff 100%)',
-            color: '#fff',
+            background: 'linear-gradient(90deg, #5d95daff 0%, #5bd2e2ff 100%)',
+            color: '#ffffffff',
             border: 'none',
             borderRadius: 8,
             padding: '10px 24px',
