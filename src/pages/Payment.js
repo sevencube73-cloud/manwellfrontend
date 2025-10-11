@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../../utils/api";
 import "./Payment.css";
 
-const Payment = ({ shippingAddress }) => {
+const Payment = ({ shippingAddress, orderItems, totalPrice }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handlePayNow = () => {
     setShowOptions(true);
@@ -20,15 +24,36 @@ const Payment = ({ shippingAddress }) => {
       return;
     }
 
-    if (selectedOption === "M-PESA") {
-      // 🔹 Here you can integrate M-PESA STK Push API call
-      setMessage("Processing M-PESA payment...");
-      setTimeout(() => {
-        setMessage("✅ M-PESA payment successful!");
-        setShowOptions(false);
-      }, 3000);
-    } else {
-      setMessage("Payment will be made on delivery.");
+    setLoading(true);
+    setMessage("");
+
+    try {
+      // ✅ create the order in backend
+      const { data } = await api.post("/orders", {
+        orderItems,
+        shippingAddress,
+        paymentMethod: selectedOption,
+        totalPrice,
+      });
+
+      if (selectedOption === "M-PESA") {
+        // 🔹 Optionally trigger your M-PESA STK push here
+        setMessage("Processing M-PESA payment...");
+        setTimeout(() => {
+          navigate(`/order-success/${data._id}`);
+        }, 2000);
+      } else {
+        // Pay on Delivery
+        setMessage("Order placed successfully. Pay on delivery.");
+        setTimeout(() => {
+          navigate(`/order-success/${data._id}`);
+        }, 1500);
+      }
+    } catch (error) {
+      console.error("Payment error:", error);
+      setMessage("Something went wrong while placing your order.");
+    } finally {
+      setLoading(false);
       setShowOptions(false);
     }
   };
@@ -42,8 +67,8 @@ const Payment = ({ shippingAddress }) => {
         {shippingAddress.country}
       </p>
 
-      <button className="pay-btn" onClick={handlePayNow}>
-        Pay Now
+      <button className="pay-btn" onClick={handlePayNow} disabled={loading}>
+        {loading ? "Processing..." : "Pay Now"}
       </button>
 
       {showOptions && (
@@ -83,12 +108,13 @@ const Payment = ({ shippingAddress }) => {
             </div>
 
             <div className="payment-actions">
-              <button className="confirm-btn" onClick={handleConfirm}>
-                Confirm
+              <button className="confirm-btn" onClick={handleConfirm} disabled={loading}>
+                {loading ? "Placing..." : "Confirm"}
               </button>
               <button
                 className="cancel-btn"
                 onClick={() => setShowOptions(false)}
+                disabled={loading}
               >
                 Cancel
               </button>
