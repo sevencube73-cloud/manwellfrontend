@@ -161,10 +161,11 @@ const AdminProducts = () => {
               </div>
             </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 12 }}>
-          <Link to="/admin/product/addproduct" className="admin-btn-primary" style={{ padding: '8px 12px', textDecoration: 'none' }}>+ Add Product</Link>
-        </div>
+              <Link to="/admin/product/addproduct" className="admin-btn-primary" style={{ padding: '8px 12px', textDecoration: 'none' }}>+ Add Product</Link>
+            </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            
             <button className="admin-btn-secondary" onClick={handleDownloadExcel}>Download Excel</button>
             <button className="admin-btn-secondary" onClick={handleDownloadPDF}>Download PDF</button>
           </div>
