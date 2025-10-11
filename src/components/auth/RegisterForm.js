@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../../utils/api';
 import './auth-form.css';
 
@@ -14,6 +15,7 @@ const bgSvg = (
 );
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -23,7 +25,7 @@ const RegisterForm = () => {
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [loading, setLoading] = useState(false); // 👈 Added loading state
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -39,15 +41,20 @@ const RegisterForm = () => {
       return;
     }
 
-    setLoading(true); // 👈 Start loading
+    setLoading(true);
     try {
       await api.post('/auth/register', form);
-      setSuccess('Account registered successfully. Please login.');
+      setSuccess('Account registered successfully. Redirecting to login...');
       setForm({ name: '', email: '', password: '', phone: '', address: '' });
+
+      // ✅ Redirect after 2 seconds
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
     } finally {
-      setLoading(false); // 👈 Stop loading
+      setLoading(false);
     }
   };
 
@@ -125,10 +132,39 @@ const RegisterForm = () => {
           </div>
 
           <button type="submit" disabled={loading}>
-            {loading ? 'Registering...' : 'Register'}
+            {loading ? (
+              <>
+                <span
+                  className="spinner"
+                  style={{
+                    border: '2px solid #fff',
+                    borderTop: '2px solid transparent',
+                    borderRadius: '50%',
+                    width: '16px',
+                    height: '16px',
+                    display: 'inline-block',
+                    marginRight: '8px',
+                    animation: 'spin 0.8s linear infinite',
+                  }}
+                ></span>
+                Registering...
+              </>
+            ) : (
+              'Register'
+            )}
           </button>
         </form>
       </div>
+
+      {/* Spinner animation keyframes */}
+      <style>
+        {`
+          @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+        `}
+      </style>
     </>
   );
 };
