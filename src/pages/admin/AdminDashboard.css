@@ -1,4 +1,4 @@
-/* AdminDashboard.css - Modern UI for Admin Pages */
+/* AdminDashboard.css - Modern Responsive Admin UI */
 
 /* Global Styles */
 body, html {
@@ -8,7 +8,7 @@ body, html {
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
 }
 
-/* Admin Dashboard Container */
+/* Container */
 .admin-dashboard {
   max-width: 1200px;
   margin: 40px auto;
@@ -236,7 +236,7 @@ body, html {
   box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
-/* Buttons */
+/* Primary & Secondary Buttons */
 .admin-btn-primary {
   background: #1976d2;
   color: #fff;
@@ -285,6 +285,61 @@ body, html {
   text-align: center;
 }
 
+/* Sidebar */
+.admin-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 220px;
+  background: #fff;
+  border-right: 1px solid #e0e3ea;
+  padding: 32px 0;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+}
+
+.admin-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-sidebar li {
+  margin-bottom: 18px;
+}
+
+.admin-sidebar a {
+  color: #222;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 10px 24px;
+  display: block;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.admin-sidebar a.active,
+.admin-sidebar a:hover {
+  background: #f5f6fa;
+  color: #007bff;
+}
+
+/* Header */
+.admin-header {
+  background: #fff;
+  padding: 24px 40px;
+  border-bottom: 1px solid #e0e3ea;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-header-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .admin-dashboard {
@@ -304,6 +359,10 @@ body, html {
   .admin-nav li {
     flex: 1 1 45%;
   }
+
+  .admin-sidebar {
+    display: none;
+  }
 }
 
 @media (max-width: 600px) {
@@ -314,5 +373,14 @@ body, html {
   .admin-title {
     font-size: 1.5rem;
     text-align: center;
+  }
+
+  .admin-btn, .admin-link {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .admin-input, .admin-textarea, .admin-select {
+    margin-bottom: 12px;
   }
 }
