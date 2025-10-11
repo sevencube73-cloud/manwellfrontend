@@ -28,7 +28,7 @@ import AddProduct from "./pages/admin/AddProduct";
 import AdminOrders from "./pages/admin/orders";
 import AdminCustomers from "./pages/admin/customers";
 import AdminReturns from "./pages/admin/returns";
-import OrderDetails from './pages/admin/order/[orderId]';
+import OrderDetails from './pages/admin/OrderDetails';
 
 // 📌 Footer pages
 import HelpCenter from "./pages/HelpCenter";
@@ -99,7 +99,7 @@ function App() {
 
             {/* Protected routes */}
             <Route
-              path="/admin/order/:orderId"
+              path="/admin/orders/:orderId"
               element={
                 <PrivateRoute roles={["admin"]}>
                   <OrderDetails />
