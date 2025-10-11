@@ -5,7 +5,7 @@ body, html {
 }
 
 .admin-dashboard {
-  max-width: 100%;
+  max-width: 1200px;
   margin: 40px auto;
   background: #fff;
   border-radius: 16px;
