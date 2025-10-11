@@ -29,7 +29,7 @@ const ResetPassword = () => {
     setLoading(true);
     setMessage("");
     try {
-      const res = await fetch("http://localhost:5000/api/account/request-reset", {
+      const res = await fetch("https://manwellback.onrender.com/api/account/request-reset", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -54,7 +54,7 @@ const ResetPassword = () => {
     setLoading(true);
     setMessage("");
     try {
-      const res = await fetch("http://localhost:5000/api/account/reset-password", {
+      const res = await fetch("https://manwellback.onrender.com/api/account/reset-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token, newPassword }),
