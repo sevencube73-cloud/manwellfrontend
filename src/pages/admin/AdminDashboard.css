@@ -798,3 +798,92 @@ body, html {
 .revenue-card p {
   color: white;
 }
+.admin-navbar-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 0.8rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.admin-navbar-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+/* Links - desktop */
+.admin-navbar-links-flex {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.admin-navbar-links-flex li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.admin-navbar-links-flex li a.active {
+  color: #007bff;
+}
+
+.admin-navbar-links-flex li a:hover {
+  color: #007bff;
+}
+
+/* Mobile-specific */
+.mobile-only {
+  display: none;
+  position: relative;
+}
+
+.mobile-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #fff;
+  flex-direction: column;
+  list-style: none;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  min-width: 180px;
+}
+
+.mobile-menu li {
+  margin-bottom: 0.5rem;
+}
+
+.mobile-menu li:last-child {
+  margin-bottom: 0;
+}
+
+.mobile-menu li a {
+  display: block;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 900px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: flex;
+    align-items: center;
+  }
+}

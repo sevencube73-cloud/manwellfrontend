@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './AdminDashboard.css';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 const adminNavLinks = [
   { label: 'Dashboard', to: '/admin/dashboard' },
@@ -8,15 +9,18 @@ const adminNavLinks = [
   { label: 'Orders', to: '/admin/orders' },
   { label: 'Customers', to: '/admin/customers' },
   { label: 'Manage Returns', to: '/admin/returns' },
-  
 ];
 
 const AdminNavbar = () => {
   const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <nav className="admin-navbar-flex">
-  <div className="admin-navbar-title">MANWELL</div>
-      <ul className="admin-navbar-links-flex">
+      <div className="admin-navbar-title">MANWELL</div>
+
+      {/* Desktop links */}
+      <ul className="admin-navbar-links-flex desktop-only">
         {adminNavLinks.map(link => (
           <li key={link.label}>
             <Link
@@ -28,6 +32,32 @@ const AdminNavbar = () => {
           </li>
         ))}
       </ul>
+
+      {/* Mobile toggle */}
+      <div className="mobile-only toggle-wrapper">
+        <button
+          className="mobile-toggle-btn"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+        </button>
+
+        {mobileMenuOpen && (
+          <ul className="admin-navbar-links-flex mobile-menu">
+            {adminNavLinks.map(link => (
+              <li key={link.label}>
+                <Link
+                  to={link.to}
+                  className={location.pathname === link.to ? 'active' : ''}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </nav>
   );
 };
