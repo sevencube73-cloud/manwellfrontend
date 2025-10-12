@@ -11,7 +11,7 @@ const Navbar = () => {
   const { cartItems } = useContext(CartContext);
   const [categories, setCategories] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -134,12 +134,7 @@ const Navbar = () => {
         </Link>
 
         {/* Mobile Toggle */}
-        <button
-          className="mobile-toggle"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          
-        </button>
+        
       </div>
     </nav>
   );

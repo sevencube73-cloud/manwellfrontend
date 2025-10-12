@@ -190,14 +190,7 @@
   border-radius: 50%;
 }
 
-/* Mobile toggle */
-/* .mobile-toggle {
-  background: none;
-  border: none;
-  display: none;
-  cursor: pointer;
-  color: #111;
-} */
+
 
 /* Mobile menu overlay */
 @media (max-width: 768px) {
@@ -231,9 +224,7 @@
   .nav-links.open {
     left: 0;
   }
-  .mobile-toggle {
-    display: block;
-  }
+  
 }
 
 /* Animations */
