@@ -59,7 +59,9 @@ body{
   margin-bottom: 14px;
   line-height: 1.5;
 }
-
+.description{
+  text-align: left;
+}
 .price {
   font-size: 1.2rem;
   font-weight: 600;

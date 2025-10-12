@@ -34,7 +34,6 @@ const ProductDetails = () => {
       </div>
       <div className="product-info">
         <h2>{product.name}</h2>
-        <p className="description">{product.description}</p>
         <p className="price">Price: ${(Number(product?.price) || 0).toFixed(2)}</p>
         <p className="stock">In Stock: {product.stock}</p>
 
@@ -52,6 +51,8 @@ const ProductDetails = () => {
           >
             {product.stock < 1 ? 'Out of Stock' : 'Add to Cart'}
           </button>
+          <h3 className="pdescription">Product Description</h3>
+          <p className="description">{product.description}</p>
         </div>
       </div>
     </div>
