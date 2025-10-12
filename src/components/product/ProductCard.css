@@ -7,10 +7,11 @@
 }
 
 .product-list-page h2 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: #222;
   margin: 25px 0 15px;
+  text-align: center;
 }
 
 /* 🌸 Product Grid */
@@ -18,48 +19,53 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 18px;
+  justify-items: center;
 }
 
 /* 🛍️ Product Card */
 .product-card {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   display: flex;
-  position: relative;
   flex-direction: column;
+  align-items: stretch; /* ensures image fills full width */
   position: relative;
+  width: 100%;
 }
 
 .product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
 /* 🖼️ Product Image */
 .product-image {
-  width: 80%;
-  height: 180px;
-  align-items: center;
-  object-fit: cover;
-  background: #fafafa;
+  width: 100%;              /* full width of the card */
+  height: 220px;            /* fixed height for consistency */
+  display: block;
+  object-fit: cover;        /* keeps proportions while filling container */
+  background-color: #f9f9f9;
   border-bottom: 1px solid #eee;
+  margin: 0;
+  padding: 0;
 }
 
 /* 📄 Product Info */
 .product-info {
-  padding: 5px;
+  padding: 10px 14px;
+  width: 100%;
   text-align: left;
-  
+  box-sizing: border-box;
 }
 
 .product-name {
   font-size: 1.05rem;
-  font-weight: 500;
+  font-weight: 600;
   color: #333;
-  margin: 8px 0;
+  margin: 8px 0 4px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -67,56 +73,29 @@
 
 .product-price {
   color: #2d8f2d;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-
-/* 🧮 Quantity Controls */
-.qty-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
+  font-weight: 700;
   margin-bottom: 10px;
-}
-
-.qty-controls button {
-  background-color: #f2f2f2;
-  border: none;
-  padding: 6px 10px;
-  font-size: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.qty-controls button:hover {
-  background-color: #ddd;
-}
-
-.qty-controls input {
-  width: 45px;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  padding: 4px;
+  font-size: 0.95rem;
 }
 
 /* 🔘 Add to Cart Button */
 .add-btn {
-  background: #ff9800;
+  background: linear-gradient(135deg, #ff9800, #ffb84d);
   border: none;
   color: white;
   font-size: 0.9rem;
-  padding: 8px 14px;
+  padding: 9px 14px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(255, 152, 0, 0.3);
+  width: 100%;
+  text-align: center;
 }
 
 .add-btn:hover {
-  background: #e68900;
+  background: linear-gradient(135deg, #e68900, #ffa31a);
 }
 
 /* 🔗 View Details Button */
@@ -129,11 +108,16 @@
   text-decoration: none;
   font-size: 0.9rem;
   margin-top: 6px;
-  transition: background 0.3s ease;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(226, 206, 22, 0.3);
+  width: 100%;
 }
 
 .view-btn:hover {
-  background: #a1c211;
+  background: #c7b413;
+  transform: translateY(-2px);
 }
 
 /* ✅ Added to Cart Toast */
@@ -162,23 +146,30 @@
     gap: 10px;
   }
 
-  .product-image {
-    height: 150px;
-  }
-
   .product-card {
     border-radius: 12px;
   }
 
-  .product-info {
-    padding: 10px;
+  .product-image {
+    height: 160px;     /* slightly smaller for phones */
   }
 
+  .product-info {
+    padding: 8px;
+  }
+
+  .product-name {
+    font-size: 0.95rem;
+  }
+
+  .product-price {
+    font-size: 0.85rem;
+  }
+
+  .add-btn,
   .view-btn {
     font-size: 0.8rem;
     padding: 6px 10px;
-    background: #e2ce16;
-    color: #fff;
   }
 }
 
@@ -189,7 +180,11 @@
   }
 
   .product-card {
-    max-width: 250px;
+    max-width: 260px;
     margin: auto;
+  }
+
+  .product-image {
+    height: 230px;
   }
 }
