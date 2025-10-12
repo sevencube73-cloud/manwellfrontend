@@ -177,6 +177,8 @@
   .view-btn {
     font-size: 0.8rem;
     padding: 6px 10px;
+    background: #e2ce16;
+    color: #fff;
   }
 }
 
