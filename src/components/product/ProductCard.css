@@ -7,11 +7,10 @@
 }
 
 .product-list-page h2 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: #222;
   margin: 25px 0 15px;
-  text-align: center;
 }
 
 /* 🌸 Product Grid */
@@ -19,53 +18,47 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 18px;
-  justify-items: center;
 }
 
 /* 🛍️ Product Card */
 .product-card {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   display: flex;
-  flex-direction: column;
-  align-items: stretch; /* ensures image fills full width */
   position: relative;
-  width: 100%;
+  flex-direction: column;
+  position: relative;
 }
 
 .product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* 🖼️ Product Image */
 .product-image {
-  width: 100%;              /* full width of the card */
-  height: 220px;            /* fixed height for consistency */
-  display: block;
-  object-fit: cover;        /* keeps proportions while filling container */
-  background-color: #f9f9f9;
+  width: 80%;
+  height: 180px;
+  align-items: center;
+  object-fit: cover;
+  background: #fafafa;
   border-bottom: 1px solid #eee;
-  margin: 0;
-  padding: 0;
 }
 
 /* 📄 Product Info */
 .product-info {
-  padding: 10px 14px;
-  width: 100%;
+  padding: 5px;
   text-align: left;
-  box-sizing: border-box;
 }
 
 .product-name {
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #333;
-  margin: 8px 0 4px;
+  margin: 8px 0;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -73,51 +66,73 @@
 
 .product-price {
   color: #2d8f2d;
-  font-weight: 700;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* 🧮 Quantity Controls */
+.qty-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   margin-bottom: 10px;
-  font-size: 0.95rem;
+}
+
+.qty-controls button {
+  background-color: #f2f2f2;
+  border: none;
+  padding: 6px 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.qty-controls button:hover {
+  background-color: #ddd;
+}
+
+.qty-controls input {
+  width: 45px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  padding: 4px;
 }
 
 /* 🔘 Add to Cart Button */
 .add-btn {
-  background: linear-gradient(135deg, #ff9800, #ffb84d);
+  background: #ff9800;
   border: none;
   color: white;
   font-size: 0.9rem;
-  padding: 9px 14px;
+  padding: 8px 14px;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(255, 152, 0, 0.3);
-  width: 100%;
-  text-align: center;
+  transition: background 0.2s;
 }
 
 .add-btn:hover {
-  background: linear-gradient(135deg, #e68900, #ffa31a);
+  background: #e68900;
 }
 
 /* 🔗 View Details Button */
 .view-btn {
   display: inline-block;
-  background: #e2ce16;
+  background: #007bff;
   color: #fff;
   padding: 7px 14px;
   border-radius: 8px;
   text-decoration: none;
   font-size: 0.9rem;
   margin-top: 6px;
-  font-weight: 600;
-  text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(226, 206, 22, 0.3);
-  width: 100%;
+  transition: background 0.3s ease;
 }
 
 .view-btn:hover {
-  background: #c7b413;
-  transform: translateY(-2px);
+  background: #0056b3;
 }
 
 /* ✅ Added to Cart Toast */
@@ -146,27 +161,18 @@
     gap: 10px;
   }
 
+  .product-image {
+    height: 150px;
+  }
+
   .product-card {
     border-radius: 12px;
   }
 
-  .product-image {
-    height: 160px;     /* slightly smaller for phones */
-  }
-
   .product-info {
-    padding: 8px;
+    padding: 10px;
   }
 
-  .product-name {
-    font-size: 0.95rem;
-  }
-
-  .product-price {
-    font-size: 0.85rem;
-  }
-
-  .add-btn,
   .view-btn {
     font-size: 0.8rem;
     padding: 6px 10px;
@@ -180,11 +186,7 @@
   }
 
   .product-card {
-    max-width: 260px;
+    max-width: 250px;
     margin: auto;
-  }
-
-  .product-image {
-    height: 230px;
   }
 }
