@@ -4,14 +4,13 @@ import './Navbar.css';
 import { AuthContext } from '../../context/AuthContext';
 import { CartContext } from '../../context/CartContext';
 import api from '../../utils/api';
-import { FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const { cartItems } = useContext(CartContext);
   const [categories, setCategories] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -20,13 +19,12 @@ const Navbar = () => {
         const { data } = await api.get('/products/categories');
         setCategories(data);
       } catch (err) {
-        // fail silently
+        console.error(err);
       }
     };
     fetchCategories();
   }, []);
 
-  // Measure navbar height and set a CSS variable so main content can be offset dynamically
   useEffect(() => {
     const el = navRef.current;
     if (!el) return;
@@ -51,33 +49,30 @@ const Navbar = () => {
   const cartCount = cartItems.reduce((sum, item) => sum + item.qty, 0);
 
   return (
-  <nav ref={navRef} className="navbar">
+    <nav ref={navRef} className="navbar">
       {/* Logo */}
       <div className="navbar-left">
-          <Link to="/" className="navbar-logo">
-            <img
-              src={process.env.PUBLIC_URL + "/logo.png"}
-              alt="MANWELL Logo"
-              className="logo-img"
-            />
-          </Link>
+        <Link to="/" className="navbar-logo">
+          <img
+            src={process.env.PUBLIC_URL + '/logo.png'}
+            alt="MANWELL Logo"
+            className="logo-img"
+          />
+        </Link>
       </div>
 
-      {/* Desktop Links */}
-      <div className={`nav-links ${mobileMenuOpen ? 'open' : ''}`}>
-      {user && user.role === 'user' && (
-        <Link to="/">Home</Link>
-      )}
-    {user && user.role === 'user' && (
-        <Link to="/about-us">About</Link>
-      )}
-      {user && user.role === 'user' && (
-        <Link to="/orders">Orders</Link>
-      )}
-    {user && user.role === 'admin' && (
-        <Link to="/admin/dashboard">Admin Dashboard</Link>
-      )}
-          
+      {/* Links */}
+      <div className="nav-links">
+        {user && user.role === 'user' && (
+          <>
+            <Link to="/">Home</Link>
+            <Link to="/about-us">About</Link>
+            <Link to="/orders">Orders</Link>
+          </>
+        )}
+        {user && user.role === 'admin' && (
+          <Link to="/admin/dashboard">Admin Dashboard</Link>
+        )}
       </div>
 
       {/* Right side */}
@@ -97,26 +92,32 @@ const Navbar = () => {
                 className="user-avatar"
               />
               <span className="user-name">{(user.name || '').split(' ')[0]}</span>
-              <span className="chevron" style={{ transform: dropdownOpen ? 'rotate(180deg)' : 'none' }}>▼</span>
+              <span
+                className="chevron"
+                style={{ transform: dropdownOpen ? 'rotate(180deg)' : 'none' }}
+              >
+                ▼
+              </span>
               {dropdownOpen && (
                 <div className="dropdown-content">
                   <Link to="/profile">My Account</Link>
                   <Link to="/orders">My Orders</Link>
                   <Link to="/change-password">Change Password</Link>
-                   {user && user.role === 'user' && (
-                    <Link to="/contact">Contact</Link>
+                  {user.role === 'user' && (
+                    <>
+                      <Link to="/contact">Contact</Link>
+                      <Link to="/activate-account">Activate Account</Link>
+                    </>
                   )}
-                  {user && user.role === 'user' && (
-                    <Link to="/activate-account">Activate Acount</Link>
+                  {user.role === 'admin' && (
+                    <>
+                      <Link to="/admin/dashboard">Admin Dashboard</Link>
+                      <Link to="/admin/activate-account">Activate Account</Link>
+                    </>
                   )}
-                  {user && user.role === 'admin' && (
-                    <Link to="/admin/dashboard">Admin Dashboard</Link>
-                  )}
-                  {user && user.role === 'admin' && (
-                    <Link to="/admin/activate-account">Activate Account</Link>
-                  )}
-                  
-                  <button onClick={logout} className="logout-btn">Logout</button>
+                  <button onClick={logout} className="logout-btn">
+                    Logout
+                  </button>
                 </div>
               )}
             </div>
@@ -132,9 +133,6 @@ const Navbar = () => {
           <FaShoppingCart size={20} />
           {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
         </Link>
-
-        {/* Mobile Toggle */}
-        
       </div>
     </nav>
   );
