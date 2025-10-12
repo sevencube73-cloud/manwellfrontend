@@ -4,7 +4,6 @@ import api from '../../utils/api';
 import { CartContext } from '../../context/CartContext';
 import './ProductDetails.css';
 
-
 const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -22,7 +21,11 @@ const ProductDetails = () => {
 
   const handleAddToCart = () => {
     addToCart(product, qty);
-    navigate('/cart');
+  };
+
+  const handleBuyNow = () => {
+    addToCart(product, qty); // Add to cart first
+    navigate('/checkout'); // Navigate to checkout page
   };
 
   if (!product) return <p className="loading">Loading...</p>;
@@ -30,7 +33,10 @@ const ProductDetails = () => {
   return (
     <div className="product-details">
       <div className="product-image">
-        <img src={product.image || product.images?.[0]?.url || ''} alt={product.name} />
+        <img
+          src={product.image || product.images?.[0]?.url || ''}
+          alt={product.name}
+        />
       </div>
       <div className="product-info">
         <h2>{product.name}</h2>
@@ -43,14 +49,27 @@ const ProductDetails = () => {
             min="1"
             max={product.stock}
             value={qty}
-            onChange={e => setQty(Number(e.target.value))}
+            onChange={(e) => setQty(Number(e.target.value))}
           />
+
+          {/* Add to Cart Button */}
           <button
             onClick={handleAddToCart}
             disabled={product.stock < 1}
+            className="add-cart-btn"
           >
             {product.stock < 1 ? 'Out of Stock' : 'Add to Cart'}
           </button>
+
+          {/* Buy Now Button */}
+          <button
+            onClick={handleBuyNow}
+            disabled={product.stock < 1}
+            className="buy-now-btn"
+          >
+            Buy Now
+          </button>
+
           <h3 className="pdescription">Product Description</h3>
           <p className="description">{product.description}</p>
         </div>
