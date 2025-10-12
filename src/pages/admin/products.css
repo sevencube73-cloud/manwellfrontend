@@ -96,5 +96,19 @@
     margin-bottom: 6px;
     width: 100%;
   }
+   .products-header > div:first-child {
+    display: flex;
+    flex-direction: column; /* stack cards vertically */
+    gap: 16px;
+  }
+
+  .order-summary-card {
+    width: 100%; /* full width */
+    text-align: left; /* optional */
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+  }
 }
+
 
