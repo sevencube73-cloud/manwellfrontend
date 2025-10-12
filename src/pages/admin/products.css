@@ -108,5 +108,8 @@
 }
   
 }
-
+.order-summary-card-whole {
+  display: flex; /* change from flex to block */
+  gap: 16px; /* optional spacing between cards */
+}
 

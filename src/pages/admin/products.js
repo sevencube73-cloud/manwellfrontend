@@ -143,7 +143,7 @@ const AdminProducts = () => {
         <section className="products-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 32 }}>
           <div>
             <h2 className="admin-page-title" style={{ fontWeight: 700, fontSize: '1.5rem', marginBottom: 8 }}>Products</h2>
-            <div  className="order-summary-card-whole" style={{ display: 'block', gap: 24 }}>
+            <div  className="order-summary-card-whole" >
               <div className="order-summary-card">
                 <div style={{ fontWeight: 600, fontSize: '1.1rem' }}>Total Products</div>
                 <div style={{ fontSize: '2rem', fontWeight: 700, margin: '8px 0' }}>{products.length}</div>

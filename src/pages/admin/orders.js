@@ -99,7 +99,7 @@ const AdminOrders = () => {
               onChange={e => setSearch(e.target.value)}
               style={{ padding: '8px 14px', borderRadius: 8, border: '1px solid #ccc', marginBottom: 12, width: 240 }}
             />
-            <div style={{ display: 'block', gap: 24 }}>
+            <div className="order-summary-card-whole">
               <div className="order-summary-card">
                 <div style={{ fontWeight: 600, fontSize: '1.1rem' }}>Total Orders</div>
                 <div style={{ fontSize: '2rem', fontWeight: 700, margin: '8px 0' }}>{orders.length}</div>
