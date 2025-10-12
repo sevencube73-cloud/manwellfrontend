@@ -1,45 +1,58 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProductList from '../components/product/ProductList';
 import './HomePage.css';
+import api from '../utils/api'; // axios instance
 
 const HomePage = () => {
+  const [latestProduct, setLatestProduct] = useState(null);
+
+  useEffect(() => {
+    const fetchLatest = async () => {
+      try {
+        const { data } = await api.get('/products?limit=1&sort=-createdAt');
+        setLatestProduct(data[0]);
+      } catch (err) {
+        console.error('Failed to fetch latest product:', err);
+      }
+    };
+    fetchLatest();
+  }, []);
+
   return (
     <div className="home-container">
-      {/* Sidebar */}
-      <aside className="sidebar">
-        <ul className="category-list">
-          <li>Official Stores</li>
-          <li>Phones & Tablets</li>
-          <li>TVs & Audio</li>
-          <li>Appliances</li>
-          <li>Health & Beauty</li>
-          <li>Home & Office</li>
-          <li>Fashion</li>
-          <li>Computing</li>
-          <li>Gaming</li>
-          <li>Supermarket</li>
-          <li>Baby Products</li>
-          <li>Other Categories</li>
-        </ul>
-      </aside>
-
-      {/* Main content */}
-      <main className="main-content">
-        <div className="hero-banner">
-          <div className="hero-text">
-            <h1>MANWELL STORE</h1>
-            <p>Premium Fashion, Business Class Service</p>
-            <Link to="#" className="shop-now-btn">Shop Now</Link>
+      <div className="main-content">
+        {/* Dynamic Hero Section */}
+        {latestProduct ? (
+          <div
+            className="hero-banner"
+            style={{
+              backgroundImage: `url(${latestProduct.image || '/default.jpg'})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          >
+            <div className="hero-text">
+              <h1>{latestProduct.name}</h1>
+              <p>{latestProduct.description?.substring(0, 100)}...</p>
+              <Link to={`/product/${latestProduct._id}`} className="shop-now-btn">
+                Shop Now
+              </Link>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="hero-banner fallback-hero">
+            <div className="hero-text">
+              <h1>MANWELL STORE</h1>
+              <p>Premium Quality Fashion — Where Street Meets Sleek</p>
+            </div>
+          </div>
+        )}
 
-        <section className="product-section">
-          <h2 className="section-title">Flash Sales | Live Now</h2>
-          <ProductList />
-        </section>
-      </main>
+        {/* Products Section */}
+        <h2 className="section-title">Explore Our Products</h2>
+        <ProductList />
+      </div>
     </div>
   );
 };
