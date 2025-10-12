@@ -49,7 +49,7 @@ const Footer = () => {
         <p className="footer-credit">
           Designed & Developed by{" "}
           <a
-            href="https://www.muzamilafey.netlify.app"
+            href="https://muzamilafey.netlify.app/"
             target="_blank"
             rel="noopener noreferrer"
           >
