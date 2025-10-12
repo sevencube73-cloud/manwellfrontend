@@ -1,20 +1,45 @@
 import React from 'react';
-import '../components/Layout/.css';
-import { Link } from 'react-router-dom'; // to navigate between pages
+import '../components/Layout/Layout.css';
+import { Link } from 'react-router-dom';
 import ProductList from '../components/product/ProductList';
-import './HomePage.css';  // import the styles
+import './HomePage.css';
 
 const HomePage = () => {
   return (
     <div className="home-container">
-      <h1 className="home-title">MANWELL STORE</h1>
-      <h3 className='home-slogan'>where street meet sleek</h3>
-      <div className="auth-buttons">
-        {/* <Link to="/login" className="btn login-btn">Login</Link>
-        <Link to="/register" className="btn register-btn">Register</Link> */}
-      </div>
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <ul className="category-list">
+          <li>Official Stores</li>
+          <li>Phones & Tablets</li>
+          <li>TVs & Audio</li>
+          <li>Appliances</li>
+          <li>Health & Beauty</li>
+          <li>Home & Office</li>
+          <li>Fashion</li>
+          <li>Computing</li>
+          <li>Gaming</li>
+          <li>Supermarket</li>
+          <li>Baby Products</li>
+          <li>Other Categories</li>
+        </ul>
+      </aside>
 
-      <ProductList />
+      {/* Main content */}
+      <main className="main-content">
+        <div className="hero-banner">
+          <div className="hero-text">
+            <h1>MANWELL STORE</h1>
+            <p>Premium Fashion, Business Class Service</p>
+            <Link to="/shop" className="shop-now-btn">Shop Now</Link>
+          </div>
+        </div>
+
+        <section className="product-section">
+          <h2 className="section-title">Flash Sales | Live Now</h2>
+          <ProductList />
+        </section>
+      </main>
     </div>
   );
 };
