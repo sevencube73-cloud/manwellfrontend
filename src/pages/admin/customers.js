@@ -136,7 +136,7 @@ const AdminCustomers = () => {
               />
               Show only unverified customers
             </label>
-            <div style={{ display: 'flex', gap: 24 }}>
+            <div style={{ display: 'block', gap: 24 }}>
               <div className="order-summary-card">
                 <div style={{ fontWeight: 600, fontSize: '1.1rem' }}>Total Customers</div>
                 <div style={{ fontSize: '2rem', fontWeight: 700, margin: '8px 0' }}>{customers.length}</div>
