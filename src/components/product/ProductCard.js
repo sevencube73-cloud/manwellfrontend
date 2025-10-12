@@ -66,12 +66,7 @@ const ProductCard = ({ product }) => {
           <div className="qty-controls">
             
           </div>
-          
         </div>
-
-        <Link to={`/product/${product._id}`} className="view-btn">
-          Details
-        </Link>
 
         {showToast && (
           <div className="card-toast">Added to cart</div>
