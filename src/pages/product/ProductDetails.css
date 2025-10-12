@@ -1,16 +1,16 @@
 /* 🌟 General Layout */
 body{
-  padding-top: 50px;
+  padding-top: 70px;
 }
 .product-details {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 25px 20px;
+  padding:  20px;
   background-color: #f9fafc;
   font-family: 'Poppins', sans-serif;
   min-height: 100vh;
-  padding-top: 170px;
+  padding-top: 200px;
 }
 
 /* 🖼️ Product Image Section */
