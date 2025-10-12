@@ -31,7 +31,7 @@ const HomePage = () => {
           <div className="hero-text">
             <h1>MANWELL STORE</h1>
             <p>Premium Fashion, Business Class Service</p>
-            <Link to="/ProductList" className="shop-now-btn">Shop Now</Link>
+            <Link to="#" className="shop-now-btn">Shop Now</Link>
           </div>
         </div>
 
