@@ -34,6 +34,8 @@ body {
 
 .navbar-logo img {
   height: 50px;
+  border-radius: 10px;
+  left: 1rem;
   object-fit: contain;
 }
 
