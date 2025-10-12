@@ -21,38 +21,42 @@ const HomePage = () => {
 
   return (
     <div className="home-container">
-      <div className="main-content">
-        {/* Dynamic Hero Section */}
-        {latestProduct ? (
-          <div
-            className="hero-banner"
-            style={{
-              backgroundImage: `url(${latestProduct.image || '/default.jpg'})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          >
-            <div className="hero-text">
-              <h1>{latestProduct.name}</h1>
-              <p>{latestProduct.description?.substring(0, 100)}...</p>
+      {/* Hero Section */}
+      <section
+        className="hero-banner"
+        style={{
+          backgroundImage: latestProduct
+            ? `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${latestProduct.image || '/default.jpg'})`
+            : `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('/default.jpg')`,
+        }}
+      >
+        <div className="hero-content">
+          {latestProduct ? (
+            <>
+              <h1 className="hero-title">{latestProduct.name}</h1>
+              <p className="hero-description">
+                {latestProduct.description?.substring(0, 100)}...
+              </p>
               <Link to={`/product/${latestProduct._id}`} className="shop-now-btn">
                 Shop Now
               </Link>
-            </div>
-          </div>
-        ) : (
-          <div className="hero-banner fallback-hero">
-            <div className="hero-text">
-              <h1>MANWELL STORE</h1>
-              <p>Premium Quality Fashion — Where Street Meets Sleek</p>
-            </div>
-          </div>
-        )}
+            </>
+          ) : (
+            <>
+              <h1 className="hero-title">MANWELL STORE</h1>
+              <p className="hero-description">
+                Premium Quality Fashion — Where Street Meets Sleek
+              </p>
+            </>
+          )}
+        </div>
+      </section>
 
-        {/* Products Section */}
+      {/* Products Section */}
+      <section className="products-section">
         <h2 className="section-title">Explore Our Products</h2>
         <ProductList />
-      </div>
+      </section>
     </div>
   );
 };
