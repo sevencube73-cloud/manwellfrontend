@@ -1,5 +1,7 @@
 /* 🌟 General Layout */
-
+body{
+  padding-top: 20px;
+}
 .product-details {
   display: flex;
   flex-direction: column;
