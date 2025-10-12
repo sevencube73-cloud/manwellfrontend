@@ -67,6 +67,7 @@ const ProductCard = ({ product }) => {
             
           </div>
         </div>
+        </Link>
 
         {showToast && (
           <div className="card-toast">Added to cart</div>
