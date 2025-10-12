@@ -60,7 +60,7 @@ const ProductCard = ({ product }) => {
         
       <div className="product-info">
         <h3 className="product-name">{product.name}</h3>
-        <p className="product-price">KES {(Number(product?.price) || 0).toFixed(2)}</p>
+        <p style={"color:green;"} className="product-price">KES {(Number(product?.price) || 0).toFixed(2)}</p>
 
         <div className="card-actions">
           <div className="qty-controls">
