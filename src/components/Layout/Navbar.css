@@ -157,10 +157,15 @@ body {
 }
 
 /* MOBILE BOTTOM NAVBAR */
-@media (max-width: 900px) {
-  body {
-    padding-bottom: var(--mobile-navbar-height);
+  @media (max-width: 768px) {
+    .navbar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 1000;
+    }
   }
+
 
   .navbar {
     position: fixed;
