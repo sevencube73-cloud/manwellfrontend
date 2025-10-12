@@ -5,16 +5,11 @@ import './HomePage.css';
 import api from '../utils/api'; // axios instance
 
 const HomePage = () => {
-  
-
   return (
-    <div className="home-container">
+    <div className="products-section">
       {/* Hero Section */}
-      
-
-      {/* Products Section */}
-      <section className="products-section">
-        <h2 className="section-title">Explore Our Products</h2>
+      <section className="">
+        <h2 className="section-title">MANWELL STORE</h2>
         <ProductList />
       </section>
     </div>
