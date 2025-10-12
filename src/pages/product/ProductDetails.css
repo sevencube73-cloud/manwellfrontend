@@ -211,3 +211,68 @@ body {
     margin-top: 0;
   }
 }
+/* 🟢 Floating Action Buttons */
+.floating-actions {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  padding: 12px 20px;
+  border-radius: 14px;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+
+/* Floating Buttons Style */
+.floating-actions button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.15s ease;
+}
+
+/* Add to Cart (Orange) */
+.floating-actions .add-cart-btn {
+  background: #ff9800;
+  color: #fff;
+}
+
+.floating-actions .add-cart-btn:hover {
+  background: #e68900;
+  transform: scale(1.03);
+}
+
+/* Buy Now (Red) */
+.floating-actions .buy-now-btn {
+  background: #e53935;
+  color: #fff;
+}
+
+.floating-actions .buy-now-btn:hover {
+  background: #c62828;
+  transform: scale(1.03);
+}
+
+/* 📱 Mobile: Make the buttons full-width */
+@media (max-width: 600px) {
+  .floating-actions {
+    width: 90%;
+    bottom: 20px;
+    flex-direction: column;
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .floating-actions button {
+    width: 100%;
+  }
+}

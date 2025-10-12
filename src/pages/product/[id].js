@@ -38,6 +38,7 @@ const ProductDetails = () => {
           alt={product.name}
         />
       </div>
+
       <div className="product-info">
         <h2>{product.name}</h2>
         <p className="price">Price: ${(Number(product?.price) || 0).toFixed(2)}</p>
@@ -51,28 +52,29 @@ const ProductDetails = () => {
             value={qty}
             onChange={(e) => setQty(Number(e.target.value))}
           />
-
-          {/* Add to Cart Button */}
-          <button
-            onClick={handleAddToCart}
-            disabled={product.stock < 1}
-            className="add-cart-btn"
-          >
-            {product.stock < 1 ? 'Out of Stock' : 'Add to Cart'}
-          </button>
-
-          {/* Buy Now Button */}
-          <button
-            onClick={handleBuyNow}
-            disabled={product.stock < 1}
-            className="buy-now-btn"
-          >
-            Buy Now
-          </button>
-
-          <h3 className="pdescription">Product Description</h3>
-          <p className="description">{product.description}</p>
         </div>
+
+        <h3 className="pdescription">Product Description</h3>
+        <p className="description">{product.description}</p>
+      </div>
+
+      {/* 🟠 Floating Buttons */}
+      <div className="floating-actions">
+        <button
+          onClick={handleAddToCart}
+          disabled={product.stock < 1}
+          className="add-cart-btn"
+        >
+          {product.stock < 1 ? 'Out of Stock' : 'Add to Cart'}
+        </button>
+
+        <button
+          onClick={handleBuyNow}
+          disabled={product.stock < 1}
+          className="buy-now-btn"
+        >
+          Buy Now
+        </button>
       </div>
     </div>
   );
