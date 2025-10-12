@@ -146,7 +146,9 @@
     grid-template-columns: 1fr;
     text-align: left;
   }
-
+  .footer-section ul li{
+    text-align: left;
+  }
   .newsletter input {
     width: 60%;
   }
@@ -156,6 +158,6 @@
   }
 
   .footer-section ul li {
-    justify-content: center;
+    justify-content: left;
   }
 }
