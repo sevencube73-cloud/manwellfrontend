@@ -28,6 +28,7 @@
   overflow: hidden;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   display: flex;
+  position: relative;
   flex-direction: column;
   position: relative;
 }
@@ -39,8 +40,9 @@
 
 /* 🖼️ Product Image */
 .product-image {
-  width: 100%;
+  width: 80%;
   height: 180px;
+  align-items: center;
   object-fit: cover;
   background: #fafafa;
   border-bottom: 1px solid #eee;
