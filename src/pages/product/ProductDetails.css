@@ -129,11 +129,13 @@ body{
 @media (max-width: 600px) {
   .product-details {
     padding: 15px;
+    padding-top: 170px;
   }
 
   .product-image {
     padding: 12px;
     max-width: 100%;
+    border-radius: 8px;
   }
 
   .product-info {
