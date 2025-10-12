@@ -1,5 +1,5 @@
 import React from 'react';
-import '../components/Layout/Layout.css';
+
 import { Link } from 'react-router-dom';
 import ProductList from '../components/product/ProductList';
 import './HomePage.css';
