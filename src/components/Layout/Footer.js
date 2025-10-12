@@ -1,12 +1,13 @@
 import React from "react";
 import "./Footer.css";
-import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaStore } from "react-icons/fa";
 
 const Footer = () => {
   return (
     <footer className="footer">
       {/* Top Section */}
       <div className="footer-top">
+        {/* Customer Care */}
         <div className="footer-section">
           <h4>Customer Care</h4>
           <ul>
@@ -18,6 +19,7 @@ const Footer = () => {
           </ul>
         </div>
 
+        {/* About */}
         <div className="footer-section">
           <h4>About MANWELL</h4>
           <ul>
@@ -28,18 +30,25 @@ const Footer = () => {
           </ul>
         </div>
 
+        {/* Newsletter */}
         <div className="footer-section newsletter">
-          <h4>Stay Connected</h4>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <input type="email" placeholder="Enter your email" />
-            <button type="submit">Subscribe</button>
-          </form>
           <div className="social-icons">
-            <a href="https://facebook.com/muzamilafey" target="_blank" rel="noopener noreferrer"><FaFacebookF /></a>
-            <a href="https://twitter.com/muzamilafey" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
-            <a href="https://instagram.com/muzamilafey" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-            <a href="https://youtube.com/muzamilafey" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><FaFacebookF /></a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
           </div>
+        </div>
+
+        {/* Business Details */}
+        <div className="footer-section business-details">
+          <h4>Business Details</h4>
+          <ul>
+            <li><FaStore /> Fashion Store</li>
+            <li><FaMapMarkerAlt /> 6th Street Tower (Eastleigh), Nairobi</li>
+            <li><FaPhoneAlt /> +254 722 617362</li>
+            <li><FaEnvelope /> manwellstore@gmail.com</li>
+          </ul>
         </div>
       </div>
 
@@ -49,7 +58,7 @@ const Footer = () => {
         <p className="footer-credit">
           Designed & Developed by{" "}
           <a
-            href="https://muzamilafey.netlify.app/"
+            href="https://manderasoftwares.netlify.app"
             target="_blank"
             rel="noopener noreferrer"
           >
