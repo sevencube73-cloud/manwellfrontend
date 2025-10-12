@@ -50,13 +50,13 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="product-card">
-      <img
+      
+      <Link to={`/product/${product._id}`} className="view-btn">
+          <img
         src={product.image || product.images?.[0]?.url || ''}
         alt={product.name}
         className="product-image"
       />
-      <Link to={`/product/${product._id}`} className="view-btn">
-          Details
         </Link>
       <div className="product-info">
         <h3 className="product-name">{product.name}</h3>
