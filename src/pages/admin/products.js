@@ -154,11 +154,7 @@ const AdminProducts = () => {
                 <div style={{ fontSize: '2rem', fontWeight: 700, margin: '8px 0' }}>{products.filter(p => p.stock < 10).length}</div>
                 <div style={{ color: '#888', fontSize: '0.95rem' }}>Products below threshold</div>
               </div>
-              <div className="order-summary-card">
-                <div style={{ fontWeight: 600, fontSize: '1.1rem' }}>Categories</div>
-                <div style={{ fontSize: '2rem', fontWeight: 700, margin: '8px 0' }}>{[...new Set(products.map(p => p.category))].length}</div>
-                <div style={{ color: '#888', fontSize: '0.95rem' }}>Product categories</div>
-              </div>
+              
             </div>
           </div>
             
