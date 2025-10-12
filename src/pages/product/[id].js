@@ -35,7 +35,7 @@ const ProductDetails = () => {
       <div className="product-info">
         <h2>{product.name}</h2>
         <p className="description">{product.description}</p>
-  <p className="price">Price: ${(Number(product?.price) || 0).toFixed(2)}</p>
+        <p className="price">Price: ${(Number(product?.price) || 0).toFixed(2)}</p>
         <p className="stock">In Stock: {product.stock}</p>
 
         <div className="actions">

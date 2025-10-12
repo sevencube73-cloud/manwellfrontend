@@ -10,6 +10,7 @@ body{
   background-color: #f9fafc;
   font-family: 'Poppins', sans-serif;
   min-height: 100vh;
+  padding-top: 170px;
 }
 
 /* 🖼️ Product Image Section */
@@ -20,7 +21,7 @@ body{
   border-radius: 16px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   padding: 18px;
-  padding-top: 170px;
+  
   display: flex;
   justify-content: center;
   align-items: center;
