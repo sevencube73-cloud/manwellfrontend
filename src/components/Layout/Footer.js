@@ -28,8 +28,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        
-
         <div className="footer-section newsletter">
           <h4>Stay Connected</h4>
           <form onSubmit={(e) => e.preventDefault()}>
@@ -47,7 +45,17 @@ const Footer = () => {
 
       {/* Bottom Section */}
       <div className="footer-bottom">
-  <p>© {new Date().getFullYear()} MANWELL STORE . All rights reserved.</p>
+        <p>© {new Date().getFullYear()} MANWELL STORE. All rights reserved.</p>
+        <p className="footer-credit">
+          Designed & Developed by{" "}
+          <a
+            href="https://www.muzamilafey.netlify.app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Mandera Soft
+          </a>
+        </p>
       </div>
     </footer>
   );
