@@ -10,6 +10,7 @@ const ProductDetails = () => {
   const { addToCart } = useContext(CartContext);
   const [product, setProduct] = useState(null);
   const [qty, setQty] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -24,20 +25,38 @@ const ProductDetails = () => {
   };
 
   const handleBuyNow = () => {
-    addToCart(product, qty); // Add to cart first
-    navigate('/checkout'); // Navigate to checkout page
+    addToCart(product, qty);
+    navigate('/checkout');
   };
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   if (!product) return <p className="loading">Loading...</p>;
 
   return (
     <div className="product-details">
-      <div className="product-image">
+      <div className="product-image" onClick={openModal}>
         <img
           src={product.image || product.images?.[0]?.url || ''}
           alt={product.name}
         />
       </div>
+
+      {/* Modal Popup for Full Image */}
+      {isModalOpen && (
+        <div className="image-modal" onClick={closeModal}>
+          <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={product.image || product.images?.[0]?.url || ''}
+              alt={product.name}
+            />
+            <button className="close-modal" onClick={closeModal}>
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="product-info">
         <h2>{product.name}</h2>
@@ -58,7 +77,7 @@ const ProductDetails = () => {
         <p className="description">{product.description}</p>
       </div>
 
-      {/* 🟠 Floating Buttons */}
+      {/* Floating Buttons */}
       <div className="floating-actions">
         <button
           onClick={handleAddToCart}
