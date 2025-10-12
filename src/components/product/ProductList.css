@@ -1,13 +1,13 @@
 .product-list-container {
-  padding: 20px;
-  max-width: 1200px;
+  padding: 10px;
+  max-width: 100%;
   margin: auto;
 }
 
 .filter-bar {
   display: flex;
   gap: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   justify-content: center;
   flex-wrap: wrap;
 }
