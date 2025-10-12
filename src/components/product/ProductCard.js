@@ -57,7 +57,7 @@ const ProductCard = ({ product }) => {
         alt={product.name}
         className="product-image"
       />
-        </Link>
+        
       <div className="product-info">
         <h3 className="product-name">{product.name}</h3>
         <p className="product-price">KES {(Number(product?.price) || 0).toFixed(2)}</p>
@@ -67,13 +67,15 @@ const ProductCard = ({ product }) => {
             
           </div>
         </div>
-        </Link>
+        
 
         {showToast && (
           <div className="card-toast">Added to cart</div>
         )}
       </div>
+      </Link>
     </div>
+    
   );
 };
 
