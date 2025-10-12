@@ -102,7 +102,9 @@
     flex-direction: column; /* stack cards vertically */
     gap: 16px;
   }
-
+  .order-summary-card-whole{
+    display: block;
+  }
   
 }
 
