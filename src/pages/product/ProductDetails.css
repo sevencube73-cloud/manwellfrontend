@@ -221,7 +221,7 @@ body {
   gap: 15px;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0.95);
+  background: transparent;
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
   padding: 12px 20px;
   border-radius: 14px;
@@ -254,7 +254,7 @@ body {
 /* Buy Now (Red) */
 .floating-actions .buy-now-btn {
   background: #e53935;
-  color: transparent;
+  color: #fff;
 }
 
 .floating-actions .buy-now-btn:hover {
