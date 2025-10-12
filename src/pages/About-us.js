@@ -1,5 +1,5 @@
 import React from "react";
-import "./page.css"; // external stylesheet
+import "./pages.css"; // external stylesheet
 
 export default function AboutManwell() {
   return (
