@@ -62,18 +62,7 @@ const Navbar = () => {
       </div>
 
       {/* Links */}
-      <div className="nav-links">
-        {user && user.role === 'user' && (
-          <>
-            <Link to="/">Home</Link>
-            <Link to="/about-us">About</Link>
-            <Link to="/orders">Orders</Link>
-          </>
-        )}
-        {user && user.role === 'admin' && (
-          <Link to="/admin/dashboard">Admin Dashboard</Link>
-        )}
-      </div>
+      
 
       {/* Right side */}
       <div className="navbar-right">
