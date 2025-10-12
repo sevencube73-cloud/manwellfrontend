@@ -201,9 +201,5 @@ body {
     order: 2;
   }
 
-  .dropdown-content {
-    right: auto;
-    bottom: var(--mobile-navbar-height);
-    top: auto;
-  }
+  
 
