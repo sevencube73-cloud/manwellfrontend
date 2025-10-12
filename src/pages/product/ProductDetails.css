@@ -254,7 +254,7 @@ body {
 /* Buy Now (Red) */
 .floating-actions .buy-now-btn {
   background: #e53935;
-  color: #fff;
+  color: transparent;
 }
 
 .floating-actions .buy-now-btn:hover {
