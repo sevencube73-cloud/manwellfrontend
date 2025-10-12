@@ -44,10 +44,11 @@
 
   .order-summary-card {
     width: 100%;
-    display: flex;
+    display: block;
     justify-content: space-between;
-    padding: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    text-align: left; /* optional */
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     border-radius: 8px;
   }
 
@@ -102,13 +103,7 @@
     gap: 16px;
   }
 
-  .order-summary-card {
-    width: 100%; /* full width */
-    text-align: left; /* optional */
-    padding: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    border-radius: 8px;
-  }
+  
 }
 
 
