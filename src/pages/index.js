@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ProductList from '../components/product/ProductList';
+import ProductList from './product/ProductList';
 import './HomePage.css';
 import api from '../utils/api'; // axios instance
 
