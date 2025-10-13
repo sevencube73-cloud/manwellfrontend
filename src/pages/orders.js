@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import './OrdersPage.css';
+import './Orders.css';
 import api from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
 
