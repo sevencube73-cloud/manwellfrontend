@@ -58,7 +58,7 @@ const ProductCard = ({ product }) => {
         <h3 className="shop-item-name">{product.name}</h3>
         <p className="shop-item-price">KES {(Number(product?.price) || 0).toFixed(2)}</p>
 
-        <Link to={`/product/${product._id}`} className="shop-item-btn" onClick={handleAdd}>
+        <Link to={`/product/${product._id}`} className="shop-item-btn" >
           Add to Cart
         </Link>
 
