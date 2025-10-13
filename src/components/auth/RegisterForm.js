@@ -75,7 +75,7 @@ const RegisterForm = () => {
               required
             />
             <span className="auth-form-icon" role="img" aria-label="user">
-              👤
+              
             </span>
           </div>
 
@@ -89,7 +89,7 @@ const RegisterForm = () => {
               required
             />
             <span className="auth-form-icon" role="img" aria-label="email">
-              📧
+              
             </span>
           </div>
 
@@ -103,7 +103,7 @@ const RegisterForm = () => {
               required
             />
             <span className="auth-form-icon" role="img" aria-label="lock">
-              🔒
+              
             </span>
           </div>
 
@@ -115,7 +115,7 @@ const RegisterForm = () => {
               onChange={handleChange}
             />
             <span className="auth-form-icon" role="img" aria-label="phone">
-              📱
+              
             </span>
           </div>
 
@@ -127,7 +127,7 @@ const RegisterForm = () => {
               onChange={handleChange}
             />
             <span className="auth-form-icon" role="img" aria-label="address">
-              🏠
+              
             </span>
           </div>
 
