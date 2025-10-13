@@ -1,62 +1,53 @@
-/* 🌟 General Page Layout */
-.product-list-page {
-  padding: 20px;
-  background-color: #f8f9fc;
-  font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
-}
-
-.product-list-page h2 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #222;
-  margin: 25px 0 15px;
-}
-
-/* 🌸 Product Grid */
-.product-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 18px;
-}
-
-/* 🛍️ Product Card */
+/* 🌟 Product Card Base */
 .product-card {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   display: flex;
   flex-direction: column;
   position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* 🖼️ Product Image */
+/* 🖼️ Image Styling */
 .product-image {
   width: 100%;
-  height: 180px;
+  height: 230px;
   object-fit: cover;
-  background: #fafafa;
+  display: block;
   border-bottom: 1px solid #eee;
+  background: #fafafa;
 }
 
-/* 📄 Product Info */
+@media (max-width: 600px) {
+  .product-image {
+    height: 180px;
+  }
+}
+
+/* 📦 Info Section */
 .product-info {
-  padding: 14px;
-  text-align: center;
+  padding: 12px 14px;
+  text-align: left;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .product-name {
-  font-size: 1.05rem;
-  font-weight: 500;
-  color: #333;
-  margin: 8px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 4px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -64,76 +55,31 @@
 
 .product-price {
   color: #2d8f2d;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-
-/* 🧮 Quantity Controls */
-.qty-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
   margin-bottom: 10px;
 }
 
-.qty-controls button {
-  background-color: #f2f2f2;
-  border: none;
-  padding: 6px 10px;
-  font-size: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.qty-controls button:hover {
-  background-color: #ddd;
-}
-
-.qty-controls input {
-  width: 45px;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  padding: 4px;
-}
-
-/* 🔘 Add to Cart Button */
+/* 🛒 Add Button */
 .add-btn {
-  background: #ff9800;
-  border: none;
+  background: linear-gradient(135deg, #ff9800, #ffc04d);
   color: white;
-  font-size: 0.9rem;
-  padding: 8px 14px;
+  border: none;
+  font-weight: 600;
+  padding: 10px 0;
   border-radius: 8px;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: background 0.2s;
+  text-align: center;
+  transition: all 0.3s ease;
 }
 
 .add-btn:hover {
-  background: #e68900;
+  background: linear-gradient(135deg, #e68a00, #ffb84d);
+  transform: translateY(-2px);
 }
 
-/* 🔗 View Details Button */
-.view-btn {
-  display: inline-block;
-  background: #007bff;
-  color: #fff;
-  padding: 7px 14px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 0.9rem;
-  margin-top: 6px;
-  transition: background 0.3s ease;
-}
-
-.view-btn:hover {
-  background: #0056b3;
-}
-
-/* ✅ Added to Cart Toast */
+/* ✅ Toast Notification */
 .card-toast {
   position: absolute;
   top: 10px;
@@ -147,44 +93,33 @@
 }
 
 @keyframes fadeInOut {
-  0% { opacity: 0; transform: translateY(-10px); }
-  20%, 80% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-10px); }
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  20%, 80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
 }
 
-/* 📱 Mobile Responsiveness */
-@media (max-width: 600px) {
-  .product-section {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  .product-image {
-    height: 150px;
-  }
-
+/* 📱 Responsive Grid Handling */
+@media (max-width: 768px) {
   .product-card {
     border-radius: 12px;
   }
-
-  .product-info {
-    padding: 10px;
+  .product-name {
+    font-size: 0.9rem;
   }
-
-  .view-btn {
-    font-size: 0.8rem;
-    padding: 6px 10px;
+  .product-price {
+    font-size: 0.85rem;
   }
-}
-
-/* 💻 Large Screens */
-@media (min-width: 1024px) {
-  .product-section {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .product-card {
-    max-width: 250px;
-    margin: auto;
+  .add-btn {
+    font-size: 0.85rem;
+    padding: 8px 0;
   }
 }
