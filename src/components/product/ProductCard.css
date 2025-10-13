@@ -1,59 +1,62 @@
-/* 🌟 Product Card Base */
+/* 🌟 General Page Layout */
+.product-list-page {
+  padding: 20px;
+  background-color: #f8f9fc;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+}
+
+.product-list-page h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #222;
+  margin: 25px 0 15px;
+}
+
+/* 🌸 Product Grid */
+.product-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+}
+
+/* 🛍️ Product Card */
 .product-card {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 100%;
-  height: 100%;
 }
 
 .product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* 🖼️ Image Styling */
+/* 🖼️ Product Image */
 .product-image {
   width: 100%;
-  height: 230px;
+  height: 180px;
   object-fit: cover;
-  display: block;
-  border-bottom: 1px solid #eee;
   background: #fafafa;
+  border-bottom: 1px solid #eee;
 }
 
-@media (max-width: 900px) {
-  .product-image {
-    
-    width: 100%;
-    height: auto;
-    max-height: 230px;
-    object-fit: cover;
-    display: block;
-    background: #fafafa;
-  }
-}
-
-/* 📦 Info Section */
+/* 📄 Product Info */
 .product-info {
-  padding: 12px 14px;
-  text-align: left;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  padding: 14px;
+  text-align: center;
 }
 
 .product-name {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #222;
-  margin-bottom: 4px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #333;
+  margin: 8px 0;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -61,31 +64,76 @@
 
 .product-price {
   color: #2d8f2d;
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* 🧮 Quantity Controls */
+.qty-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   margin-bottom: 10px;
 }
 
-/* 🛒 Add Button */
-.add-btn {
-  background: linear-gradient(135deg, #ff9800, #ffc04d);
-  color: white;
+.qty-controls button {
+  background-color: #f2f2f2;
   border: none;
-  font-weight: 600;
-  padding: 10px 0;
-  border-radius: 8px;
-  font-size: 0.9rem;
+  padding: 6px 10px;
+  font-size: 1rem;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+.qty-controls button:hover {
+  background-color: #ddd;
+}
+
+.qty-controls input {
+  width: 45px;
   text-align: center;
-  transition: all 0.3s ease;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  padding: 4px;
+}
+
+/* 🔘 Add to Cart Button */
+.add-btn {
+  background: #ff9800;
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
 .add-btn:hover {
-  background: linear-gradient(135deg, #e68a00, #ffb84d);
-  transform: translateY(-2px);
+  background: #e68900;
 }
 
-/* ✅ Toast Notification */
+/* 🔗 View Details Button */
+.view-btn {
+  display: inline-block;
+  background: #007bff;
+  color: #fff;
+  padding: 7px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 6px;
+  transition: background 0.3s ease;
+}
+
+.view-btn:hover {
+  background: #0056b3;
+}
+
+/* ✅ Added to Cart Toast */
 .card-toast {
   position: absolute;
   top: 10px;
@@ -99,33 +147,44 @@
 }
 
 @keyframes fadeInOut {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  20%, 80% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
+  0% { opacity: 0; transform: translateY(-10px); }
+  20%, 80% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
 }
 
-/* 📱 Responsive Grid Handling */
-@media (max-width: 768px) {
+/* 📱 Mobile Responsiveness */
+@media (max-width: 600px) {
+  .product-section {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .product-image {
+    height: 150px;
+  }
+
   .product-card {
     border-radius: 12px;
   }
-  .product-name {
-    font-size: 0.9rem;
+
+  .product-info {
+    padding: 10px;
   }
-  .product-price {
-    font-size: 0.85rem;
+
+  .view-btn {
+    font-size: 0.8rem;
+    padding: 6px 10px;
   }
-  .add-btn {
-    font-size: 0.85rem;
-    padding: 8px 0;
+}
+
+/* 💻 Large Screens */
+@media (min-width: 1024px) {
+  .product-section {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .product-card {
+    max-width: 250px;
+    margin: auto;
   }
 }
