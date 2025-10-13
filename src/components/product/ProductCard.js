@@ -50,27 +50,26 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="product-card">
-      
-      <Link to={`/product/${product._id}`} className="">
-          <img
+      <img
         src={product.image || product.images?.[0]?.url || ''}
         alt={product.name}
         className="product-image"
       />
-        </Link>
       <div className="product-info">
         <h3 className="product-name">{product.name}</h3>
         <p className="product-price">KES {(Number(product?.price) || 0).toFixed(2)}</p>
 
         <div className="card-actions">
           <div className="qty-controls">
-            
+            <button type="button" onClick={() => setQty(Math.max(1, qty - 1))}>-</button>
+            <input type="number" value={qty} min="1" onChange={(e) => setQty(Number(e.target.value) || 1)} />
+            <button type="button" onClick={() => setQty(qty + 1)}>+</button>
           </div>
           
         </div>
 
         <Link to={`/product/${product._id}`} className="view-btn">
-          Add to cart
+          Details
         </Link>
 
         {showToast && (
