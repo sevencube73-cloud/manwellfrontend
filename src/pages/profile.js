@@ -7,39 +7,57 @@ import './profile.css';
 const sidebarLinks = [
   { label: 'My Account', to: '/profile', icon: '👤' },
   { label: 'Orders', to: '/orders', icon: '🛒' },
-  // { label: 'Inbox', to: '/inbox', icon: '✉️' },
-  // { label: 'Vouchers', to: '/vouchers', icon: '🎟️' },
-  // { label: 'Wishlist', to: '/wishlist', icon: '❤️' },
-  // { label: 'Recently Viewed', to: '/recently-viewed', icon: '⏳' },
 ];
 
 const ProfilePage = () => {
   const { user, token, logout, login } = useContext(AuthContext);
-  const [form, setForm] = useState({ name: '', email: '', phone: '', address: '', city: '', postalCode: '', country: '' });
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    postalCode: '',
+    country: '',
+  });
   const [message, setMessage] = useState('');
 
+  // ✅ Fetch user data from DB (including phone)
   useEffect(() => {
-    if (user) {
-      setForm({
-        name: user.name,
-        email: user.email,
-        phone: user.phone || '',
-        address: user.address || '',
-        city: user.city || '',
-        postalCode: user.postalCode || '',
-        country: user.country || '',
-      });
-    }
-  }, [user]);
+    const fetchProfile = async () => {
+      try {
+        const { data } = await api.get('/users/profile', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setForm({
+          name: data.name || '',
+          email: data.email || '',
+          phone: data.phone || '',
+          address: data.address || '',
+          city: data.city || '',
+          postalCode: data.postalCode || '',
+          country: data.country || '',
+        });
+      } catch (err) {
+        console.error('Error fetching profile:', err);
+        setMessage('Failed to load profile. Please try again.');
+      }
+    };
 
-  const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
+    if (token) fetchProfile();
+  }, [token]);
 
-  const handleSubmit = async e => {
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
     try {
-      const { data } = await api.put('/users/profile', form);
-      login(data, token); 
+      const { data } = await api.put('/users/profile', form, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      login(data, token);
       setMessage('Profile updated successfully.');
     } catch (err) {
       setMessage(err.response?.data?.message || 'Update failed.');
@@ -56,7 +74,7 @@ const ProfilePage = () => {
       <aside className="account-sidebar">
         <h3 className="sidebar-title">My Account</h3>
         <ul className="sidebar-nav">
-          {sidebarLinks.map(link => (
+          {sidebarLinks.map((link) => (
             <li key={link.label}>
               <a href={link.to} className="sidebar-link">
                 <span>{link.icon}</span> {link.label}
@@ -64,33 +82,67 @@ const ProfilePage = () => {
             </li>
           ))}
         </ul>
-        <button onClick={logout} className="sidebar-logout">Log Out</button>
+        <button onClick={logout} className="sidebar-logout">
+          Log Out
+        </button>
       </aside>
 
       {/* Main Content */}
       <main className="account-main">
         <h2 className="account-title">Account Overview</h2>
         <div className="account-grid">
-          
           {/* Account Details */}
           <div className="account-card">
             <div className="account-card-header">Account Details</div>
             <div className="account-card-body">
-              <p>{form.name}</p>
-              <p>{form.email}</p>
-              <p>{form.phone || 'No phone added'}</p>
+              <form onSubmit={handleSubmit} className="profile-form">
+                <label>
+                  Name:
+                  <input
+                    type="text"
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                  />
+                </label>
+                <label>
+                  Email:
+                  <input
+                    type="email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                  />
+                </label>
+                <label>
+                  Phone:
+                  <input
+                    type="text"
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    placeholder="Enter your phone number"
+                  />
+                </label>
+                <button type="submit" className="update-btn">
+                  Update Profile
+                </button>
+                {message && <p className="status-msg">{message}</p>}
+              </form>
             </div>
           </div>
 
           {/* Address Book */}
           <div className="account-card">
             <div className="account-card-header">
-              Address Book
-              <span className="account-edit">✎</span>
+              Address Book <span className="account-edit">✎</span>
             </div>
             <div className="account-card-body">
               {form.address ? (
-                <p>{form.address}, {form.city}, {form.country} - {form.postalCode}</p>
+                <p>
+                  {form.address}, {form.city}, {form.country} -{' '}
+                  {form.postalCode}
+                </p>
               ) : (
                 <p>No address added yet.</p>
               )}
@@ -109,11 +161,13 @@ const ProfilePage = () => {
           <div className="account-card">
             <div className="account-card-header">Newsletter Preferences</div>
             <div className="account-card-body">
-              <p>Manage your email communications to stay updated with latest news and offers.</p>
+              <p>
+                Manage your email communications to stay updated with latest
+                news and offers.
+              </p>
               <a href="#">Edit Newsletter Preferences</a>
             </div>
           </div>
-
         </div>
       </main>
     </div>
