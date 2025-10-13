@@ -44,7 +44,7 @@ const RegisterForm = () => {
     setLoading(true);
     try {
       // ✅ Use correct backend route: /api/users/register
-      const { data } = await api.post('/api/users/register', form);
+      const { data } = await api.post('/users/register', form);
 
       if (data) {
         setSuccess('Account registered successfully! Redirecting to login...');
