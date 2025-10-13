@@ -43,14 +43,14 @@ const RegisterForm = () => {
 
     setLoading(true);
     try {
-      await api.post('/auth/register', form);
-      setSuccess('Account registered successfully. Redirecting to login...');
-      setForm({ name: '', email: '', password: '', phone: '', address: '' });
+      // ✅ Use correct backend route: /api/users/register
+      const { data } = await api.post('/api/users/register', form);
 
-      // ✅ Redirect after 2 seconds
-      setTimeout(() => {
-        navigate('/login');
-      }, 2000);
+      if (data) {
+        setSuccess('Account registered successfully! Redirecting to login...');
+        setForm({ name: '', email: '', password: '', phone: '', address: '' });
+        setTimeout(() => navigate('/login'), 2000);
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
     } finally {
@@ -110,7 +110,7 @@ const RegisterForm = () => {
           <div className="auth-form-input-group">
             <input
               name="phone"
-              placeholder="Phone"
+              placeholder="Phone (e.g. +2547XXXXXXXX)"
               value={form.phone}
               onChange={handleChange}
             />
