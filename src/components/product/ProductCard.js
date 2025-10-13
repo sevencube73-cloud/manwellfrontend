@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
-import './ProductCard.css';
+import './ShopItemCard.css';
 
 const ProductCard = ({ product }) => {
   const [qty, setQty] = useState(1);
@@ -10,11 +10,9 @@ const ProductCard = ({ product }) => {
 
   const handleAdd = (e) => {
     e.preventDefault();
-    // Add to cart
     addToCart(product, qty);
 
-    // Fly-to-cart animation: clone image and animate to cart icon
-    const img = e.currentTarget.closest('.product-card').querySelector('img');
+    const img = e.currentTarget.closest('.shop-item-card').querySelector('img');
     if (img) {
       const clone = img.cloneNode(true);
       const rect = img.getBoundingClientRect();
@@ -27,9 +25,10 @@ const ProductCard = ({ product }) => {
       clone.style.zIndex = 9999;
       document.body.appendChild(clone);
 
-      // find cart icon position
       const cartIcon = document.querySelector('.nav-cart');
-      const targetRect = cartIcon ? cartIcon.getBoundingClientRect() : { left: window.innerWidth - 40, top: 20 };
+      const targetRect = cartIcon
+        ? cartIcon.getBoundingClientRect()
+        : { left: window.innerWidth - 40, top: 20 };
       const translateX = targetRect.left - rect.left;
       const translateY = targetRect.top - rect.top;
 
@@ -38,43 +37,32 @@ const ProductCard = ({ product }) => {
         clone.style.opacity = '0.6';
       });
 
-      setTimeout(() => {
-        clone.remove();
-      }, 900);
+      setTimeout(() => clone.remove(), 900);
     }
 
-    // show small toast
     setShowToast(true);
     setTimeout(() => setShowToast(false), 1200);
   };
 
   return (
-    <div className="product-card">
-      <img
-        src={product.image || product.images?.[0]?.url || ''}
-        alt={product.name}
-        className="product-image"
-      />
-      <div className="product-info">
-        <h3 className="product-name">{product.name}</h3>
-        <p className="product-price">KES {(Number(product?.price) || 0).toFixed(2)}</p>
+    <div className="shop-item-card">
+      <Link to={`/product/${product._id}`} className="shop-item-link">
+        <img
+          src={product.image || product.images?.[0]?.url || ''}
+          alt={product.name}
+          className="shop-item-image"
+        />
+      </Link>
 
-        <div className="card-actions">
-          <div className="qty-controls">
-            <button type="button" onClick={() => setQty(Math.max(1, qty - 1))}>-</button>
-            <input type="number" value={qty} min="1" onChange={(e) => setQty(Number(e.target.value) || 1)} />
-            <button type="button" onClick={() => setQty(qty + 1)}>+</button>
-          </div>
-          
-        </div>
+      <div className="shop-item-info">
+        <h3 className="shop-item-name">{product.name}</h3>
+        <p className="shop-item-price">KES {(Number(product?.price) || 0).toFixed(2)}</p>
 
-        <Link to={`/product/${product._id}`} className="view-btn">
-          Details
+        <Link to={`/product/${product._id}`} className="shop-item-btn" onClick={handleAdd}>
+          Add to Cart
         </Link>
 
-        {showToast && (
-          <div className="card-toast">Added to cart</div>
-        )}
+        {showToast && <div className="shop-item-toast">Added to cart</div>}
       </div>
     </div>
   );
