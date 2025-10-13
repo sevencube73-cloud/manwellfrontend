@@ -27,9 +27,15 @@
   background: #fafafa;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .product-image {
-    height: 180px;
+    
+    width: 100%;
+    height: auto;
+    max-height: 230px;
+    object-fit: cover;
+    display: block;
+    background: #fafafa;
   }
 }
 
