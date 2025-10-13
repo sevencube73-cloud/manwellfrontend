@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import { AuthContext } from '../../context/AuthContext';
 import { CartContext } from '../../context/CartContext';
@@ -11,7 +11,9 @@ const Navbar = () => {
   const { cartItems } = useContext(CartContext);
   const [categories, setCategories] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [search, setSearch] = useState('');
   const navRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -48,6 +50,14 @@ const Navbar = () => {
 
   const cartCount = cartItems.reduce((sum, item) => sum + item.qty, 0);
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (search.trim()) {
+      navigate(`/search?q=${encodeURIComponent(search.trim())}`);
+      setSearch('');
+    }
+  };
+
   return (
     <nav ref={navRef} className="navbar">
       {/* Logo */}
@@ -61,8 +71,16 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* Links */}
-      
+      {/* ✅ Desktop-only search box */}
+      <form className="navbar-search desktop-only" onSubmit={handleSearch}>
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button type="submit">🔍</button>
+      </form>
 
       {/* Right side */}
       <div className="navbar-right">
