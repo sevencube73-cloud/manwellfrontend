@@ -58,10 +58,10 @@ const ProductCard = ({ product }) => {
         <h3 className="product-name">{product.name}</h3>
         <p className="product-price">KES {(Number(product?.price) || 0).toFixed(2)}</p>
 
-        <button className="add-btn" onClick={handleAdd}>
-          Add to Cart
-        </button>
-
+        
+        <Link to={`/product/${product._id}`} className="add-btn">
+          Add to cart
+        </Link>
         {showToast && <div className="card-toast">Added to cart</div>}
       </div>
     </div>
