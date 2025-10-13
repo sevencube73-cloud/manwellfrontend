@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './AdminDashboard.css';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes, FaHeadset } from 'react-icons/fa';
 
 const adminNavLinks = [
   { label: 'Dashboard', to: '/admin/dashboard' },
@@ -9,6 +9,7 @@ const adminNavLinks = [
   { label: 'Orders', to: '/admin/orders' },
   { label: 'Customers', to: '/admin/customers' },
   { label: 'Manage Returns', to: '/admin/returns' },
+  { label: 'Support Messages', to: '/admin/support', icon: <FaHeadset /> }, // ✅ Added Support Button
 ];
 
 const AdminNavbar = () => {
@@ -27,6 +28,7 @@ const AdminNavbar = () => {
               to={link.to}
               className={location.pathname === link.to ? 'active' : ''}
             >
+              {link.icon && <span className="nav-icon">{link.icon}</span>}
               {link.label}
             </Link>
           </li>
@@ -51,6 +53,7 @@ const AdminNavbar = () => {
                   className={location.pathname === link.to ? 'active' : ''}
                   onClick={() => setMobileMenuOpen(false)}
                 >
+                  {link.icon && <span className="nav-icon">{link.icon}</span>}
                   {link.label}
                 </Link>
               </li>

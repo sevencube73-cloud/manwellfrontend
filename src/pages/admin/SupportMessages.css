@@ -1,0 +1,44 @@
+.support-container {
+  padding: 20px;
+}
+
+.support-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.support-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.support-table th,
+.support-table td {
+  border-bottom: 1px solid #eee;
+  padding: 12px 15px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.support-table th {
+  background: #007bff;
+  color: white;
+}
+
+.support-table tr:hover {
+  background: #f9f9f9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .support-table {
+    font-size: 0.85rem;
+  }
+  .support-table th, .support-table td {
+    padding: 8px;
+  }
+}

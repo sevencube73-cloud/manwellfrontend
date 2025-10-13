@@ -9,6 +9,10 @@ import {
 import { AuthProvider, AuthContext } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 
+// 
+import Contact from './pages/Contact';
+import SupportMessages from './pages/admin/SupportMessages';
+
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 
@@ -96,6 +100,13 @@ function App() {
             <Route path="/manwell-pay" element={<ManwellPay />} />
             <Route path="/manwell-food" element={<ManwellFood />} />
             <Route path="/manwell-travel" element={<ManwellTravel />} />
+            {/*  */}
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/admin/support" element={<SupportMessages />} />
+
+
+            
+
 
             {/* Protected routes */}
             <Route
