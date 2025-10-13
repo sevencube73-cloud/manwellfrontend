@@ -31,7 +31,6 @@ const AdminCustomers = () => {
     fetchCustomers();
   }, []);
 
-
   const handleDeactivate = async id => {
     if (!window.confirm('Deactivate this customer?')) return;
     try {
@@ -86,8 +85,15 @@ const AdminCustomers = () => {
     const doc = new jsPDF();
     doc.text('Customers List', 14, 16);
     autoTable(doc, {
-      head: [['Customer ID', 'Name', 'Email', 'Phone', 'Total Spent (KES)']],
-  body: customers.map(c => [c.customerId || c._id, c.name, c.email, c.phone, c.totalSpent ? `KES ${(Number(c.totalSpent) || 0).toFixed(2)}` : '']),
+      head: [['Customer ID', 'Name', 'Email', 'Phone', 'Address', 'Total Spent (KES)']],
+      body: customers.map(c => [
+        c.customerId || c._id,
+        c.name,
+        c.email,
+        c.phone || 'N/A',
+        c.address || 'N/A',
+        c.totalSpent ? `KES ${(Number(c.totalSpent) || 0).toFixed(2)}` : ''
+      ]),
       startY: 22,
     });
     doc.save('customers.pdf');
@@ -96,7 +102,8 @@ const AdminCustomers = () => {
   const [showUnverified, setShowUnverified] = useState(false);
 
   const filteredCustomers = customers.filter(c => {
-    const matchesSearch = (c.customerId || c._id).toLowerCase().includes(search.toLowerCase()) ||
+    const matchesSearch =
+      (c.customerId || c._id).toLowerCase().includes(search.toLowerCase()) ||
       c.name.toLowerCase().includes(search.toLowerCase()) ||
       c.email.toLowerCase().includes(search.toLowerCase());
     if (showUnverified) {
@@ -111,21 +118,50 @@ const AdminCustomers = () => {
   return (
     <div className="admin-orders-bg">
       <AdminNavbar />
-      <main className="admin-content" style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px', minHeight: '80vh' }}>
+      <main
+        className="admin-content"
+        style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px', minHeight: '80vh' }}
+      >
         {actionError && (
-          <div style={{ background: '#ffe6e6', color: '#b00020', padding: '12px', borderRadius: 8, marginBottom: 16, fontWeight: 600 }}>
+          <div
+            style={{
+              background: '#ffe6e6',
+              color: '#b00020',
+              padding: '12px',
+              borderRadius: 8,
+              marginBottom: 16,
+              fontWeight: 600,
+            }}
+          >
             {actionError}
           </div>
         )}
-        <section className="customers-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 32 }}>
+
+        <section
+          className="customers-header"
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            marginBottom: 32,
+          }}
+        >
           <div>
-            <h2 className="admin-page-title" style={{ fontWeight: 700, fontSize: '1.5rem', marginBottom: 8 }}>Customers</h2>
+            <h2 className="admin-page-title" style={{ fontWeight: 700, fontSize: '1.5rem', marginBottom: 8 }}>
+              Customers
+            </h2>
             <input
               type="text"
               placeholder="Search customers..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              style={{ padding: '8px 14px', borderRadius: 8, border: '1px solid #ccc', marginBottom: 12, width: 240 }}
+              style={{
+                padding: '8px 14px',
+                borderRadius: 8,
+                border: '1px solid #ccc',
+                marginBottom: 12,
+                width: 240,
+              }}
             />
             <label style={{ display: 'block', marginBottom: 12 }}>
               <input
@@ -136,7 +172,8 @@ const AdminCustomers = () => {
               />
               Show only unverified customers
             </label>
-            <div className="order-summary-card-whole" >
+
+            <div className="order-summary-card-whole">
               <div className="order-summary-card">
                 <div style={{ fontWeight: 600, fontSize: '1.1rem' }}>Total Customers</div>
                 <div style={{ fontSize: '2rem', fontWeight: 700, margin: '8px 0' }}>{customers.length}</div>
@@ -144,37 +181,51 @@ const AdminCustomers = () => {
               </div>
               <div className="order-summary-card">
                 <div style={{ fontWeight: 600, fontSize: '1.1rem' }}>Active Customers</div>
-                <div style={{ fontSize: '2rem', fontWeight: 700, margin: '8px 0' }}>{customers.filter(c => c.isActive).length}</div>
+                <div style={{ fontSize: '2rem', fontWeight: 700, margin: '8px 0' }}>
+                  {customers.filter(c => c.isActive).length}
+                </div>
                 <div style={{ color: '#888', fontSize: '0.95rem' }}>Active in last 30 days</div>
               </div>
               <div className="order-summary-card">
                 <div style={{ fontWeight: 600, fontSize: '1.1rem' }}>Blocked</div>
-                <div style={{ fontSize: '2rem', fontWeight: 700, margin: '8px 0' }}>{customers.filter(c => !c.isActive).length}</div>
+                <div style={{ fontSize: '2rem', fontWeight: 700, margin: '8px 0' }}>
+                  {customers.filter(c => !c.isActive).length}
+                </div>
                 <div style={{ color: '#888', fontSize: '0.95rem' }}>Blocked customers</div>
               </div>
             </div>
           </div>
+
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <button className="admin-btn-secondary" onClick={handleDownloadExcel}>Download Excel</button>
-            <button className="admin-btn-secondary" onClick={handleDownloadPDF}>Download PDF</button>
+            <button className="admin-btn-secondary" onClick={handleDownloadExcel}>
+              Download Excel
+            </button>
+            <button className="admin-btn-secondary" onClick={handleDownloadPDF}>
+              Download PDF
+            </button>
           </div>
         </section>
+
         <section className="customers-table-section">
           <table className="orders-table" style={{ width: '100%', background: 'transparent', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ fontWeight: 700, fontSize: '1.05rem', color: '#222' }}>
                 <th style={{ padding: '12px 8px' }}>Name</th>
                 <th style={{ padding: '12px 8px' }}>Email</th>
+                <th style={{ padding: '12px 8px' }}>Phone</th>
+                <th style={{ padding: '12px 8px' }}>Address</th>
                 <th style={{ padding: '12px 8px' }}>Status</th>
                 <th style={{ padding: '12px 8px' }}>Verified</th>
                 <th style={{ padding: '12px 8px' }}>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {filteredCustomers.map((c) => (
+              {filteredCustomers.map(c => (
                 <tr key={c._id}>
                   <td>{c.name}</td>
                   <td>{c.email}</td>
+                  <td>{c.phone || '—'}</td>
+                  <td>{c.address || '—'}</td>
                   <td>
                     <span className={c.isActive ? styles.statusActive : styles.statusInactive}>
                       {c.isActive ? 'Active' : 'Inactive'}
@@ -188,25 +239,55 @@ const AdminCustomers = () => {
                   <td>
                     <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                       {c.isActive ? (
-                        <button 
+                        <button
                           className={styles.btnDanger}
-                          style={{ background: 'linear-gradient(90deg, #ff4c4c 0%, #1f4068 100%)', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 18px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 2px 8px rgba(33,150,243,0.10)', transition: 'background 0.2s, transform 0.2s' }}
+                          style={{
+                            background: 'linear-gradient(90deg, #ff4c4c 0%, #1f4068 100%)',
+                            color: '#fff',
+                            border: 'none',
+                            borderRadius: 8,
+                            padding: '8px 18px',
+                            fontWeight: 600,
+                            cursor: 'pointer',
+                            boxShadow: '0 2px 8px rgba(33,150,243,0.10)',
+                            transition: 'background 0.2s, transform 0.2s',
+                          }}
                           onClick={() => handleDeactivate(c._id)}
                         >
                           Deactivate
                         </button>
                       ) : (
-                        <button 
+                        <button
                           className={styles.btnPrimary}
-                          style={{ background: 'linear-gradient(90deg, #5cb85c 0%, #1f4068 100%)', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 18px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 2px 8px rgba(33,150,243,0.10)', transition: 'background 0.2s, transform 0.2s' }}
+                          style={{
+                            background: 'linear-gradient(90deg, #5cb85c 0%, #1f4068 100%)',
+                            color: '#fff',
+                            border: 'none',
+                            borderRadius: 8,
+                            padding: '8px 18px',
+                            fontWeight: 600,
+                            cursor: 'pointer',
+                            boxShadow: '0 2px 8px rgba(33,150,243,0.10)',
+                            transition: 'background 0.2s, transform 0.2s',
+                          }}
                           onClick={() => handleActivate(c._id)}
                         >
                           Activate
                         </button>
                       )}
-                      <button 
+                      <button
                         className={styles.btnDelete}
-                        style={{ background: 'linear-gradient(90deg, #b00020 0%, #1f4068 100%)', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 18px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 2px 8px rgba(33,150,243,0.10)', transition: 'background 0.2s, transform 0.2s' }}
+                        style={{
+                          background: 'linear-gradient(90deg, #b00020 0%, #1f4068 100%)',
+                          color: '#fff',
+                          border: 'none',
+                          borderRadius: 8,
+                          padding: '8px 18px',
+                          fontWeight: 600,
+                          cursor: 'pointer',
+                          boxShadow: '0 2px 8px rgba(33,150,243,0.10)',
+                          transition: 'background 0.2s, transform 0.2s',
+                        }}
                         onClick={() => handleDelete(c._id)}
                       >
                         Delete
@@ -214,7 +295,17 @@ const AdminCustomers = () => {
                       {!c.isVerified && (
                         <button
                           className={styles.btnPrimary}
-                          style={{ background: 'linear-gradient(90deg, #00e0ff 0%, #1f4068 100%)', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 18px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 2px 8px rgba(33,150,243,0.10)', transition: 'background 0.2s, transform 0.2s' }}
+                          style={{
+                            background: 'linear-gradient(90deg, #00e0ff 0%, #1f4068 100%)',
+                            color: '#fff',
+                            border: 'none',
+                            borderRadius: 8,
+                            padding: '8px 18px',
+                            fontWeight: 600,
+                            cursor: 'pointer',
+                            boxShadow: '0 2px 8px rgba(33,150,243,0.10)',
+                            transition: 'background 0.2s, transform 0.2s',
+                          }}
                           onClick={() => handleVerify(c._id)}
                         >
                           Verify
