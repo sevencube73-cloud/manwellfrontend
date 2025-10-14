@@ -33,7 +33,7 @@ const OrderDetails = () => {
         <div className="info-grid">
           <p><strong>Name:</strong> {order.user?.name || 'N/A'}</p>
           <p><strong>Email:</strong> {order.user?.email || 'N/A'}</p>
-          <p><strong>Phone:</strong> {order.user?.phoneNumber || 'N/A'}</p>
+          <p><strong>Phone:</strong> {order.user?.phone || 'N/A'}</p>
         </div>
       </div>
 
