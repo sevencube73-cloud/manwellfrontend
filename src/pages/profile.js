@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import '../components/Layout/.css';
+
 import api from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
 import './profile.css';

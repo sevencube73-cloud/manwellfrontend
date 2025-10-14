@@ -1,5 +1,5 @@
 import React from 'react';
-import '../components/Layout/.css';
+
 import RegisterForm from '../components/auth/RegisterForm';
 import './HomePage.css'; // import the styles
 

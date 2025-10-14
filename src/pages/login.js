@@ -1,5 +1,5 @@
 import React from 'react';
-import '../components/Layout/.css';
+
 import LoginForm from '../components/auth/LoginForm';
 import './HomePage.css'; // import the styles
 

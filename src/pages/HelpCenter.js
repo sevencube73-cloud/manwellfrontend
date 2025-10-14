@@ -1,5 +1,5 @@
 import React from "react";
-import '../components/Layout/.css';
+
 import "./pages.css";
 
 const HelpCenter = () => {
