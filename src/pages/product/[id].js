@@ -92,7 +92,7 @@ const ProductDetails = () => {
           disabled={product.stock < 1}
           className="buy-now-btn"
         >
-          Buy Now
+          Order Now
         </button>
       </div>
     </div>
