@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../../components/Layout/.css';
+
 import ProductCard from '../components/product/ProductCard';
 import './ProductList.css';
 import api from '../utils/api';
