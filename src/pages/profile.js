@@ -102,7 +102,7 @@ const ProfilePage = () => {
                     type="text"
                     name="name"
                     value={form.name}
-                    onChange={handleChange}
+                    
                   />
                 </label>
                 <label>
@@ -111,7 +111,7 @@ const ProfilePage = () => {
                     type="email"
                     name="email"
                     value={form.email}
-                    onChange={handleChange}
+                    
                   />
                 </label>
                 <label>
