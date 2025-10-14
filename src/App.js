@@ -88,7 +88,7 @@ function App() {
             <Route path="/activate-account" element={<ActivateAccount />} />
 
             {/* Footer routes */}
-            <Route path="/help-center" element={<HelpCenter />} />
+            <Route path="/Contact" element={<HelpCenter />} />
             <Route path="/shipping" element={<Shipping />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/contact-us" element={<ContactUs />} />
