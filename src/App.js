@@ -35,7 +35,7 @@ import AdminReturns from "./pages/admin/returns";
 import OrderDetails from './pages/admin/OrderDetails';
 
 // 📌 Footer pages
-import HelpCenter from "./pages/HelpCenter";
+import HelpCenter from "./pages/Contact";
 import Returns from "./pages/returns";
 import ChangePassword from "./pages/changePassword";
 import ResetPassword from "./pages/resetPassword";
