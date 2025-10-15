@@ -33,11 +33,11 @@ const SupportMessages = () => {
         <tbody>
           {messages.map((msg) => (
             <tr key={msg._id}>
-              <td>{msg.name}</td>
-              <td>{msg.email}</td>
-              <td>{msg.subject}</td>
-              <td>{msg.message}</td>
-              <td>{new Date(msg.createdAt).toLocaleString()}</td>
+              <td data-label="Name">{msg.name}</td>
+              <td data-label="Email">{msg.email}</td>
+              <td data-label="Subject">{msg.subject}</td>
+              <td data-label="Message">{msg.message}</td>
+              <td data-label="Date">{new Date(msg.createdAt).toLocaleString()}</td>
             </tr>
           ))}
         </tbody>
