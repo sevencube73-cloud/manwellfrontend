@@ -37,7 +37,7 @@ export default function AboutManwell() {
           <div className="hero-image">
             <img
               alt="Manwell Store - fashion display"
-              src="./public/logo.png"
+              src="/public/logo.png"
             />
             <p>A curated corner of premium fashion in Eastleigh — seasonal drops and classic staples.</p>
           </div>
