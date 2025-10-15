@@ -10,7 +10,7 @@ const adminNavLinks = [
   { label: 'Customers', to: '/admin/customers' },
   { label: 'Manage Returns', to: '/admin/returns' },
   { label: 'Support Messages', to: '/admin/support', icon: <FaHeadset /> }, // ✅ Added Support Button
-  { label: 'Manage Discounts', to: '/admin/DiscountsAdmin' },
+  { label: 'Manage Discounts', to: '/admin/discounts' },
   
 ];
 
