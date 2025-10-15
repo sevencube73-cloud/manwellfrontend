@@ -76,6 +76,28 @@ export default function DiscountsAdmin() {
     }
   }
 
+  // Delete discount
+  const handleDeleteDiscount = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this discount?')) return;
+    try {
+      await api.delete(`/discounts/${id}`);
+      fetchAll();
+    } catch (err) {
+      console.error('Delete discount failed:', err.response?.data || err.message);
+    }
+  };
+
+  // Delete coupon
+  const handleDeleteCoupon = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this coupon?')) return;
+    try {
+      await api.delete(`/coupons/${id}`);
+      fetchAll();
+    } catch (err) {
+      console.error('Delete coupon failed:', err.response?.data || err.message);
+    }
+  };
+
   return (
     <div className="discounts-admin">
       <h1>🎯 Discounts & Coupons Management</h1>
@@ -105,6 +127,7 @@ export default function DiscountsAdmin() {
               <p><strong>Amount:</strong> {d.amount}</p>
               <p><strong>Product:</strong> {d.product ? d.product : 'All'}</p>
               <p className={d.active ? 'status-active' : 'status-inactive'}>{d.active ? 'Active' : 'Inactive'}</p>
+              <button className="btn-delete" onClick={() => handleDeleteDiscount(d._id)}>Delete</button>
             </div>
           ))}
         </div>
@@ -134,6 +157,7 @@ export default function DiscountsAdmin() {
               <p><strong>Type:</strong> {c.discountType}</p>
               <p><strong>Amount:</strong> {c.amount}</p>
               <p className={c.active ? 'status-active' : 'status-inactive'}>{c.active ? 'Active' : 'Inactive'}</p>
+              <button className="btn-delete" onClick={() => handleDeleteCoupon(c._id)}>Delete</button>
             </div>
           ))}
         </div>
