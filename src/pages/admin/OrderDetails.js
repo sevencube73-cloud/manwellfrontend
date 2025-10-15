@@ -59,7 +59,7 @@ const OrderDetails = () => {
             <li key={item._id} className="order-item">
               <span className="item-name">{item.product?.name}</span>
               <span className="item-details">
-                x{item.qty} — <strong>${item.price}</strong>
+                x{item.qty} — <strong>KES {item.price.toFixed(2)}</strong>
               </span>
             </li>
           ))}
@@ -70,7 +70,14 @@ const OrderDetails = () => {
       <div className="order-section">
         <h3>Order Summary</h3>
         <p><strong>Payment Method:</strong> {order.paymentMethod}</p>
-        <p><strong>Total Price:</strong> ${order.totalPrice.toFixed(2)}</p>
+        <p><strong>Total Price:</strong> KES {order.totalPrice.toFixed(2)}</p>
+        {order.discountValue > 0 && (
+          <p>
+            <strong>Discount:</strong> {order.discountType === 'percent' ? `${order.discountValue}%` : `KES ${order.discountValue}`} 
+            {order.couponCode && ` (Coupon: ${order.couponCode})`}
+          </p>
+        )}
+        <p><strong>Final Amount:</strong> KES {order.finalAmount.toFixed(2)}</p>
         <p><strong>Status:</strong> {order.status}</p>
         <p><strong>Created At:</strong> {new Date(order.createdAt).toLocaleString()}</p>
       </div>
