@@ -4,7 +4,7 @@ import { CartContext } from "../context/CartContext";
 import api from "../utils/api";
 import "./Payment.css";
 
-const Payment = ({ shippingAddress, discount = 0 }) => {
+const Payment = ({ shippingAddress, discount = { type: "percent", value: 0 } }) => {
   const { cartItems, clearCart } = useContext(CartContext);
   const [paymentMethod, setPaymentMethod] = useState("Mpesa");
   const [phone, setPhone] = useState("");
@@ -15,8 +15,14 @@ const Payment = ({ shippingAddress, discount = 0 }) => {
   // Cart subtotal
   const totalPrice = cartItems.reduce((a, c) => a + c.product.price * c.qty, 0);
 
-  // Apply discount (percent-based for now)
-  const discountAmount = (totalPrice * discount) / 100;
+  // Compute discount amount
+  const discountAmount =
+    discount.type === "percent"
+      ? (totalPrice * discount.value) / 100
+      : discount.type === "fixed"
+      ? discount.value
+      : 0;
+
   const finalAmount = totalPrice - discountAmount;
 
   // Validate Kenyan phone number
@@ -45,7 +51,7 @@ const Payment = ({ shippingAddress, discount = 0 }) => {
         shippingAddress,
         paymentMethod,
         totalPrice,
-        discountPercentage: discount,
+        discount, // send discount object
         finalAmount,
         phone: paymentMethod === "Mpesa" ? phone : undefined,
       };
@@ -70,7 +76,7 @@ const Payment = ({ shippingAddress, discount = 0 }) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               phone: phone.startsWith("254") ? phone : `254${phone.slice(-9)}`,
-              amount: finalAmount, // ✅ discounted total
+              amount: finalAmount,
             }),
           }
         );
@@ -114,9 +120,10 @@ const Payment = ({ shippingAddress, discount = 0 }) => {
       {/* Order Summary */}
       <div className="order-summary">
         <p>Subtotal: <strong>KES {totalPrice.toFixed(2)}</strong></p>
-        {discount > 0 && (
+        {discount.value > 0 && (
           <p>
-            Discount ({discount}%): <strong>-KES {discountAmount.toFixed(2)}</strong>
+            Discount ({discount.type === "percent" ? `${discount.value}%` : `KES ${discount.value}`}):
+            <strong> -KES {discountAmount.toFixed(2)}</strong>
           </p>
         )}
         <p className="total-pay">

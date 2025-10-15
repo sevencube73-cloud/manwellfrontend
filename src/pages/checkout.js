@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import ShippingAddressForm from "./ShippingAddressForm";
 import Payment from "./Payment";
+import api from "../utils/api";
 import "./checkout.css";
 
 const Checkout = () => {
   const [shippingData, setShippingData] = useState(null);
-  const [coupon, setCoupon] = useState("");
-  const [discount, setDiscount] = useState(0);
+  const [couponCode, setCouponCode] = useState("");
+  const [discount, setDiscount] = useState({ type: "percent", value: 0 });
   const [couponError, setCouponError] = useState("");
   const [couponSuccess, setCouponSuccess] = useState("");
 
@@ -19,27 +20,36 @@ const Checkout = () => {
   };
 
   const handleApplyCoupon = async () => {
-    if (!coupon.trim()) {
+    if (!couponCode.trim()) {
       setCouponError("Please enter a coupon code.");
+      setCouponSuccess("");
+      setDiscount({ type: "percent", value: 0 });
       return;
     }
 
     try {
-      const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/coupons/validate/${coupon}`
-      );
-      const data = await res.json();
+      const res = await api.get(`/coupons/validate/${couponCode}`);
+      const data = res.data;
 
-      if (res.ok && data.valid) {
-        setDiscount(data.discountPercentage);
-        setCouponSuccess(`Coupon applied! You saved ${data.discountPercentage}%`);
+      if (data.valid) {
+        // Set discount object properly
+        setDiscount({ type: data.discountType, value: data.amount });
+        setCouponSuccess(
+          `Coupon applied! You saved ${
+            data.discountType === "percent"
+              ? `${data.amount}%`
+              : `KES ${data.amount}`
+          }`
+        );
         setCouponError("");
       } else {
-        setDiscount(0);
+        setDiscount({ type: "percent", value: 0 });
         setCouponError(data.message || "Invalid coupon code.");
         setCouponSuccess("");
       }
-    } catch (error) {
+    } catch (err) {
+      console.error("Coupon validation error:", err);
+      setDiscount({ type: "percent", value: 0 });
       setCouponError("Server error. Try again.");
       setCouponSuccess("");
     }
@@ -62,8 +72,8 @@ const Checkout = () => {
               <input
                 type="text"
                 placeholder="Enter coupon code"
-                value={coupon}
-                onChange={(e) => setCoupon(e.target.value)}
+                value={couponCode}
+                onChange={(e) => setCouponCode(e.target.value)}
                 className="coupon-input"
               />
               <button onClick={handleApplyCoupon} className="apply-btn">
