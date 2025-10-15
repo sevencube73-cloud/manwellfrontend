@@ -87,7 +87,8 @@ function App() {
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/activate-account" element={<ActivateAccount />} />
-            <Route path="/admin/DiscoutsAdmin" element = {<DiscountsAdmin/>} />
+            <Route path="/admin/discounts" element={<DiscountsAdmin />} />
+
             {/* Footer routes */}
             <Route path="/Contact" element={<HelpCenter />} />
             <Route path="/shipping" element={<Shipping />} />
