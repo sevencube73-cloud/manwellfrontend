@@ -37,7 +37,7 @@ export default function AboutManwell() {
           <div className="hero-image">
             <img
               alt="Manwell Store - fashion display"
-              src="https://images.unsplash.com/photo-1520975698514-9e7b58b5f8ad?q=80&w=1400&auto=format&fit=crop"
+              src="./public/logo.png"
             />
             <p>A curated corner of premium fashion in Eastleigh — seasonal drops and classic staples.</p>
           </div>
@@ -85,9 +85,9 @@ export default function AboutManwell() {
           <h2>Our Team</h2>
           <p>A small team of passionate curators, tailors and stylists dedicated to great clothing and service.</p>
           <div className="team-grid">
-            <div className="team-card"><div className="avatar">A</div><div><strong>Amina — Founder & Head Curator</strong><p>Styling & collection direction</p></div></div>
-            <div className="team-card"><div className="avatar">J</div><div><strong>Jamal — Lead Tailor</strong><p>Bespoke fittings & alterations</p></div></div>
-            <div className="team-card"><div className="avatar">Z</div><div><strong>Zoe — Customer Experience</strong><p>In-store styling and care guidance</p></div></div>
+            <div className="team-card"><div className="avatar">A</div><div><strong> Founder & Head Curator</strong><p>Styling & collection direction</p></div></div>
+            <div className="team-card"><div className="avatar">J</div><div><strong> Lead Tailor</strong><p>Bespoke fittings & alterations</p></div></div>
+            <div className="team-card"><div className="avatar">Z</div><div><strong> Customer Experience</strong><p>In-store styling and care guidance</p></div></div>
           </div>
         </section>
 
