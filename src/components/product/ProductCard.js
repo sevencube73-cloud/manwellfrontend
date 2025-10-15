@@ -110,9 +110,9 @@ const ProductCard = ({ product }) => {
           )}
         </div>
 
-        <button onClick={handleAdd} className="shop-item-btn">
+        <Link to={`/product/${product._id}`} className="shop-item-btn" >
           Add to Cart
-        </button>
+        </Link>
 
         {showToast && <div className="shop-item-toast">Added to cart</div>}
       </div>
