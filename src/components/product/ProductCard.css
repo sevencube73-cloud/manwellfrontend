@@ -88,3 +88,39 @@
   20%, 80% { opacity: 1; transform: translateY(0); }
   100% { opacity: 0; transform: translateY(-10px); }
 }
+
+/* Discount badge */
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #e63946;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  z-index: 2;
+}
+
+/* Container to position badge */
+.shop-item-image-container {
+  position: relative;
+}
+
+/* Price styles */
+.shop-item-price {
+  margin: 8px 0;
+}
+
+.discounted-price {
+  color: #2a9d8f;
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.original-price {
+  color: #888;
+  text-decoration: line-through;
+  font-size: 0.9rem;
+}

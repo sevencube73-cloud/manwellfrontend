@@ -4,7 +4,7 @@ import { CartContext } from "../context/CartContext";
 import api from "../utils/api";
 import "./Payment.css";
 
-const Payment = ({ shippingAddress }) => {
+const Payment = ({ shippingAddress, discount = 0 }) => {
   const { cartItems, clearCart } = useContext(CartContext);
   const [paymentMethod, setPaymentMethod] = useState("Mpesa");
   const [phone, setPhone] = useState("");
@@ -12,9 +12,14 @@ const Payment = ({ shippingAddress }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Cart subtotal
   const totalPrice = cartItems.reduce((a, c) => a + c.product.price * c.qty, 0);
 
-  // Validate Kenyan phone
+  // Apply discount (percent-based for now)
+  const discountAmount = (totalPrice * discount) / 100;
+  const finalAmount = totalPrice - discountAmount;
+
+  // Validate Kenyan phone number
   const validatePhone = (num) => /^(07|01)\d{8}$/.test(num);
 
   const handlePayment = async () => {
@@ -32,7 +37,6 @@ const Payment = ({ shippingAddress }) => {
       setLoading(true);
       setMessage("");
 
-      // Create order payload
       const orderPayload = {
         orderItems: cartItems.map((i) => ({
           product: i.product._id,
@@ -41,6 +45,8 @@ const Payment = ({ shippingAddress }) => {
         shippingAddress,
         paymentMethod,
         totalPrice,
+        discountPercentage: discount,
+        finalAmount,
         phone: paymentMethod === "Mpesa" ? phone : undefined,
       };
 
@@ -54,18 +60,20 @@ const Payment = ({ shippingAddress }) => {
       const config = { headers: { Authorization: `Bearer ${token}` } };
       await api.post("/orders", orderPayload, config);
 
-      // Handle M-PESA
       if (paymentMethod === "Mpesa") {
         setMessage("📲 Sending M-PESA STK push...");
 
-        const stkResponse = await fetch("https://manwellback.onrender.com/api/mpesa/stkpush", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            phone: phone.startsWith("254") ? phone : `254${phone.slice(-9)}`,
-            amount: totalPrice,
-          }),
-        });
+        const stkResponse = await fetch(
+          "https://manwellback.onrender.com/api/mpesa/stkpush",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              phone: phone.startsWith("254") ? phone : `254${phone.slice(-9)}`,
+              amount: finalAmount, // ✅ discounted total
+            }),
+          }
+        );
 
         const data = await stkResponse.json();
 
@@ -73,14 +81,15 @@ const Payment = ({ shippingAddress }) => {
           setMessage("✅ STK Push sent! Check your M-PESA phone to complete payment.");
         } else {
           setMessage(
-            data?.error?.errorMessage || data?.message || "❌ Failed to initiate M-PESA payment."
+            data?.error?.errorMessage ||
+              data?.message ||
+              "❌ Failed to initiate M-PESA payment."
           );
         }
       } else {
         setMessage("✅ Order placed successfully (Pay on Delivery).");
       }
 
-      // Clear cart + redirect
       clearCart();
       setTimeout(() => navigate("/"), 2500);
     } catch (err) {
@@ -99,6 +108,19 @@ const Payment = ({ shippingAddress }) => {
         <p>
           Deliver to: <strong>{shippingAddress.fullName}</strong> <br />
           {shippingAddress.address}, {shippingAddress.city}, {shippingAddress.country}
+        </p>
+      </div>
+
+      {/* Order Summary */}
+      <div className="order-summary">
+        <p>Subtotal: <strong>KES {totalPrice.toFixed(2)}</strong></p>
+        {discount > 0 && (
+          <p>
+            Discount ({discount}%): <strong>-KES {discountAmount.toFixed(2)}</strong>
+          </p>
+        )}
+        <p className="total-pay">
+          Total Payable: <strong>KES {finalAmount.toFixed(2)}</strong>
         </p>
       </div>
 

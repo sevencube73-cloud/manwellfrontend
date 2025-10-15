@@ -33,6 +33,7 @@ import AdminOrders from "./pages/admin/orders";
 import AdminCustomers from "./pages/admin/customers";
 import AdminReturns from "./pages/admin/returns";
 import OrderDetails from './pages/admin/OrderDetails';
+import DiscountsAdmin from "./pages/admin/DiscountsAdmin";
 
 // 📌 Footer pages
 import HelpCenter from "./pages/Contact";
@@ -86,7 +87,7 @@ function App() {
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/activate-account" element={<ActivateAccount />} />
-
+            <Route path="/admin/DiscoutsAdmin" element = {<DiscountsAdmin/>} />
             {/* Footer routes */}
             <Route path="/Contact" element={<HelpCenter />} />
             <Route path="/shipping" element={<Shipping />} />
