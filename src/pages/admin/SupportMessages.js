@@ -20,6 +20,7 @@ const SupportMessages = () => {
   return (
     <div className="support-container">
       <h2>Customer Support Messages</h2>
+
       <table className="support-table">
         <thead>
           <tr>
