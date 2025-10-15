@@ -4,7 +4,7 @@ import { CartContext } from "../context/CartContext";
 import api from "../utils/api";
 import "./Payment.css";
 
-const Payment = ({ shippingAddress, discount = { type: "percent", value: 0 } }) => {
+const Payment = ({ shippingAddress, discount = { type: null, value: 0 }, couponCode = null }) => {
   const { cartItems, clearCart } = useContext(CartContext);
   const [paymentMethod, setPaymentMethod] = useState("Mpesa");
   const [phone, setPhone] = useState("");
@@ -35,7 +35,7 @@ const Payment = ({ shippingAddress, discount = { type: "percent", value: 0 } }) 
     }
 
     if (paymentMethod === "Mpesa" && !validatePhone(phone)) {
-      setMessage("⚠️ Please enter a valid M-PESA number (07xxxxxxxx or 01xxxxxxxx)");
+      setMessage("⚠️ Please enter a valid M-PESA number (07XXXXXXXX or 01XXXXXXXX)");
       return;
     }
 
@@ -51,7 +51,8 @@ const Payment = ({ shippingAddress, discount = { type: "percent", value: 0 } }) 
         shippingAddress,
         paymentMethod,
         totalPrice,
-        discount, // send discount object
+        discount: discount,
+        couponCode: couponCode,
         finalAmount,
         phone: paymentMethod === "Mpesa" ? phone : undefined,
       };
@@ -64,7 +65,7 @@ const Payment = ({ shippingAddress, discount = { type: "percent", value: 0 } }) 
       }
 
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await api.post("/orders", orderPayload, config);
+      const response = await api.post("/orders", orderPayload, config);
 
       if (paymentMethod === "Mpesa") {
         setMessage("📲 Sending M-PESA STK push...");
@@ -113,7 +114,7 @@ const Payment = ({ shippingAddress, discount = { type: "percent", value: 0 } }) 
       <div className="address-box">
         <p>
           Deliver to: <strong>{shippingAddress.fullName}</strong> <br />
-          {shippingAddress.address}, {shippingAddress.city}, {shippingAddress.country}
+          {shippingAddress.address}, {shippingAddress.city}, {shippingAddress.county || shippingAddress.country}
         </p>
       </div>
 
