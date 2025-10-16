@@ -522,6 +522,11 @@ body {
     padding: 1.5rem 1rem;
     background-position: top center;
   }
+  .call-button {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 14px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -533,29 +538,6 @@ body {
     padding: 1rem;
   }
 }
-.hero-section {
-  text-align: center;
-  background: url("/logo.png") no-repeat center center/cover;
-  padding: 60px 20px;
-  color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.section-title {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: #fff;
-  font-weight: 700;
-}
-
-.hero-tagline {
-  font-size: 1.1rem;
-  margin-bottom: 20px;
-  color: #f0f0f0;
-}
-
-/* ✅ Call Button Styling */
 .call-button {
   display: inline-block;
   margin-top: 10px;
@@ -572,21 +554,4 @@ body {
 .call-button:hover {
   background-color: #3730a3;
   transform: scale(1.05);
-}
-
-/* 📱 Responsive */
-@media (max-width: 768px) {
-  .hero-section {
-    padding: 40px 15px;
-  }
-
-  .section-title {
-    font-size: 1.6rem;
-  }
-
-  .call-button {
-    width: 100%;
-    font-size: 1.1rem;
-    padding: 14px;
-  }
 }
