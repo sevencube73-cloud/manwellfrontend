@@ -56,7 +56,7 @@ const Checkout = () => {
     } catch (err) {
       console.error("Coupon validation error:", err);
       setDiscount({ type: "percent", value: 0 });
-      setCouponError("Server error. Try again.");
+      setCouponError("invalid coupon code. Try again.");
       setCouponSuccess("");
     }
   };
