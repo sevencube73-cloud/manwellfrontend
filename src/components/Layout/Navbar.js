@@ -95,13 +95,13 @@ const Navbar = () => {
                   {user.role === 'user' && (
                     <>
                       <Link to="/contact">Contact</Link>
-                      <Link to="/activate-account">Activate Account</Link>
+                      
                     </>
                   )}
                   {user.role === 'admin' && (
                     <>
                       <Link to="/admin/dashboard">Admin Dashboard</Link>
-                      <Link to="/admin/activate-account">Activate Account</Link>
+                      
                     </>
                   )}
                   <button onClick={logout} className="logout-btn">
