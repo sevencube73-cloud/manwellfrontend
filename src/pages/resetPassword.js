@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
 import "./pages.css";
-
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +11,7 @@ const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
   const location = useLocation();
 
-  // If token is present in URL, go directly to password change step
+  // ✅ Automatically detect token from URL
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const urlToken = params.get("token");
@@ -23,45 +21,55 @@ const ResetPassword = () => {
     }
   }, [location.search]);
 
-  // Step 1: Request reset
+  // ✅ Step 1: Request password reset email
   const handleRequestReset = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
+
     try {
-      const res = await fetch("https://manwellback.onrender.com/api/account/request-reset", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
+      const res = await fetch(
+        "https://manwellback.onrender.com/api/auth/forgot-password",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
+      );
+
       const data = await res.json();
       if (res.ok) {
-        setMessage("Reset email sent! Check your inbox.");
+        setMessage("✅ Password reset email sent! Check your inbox.");
         setStep(2);
       } else {
         setMessage(data.message || "Failed to send reset email.");
       }
     } catch (error) {
-      setMessage("Error. Please try again.");
+      setMessage("❌ Network error. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  // Step 2: Reset password
+  // ✅ Step 2: Set new password
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
+
     try {
-      const res = await fetch("https://manwellback.onrender.com/api/account/reset-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token, newPassword }),
-      });
+      const res = await fetch(
+        `https://manwellback.onrender.com/api/auth/reset-password/${token}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: newPassword }),
+        }
+      );
+
       const data = await res.json();
       if (res.ok) {
-        setMessage("✅ Password reset successful!");
+        setMessage("✅ Password reset successful! You can now log in.");
         setStep(1);
         setEmail("");
         setToken("");
@@ -70,7 +78,7 @@ const ResetPassword = () => {
         setMessage(data.message || "Failed to reset password.");
       }
     } catch (error) {
-      setMessage("Error. Please try again.");
+      setMessage("❌ Error. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -80,6 +88,7 @@ const ResetPassword = () => {
     <div className="page-container">
       <h2>Reset Password</h2>
       {message && <p className="form-message">{message}</p>}
+
       {step === 1 ? (
         <form className="return-form" onSubmit={handleRequestReset}>
           <input
@@ -95,7 +104,6 @@ const ResetPassword = () => {
         </form>
       ) : (
         <form className="return-form" onSubmit={handleResetPassword}>
-          {/* If token is present in URL, hide token input */}
           {!token && (
             <input
               type="text"
