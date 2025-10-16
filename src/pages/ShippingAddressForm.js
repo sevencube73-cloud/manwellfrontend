@@ -65,7 +65,7 @@ const ShippingAddressForm = ({ onSubmit }) => {
         <div className="form-row">
           <select
             name="county"
-            value={formData.county}
+            value={formData.city}
             onChange={handleChange}
             required
           >
