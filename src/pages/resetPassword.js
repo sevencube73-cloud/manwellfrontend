@@ -1,73 +1,67 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./ResetPassword.css";
-import "./pages.css";
+import "./pages.css"
 
 const ResetPassword = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [step, setStep] = useState(1);
-  const [email, setEmail] = useState("");
+  const [step, setStep] = useState(1); // 1 = enter email, 2 = enter new password
   const [token, setToken] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ Detect token (handles both /reset-password/:token and ?token=)
+  // Detect token in the URL (e.g., /reset-password/12345token)
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const queryToken = params.get("token");
-
     const pathParts = location.pathname.split("/");
-    const pathToken =
-      pathParts.length > 2 && pathParts[2].length > 10 ? pathParts[2] : null;
+    const maybeTokenIndex = pathParts.indexOf("reset-password");
+    const maybeToken =
+      maybeTokenIndex !== -1 && pathParts[maybeTokenIndex + 1]
+        ? pathParts[maybeTokenIndex + 1]
+        : null;
 
-    const finalToken = queryToken || pathToken;
-
-    if (finalToken) {
-      setToken(finalToken);
-      setStep(2);
+    if (maybeToken && maybeToken.length > 10) {
+      setToken(maybeToken);
+      setStep(2); // Show new password form
     } else {
-      setStep(1);
+      setStep(1); // Show email entry
     }
-  }, [location]);
+  }, [location.pathname]);
 
-  // ✅ Use backend URL safely
-  const API_URL =
-    import.meta.env.VITE_API_BASE_URL ||
-    "https://manwellback.onrender.com"; // fallback for Netlify
-
-  // ✅ Step 1: Request reset email
+  // Handle email submission
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
 
     try {
-      const res = await fetch(`${API_URL}/api/auth/forgot-password`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/auth/forgot-password`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
+      );
       const data = await res.json();
 
       if (res.ok) {
-        setMessage("✅ Reset link sent! Check your inbox.");
+        setMessage("✅ Reset link sent! Check your email.");
       } else {
-        setMessage(data.message || "❌ Could not send reset link.");
+        setMessage(`❌ ${data.message || "Failed to send reset link."}`);
       }
     } catch (err) {
-      console.error(err);
-      setMessage("❌ Network error. Please try again.");
+      setMessage("❌ Something went wrong. Try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  // ✅ Step 2: Reset password
+  // Handle new password submission
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -80,23 +74,24 @@ const ResetPassword = () => {
     }
 
     try {
-      const res = await fetch(`${API_URL}/api/auth/reset-password/${token}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
-      });
-
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/auth/reset-password/${token}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password }),
+        }
+      );
       const data = await res.json();
 
       if (res.ok) {
         setMessage("✅ Password reset successful! Redirecting...");
         setTimeout(() => navigate("/login"), 2000);
       } else {
-        setMessage(data.message || "❌ Reset failed. Try again.");
+        setMessage(`❌ ${data.message || "Reset failed."}`);
       }
     } catch (err) {
-      console.error(err);
-      setMessage("❌ Error. Try again.");
+      setMessage("❌ Something went wrong. Try again.");
     } finally {
       setLoading(false);
     }
@@ -109,7 +104,8 @@ const ResetPassword = () => {
           {step === 1 ? "Forgot Password" : "Reset Password"}
         </h2>
 
-        {step === 1 ? (
+        {/* Step 1: Enter email */}
+        {step === 1 && (
           <form onSubmit={handleEmailSubmit} className="reset-form">
             <label>Email Address</label>
             <input
@@ -123,7 +119,10 @@ const ResetPassword = () => {
               {loading ? "Sending..." : "Send Reset Link"}
             </button>
           </form>
-        ) : (
+        )}
+
+        {/* Step 2: Enter new password */}
+        {step === 2 && (
           <form onSubmit={handlePasswordSubmit} className="reset-form">
             <label>New Password</label>
             <input
@@ -132,7 +131,6 @@ const ResetPassword = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              minLength="6"
             />
 
             <label>Confirm Password</label>
@@ -142,7 +140,6 @@ const ResetPassword = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              minLength="6"
             />
 
             <button type="submit" disabled={loading}>
@@ -153,6 +150,7 @@ const ResetPassword = () => {
 
         {message && <p className="reset-message">{message}</p>}
 
+        {/* Social Footer */}
         <div className="reset-footer">
           <p>© {new Date().getFullYear()} Manwell Store</p>
           <div className="social-links">
