@@ -12,23 +12,15 @@ const ResetPassword = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // ✅ Detect token automatically from URL (query ?token=abc or path /reset-password/abc)
+  // ✅ Only move to step 2 if a token exists in the URL
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const urlToken = params.get("token");
-
     if (urlToken) {
       setToken(urlToken);
       setStep(2);
-    } else {
-      const pathParts = location.pathname.split("/");
-      const possibleToken = pathParts[pathParts.length - 1];
-      if (possibleToken && possibleToken.length > 10) {
-        setToken(possibleToken);
-        setStep(2);
-      }
     }
-  }, [location]);
+  }, [location.search]);
 
   // ✅ Step 1: Request password reset email
   const handleRequestReset = async (e) => {
@@ -47,21 +39,11 @@ const ResetPassword = () => {
       );
 
       const data = await res.json();
-
       if (res.ok) {
-        setMessage("✅ Reset link sent! You can reset your password below.");
-        setStep(2);
-
-        // ✅ If backend returns a token, use it automatically
-        if (data.token) {
-          setToken(data.token);
-        } else {
-          setMessage(
-            "✅ Email sent! Please also check your inbox for the reset link."
-          );
-        }
+        setMessage("✅ Password reset link sent! Please check your email.");
+        // Stay on Step 1 until the user clicks the email link
       } else {
-        setMessage(data.message || "⚠️ Unable to send reset email.");
+        setMessage(data.message || "⚠️ Failed to send reset email.");
       }
     } catch (error) {
       setMessage("❌ Network error. Please try again.");
@@ -70,7 +52,7 @@ const ResetPassword = () => {
     }
   };
 
-  // ✅ Step 2: Reset password
+  // ✅ Step 2: Reset password with token
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -87,20 +69,14 @@ const ResetPassword = () => {
       );
 
       const data = await res.json();
-
       if (res.ok) {
         setMessage("✅ Password reset successful! Redirecting to login...");
-        setEmail("");
-        setToken("");
-        setNewPassword("");
-        setStep(1);
-
-        setTimeout(() => navigate("/login"), 2500);
+        setTimeout(() => navigate("/login"), 2000);
       } else {
         setMessage(data.message || "⚠️ Failed to reset password.");
       }
     } catch (error) {
-      setMessage("❌ Something went wrong. Try again.");
+      setMessage("❌ Error. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -109,14 +85,13 @@ const ResetPassword = () => {
   return (
     <div className="page-container">
       <h2 className="page-title">Reset Password</h2>
-
       {message && <p className="form-message">{message}</p>}
 
       {step === 1 ? (
         <form className="return-form" onSubmit={handleRequestReset}>
           <input
             type="email"
-            placeholder="Enter your email"
+            placeholder="Enter your email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -132,16 +107,6 @@ const ResetPassword = () => {
         </form>
       ) : (
         <form className="return-form" onSubmit={handleResetPassword}>
-          {!token && (
-            <input
-              type="text"
-              placeholder="Enter your reset token"
-              value={token}
-              onChange={(e) => setToken(e.target.value)}
-              required
-              className="form-input"
-            />
-          )}
           <input
             type="password"
             placeholder="Enter new password"
