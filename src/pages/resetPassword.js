@@ -13,17 +13,17 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // ✅ Detect token from URL (user clicked button in email)
+  // ✅ Detect token only if URL is /reset-password/<token>
   useEffect(() => {
     const pathParts = location.pathname.split("/");
-    const maybeToken = pathParts[pathParts.length - 1];
-    if (maybeToken && maybeToken.length > 10) {
-      setToken(maybeToken);
-      setStep(2); // Directly show Enter New Password
+    // Only detect token if the last segment is not "reset-password" itself
+    const lastSegment = pathParts[pathParts.length - 1];
+    if (lastSegment && lastSegment !== "reset-password") {
+      setToken(lastSegment);
+      setStep(2); // Show Enter New Password
     }
   }, [location.pathname]);
 
-  // Step 1: Request password reset email
   const handleRequestReset = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -52,7 +52,6 @@ const ResetPassword = () => {
     }
   };
 
-  // Step 2: Reset password using token
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setLoading(true);
