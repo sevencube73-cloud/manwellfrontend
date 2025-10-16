@@ -27,6 +27,8 @@ const ShippingAddressForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Shipping form data:", formData);
+
     onSubmit(formData); // city field already exists
   };
 
