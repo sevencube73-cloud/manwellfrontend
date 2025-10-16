@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./ResetPassword.css";
+import "./pages.css";
 
 const ResetPassword = () => {
   const location = useLocation();
