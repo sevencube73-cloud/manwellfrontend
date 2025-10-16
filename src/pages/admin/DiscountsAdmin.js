@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../utils/api';
 import './Discounts.css';
+import AdminNavbar from './AdminSidebar';
 
 export default function DiscountsAdmin() {
   const [discounts, setDiscounts] = useState([]);
@@ -100,6 +101,7 @@ export default function DiscountsAdmin() {
 
   return (
     <div className="discounts-admin">
+      <AdminNavbar />
       <h1>🎯 Discounts & Coupons Management</h1>
 
       {/* Discounts Section */}

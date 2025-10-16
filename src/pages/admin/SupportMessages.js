@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../../utils/api";
 import "./SupportMessages.css";
+import AdminNavbar from './AdminSidebar';
 
 const SupportMessages = () => {
   const [messages, setMessages] = useState([]);
@@ -19,6 +20,7 @@ const SupportMessages = () => {
 
   return (
     <div className="support-container">
+      <AdminNavbar />
       <h2>Customer Support Messages</h2>
 
       <table className="support-table">

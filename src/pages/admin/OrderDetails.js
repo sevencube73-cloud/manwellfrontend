@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../../utils/api';
 import './OrderDetails.css';
+import AdminNavbar from './AdminSidebar';
 
 const OrderDetails = () => {
   const { orderId } = useParams();
@@ -25,6 +26,7 @@ const OrderDetails = () => {
 
   return (
     <div className="order-details-container">
+      <AdminNavbar />
       <h2 className="order-details-title">Order #{order.orderId}</h2>
 
       {/* 🧍 Customer Info */}
