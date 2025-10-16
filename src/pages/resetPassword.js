@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./pages.css";
 
 const ResetPassword = () => {
@@ -7,21 +7,9 @@ const ResetPassword = () => {
   const [token, setToken] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(1); // ✅ Always start at step 1
   const [loading, setLoading] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
-
-  // ✅ When user clicks the email link, detect token from URL
-  // Example link: https://yourfrontend.com/reset-password/abcd1234
-  useEffect(() => {
-    const pathParts = location.pathname.split("/");
-    const maybeToken = pathParts[pathParts.length - 1];
-    if (maybeToken && maybeToken.length > 10) {
-      setToken(maybeToken);
-      setStep(2); // ✅ Directly show "enter new password"
-    }
-  }, [location.pathname]);
 
   // ✅ Step 1: Request password reset email
   const handleRequestReset = async (e) => {
@@ -41,7 +29,7 @@ const ResetPassword = () => {
 
       const data = await res.json();
       if (res.ok) {
-        setMessage("✅ Reset link sent to your email. Please check your inbox!");
+        setMessage("✅ Reset link sent to your email! Check your inbox.");
       } else {
         setMessage(data.message || "⚠️ Failed to send reset email.");
       }
@@ -52,7 +40,7 @@ const ResetPassword = () => {
     }
   };
 
-  // ✅ Step 2: Reset password using token from URL
+  // ✅ Step 2: Reset password using token
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setLoading(true);
