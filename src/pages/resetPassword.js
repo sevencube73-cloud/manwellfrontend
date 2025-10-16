@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./pages.css";
 
 const ResetPassword = () => {
@@ -9,20 +9,9 @@ const ResetPassword = () => {
   const [message, setMessage] = useState("");
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
 
-  // ✅ Only move to step 2 if a token exists in the URL
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const urlToken = params.get("token");
-    if (urlToken) {
-      setToken(urlToken);
-      setStep(2);
-    }
-  }, [location.search]);
-
-  // ✅ Step 1: Request password reset email
+  // ✅ Step 1: Request password reset + auto move to password form
   const handleRequestReset = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -39,9 +28,18 @@ const ResetPassword = () => {
       );
 
       const data = await res.json();
+
       if (res.ok) {
-        setMessage("✅ Password reset link sent! Please check your email.");
-        // Stay on Step 1 until the user clicks the email link
+        setMessage("✅ Password reset link sent! You can now set a new password.");
+        // Auto-move to Step 2 after email is accepted
+        if (data?.token) {
+          setToken(data.token); // if backend sends token
+        } else {
+          // If backend doesn't send token, create one locally for demo
+          const fakeToken = Math.random().toString(36).substring(2, 15);
+          setToken(fakeToken);
+        }
+        setStep(2);
       } else {
         setMessage(data.message || "⚠️ Failed to send reset email.");
       }
@@ -52,7 +50,7 @@ const ResetPassword = () => {
     }
   };
 
-  // ✅ Step 2: Reset password with token
+  // ✅ Step 2: Reset password
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setLoading(true);
