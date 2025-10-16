@@ -37,7 +37,7 @@ const Shipping = () => (
         <h2>💬 Need Help?</h2>
         <p>
           For any questions or shipping inquiries, feel free to reach out at{" "}
-          <a href="mailto:support@muzamilafey.digital">support@muzamilafey.digital</a>.
+          <a href="mailto:manwellstore@gmail.com">manwellstore@gmail.com</a>.
         </p>
       </div>
     </div>

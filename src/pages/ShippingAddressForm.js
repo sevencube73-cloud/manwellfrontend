@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import "./ShippingAddressForm.css";
 
+const countiesInKenya = [
+  "Baringo", "Bomet", "Bungoma", "Busia", "Elgeyo-Marakwet", "Embu",
+  "Garissa", "Homa Bay", "Isiolo", "Kajiado", "Kakamega", "Kericho",
+  "Kiambu", "Kilifi", "Kirinyaga", "Kisii", "Kisumu", "Kitui",
+  "Kwale", "Laikipia", "Lamu", "Machakos", "Makueni", "Mandera",
+  "Marsabit", "Meru", "Migori", "Mombasa", "Murang'a", "Nairobi",
+  "Nakuru", "Nandi", "Narok", "Nyamira", "Nyandarua", "Nyeri",
+  "Samburu", "Siaya", "Taita-Taveta", "Tana River", "Tharaka-Nithi",
+  "Trans Nzoia", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot"
+];
+
 const ShippingAddressForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
     address: "",
-    city: "",
+    county: "",
     postalCode: "",
-    country: "",
+    country: "Kenya",
   });
 
   const handleChange = (e) => {
@@ -52,14 +63,20 @@ const ShippingAddressForm = ({ onSubmit }) => {
         ></textarea>
 
         <div className="form-row">
-          <input
-            type="text"
-            name="city"
-            placeholder="City"
-            value={formData.city}
+          <select
+            name="county"
+            value={formData.county}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="">Select County</option>
+            {countiesInKenya.map((county) => (
+              <option key={county} value={county}>
+                {county}
+              </option>
+            ))}
+          </select>
+
           <input
             type="text"
             name="postalCode"
@@ -73,10 +90,8 @@ const ShippingAddressForm = ({ onSubmit }) => {
         <input
           type="text"
           name="country"
-          placeholder="Country"
           value={formData.country}
-          onChange={handleChange}
-          required
+          readOnly
         />
 
         <button type="submit" className="shipping-btn">
