@@ -9,9 +9,9 @@ const HomePage = () => {
     <div className="products-section">
       {/* Hero Section */}
       <section className="hero-section">
-        <h2 className="section-title">MANWELL STORE</h2>
+        <h2 className="section-title">Welcome, MANWELL STORE</h2>
         <p className="hero-tagline">
-          Premium fashion in Eastleigh — where style meets quality.
+          {/* Premium fashion in Eastleigh — where style meets quality. */}
         </p>
 
         {/* ✅ Call to Order Button */}
