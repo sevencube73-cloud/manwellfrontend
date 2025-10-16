@@ -4,14 +4,13 @@ import "./pages.css";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
-  const [token, setToken] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // ✅ Step 1: Request password reset + auto move to password form
+  // ✅ Step 1: Request password reset
   const handleRequestReset = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -30,15 +29,8 @@ const ResetPassword = () => {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage("✅ Password reset link sent! You can now set a new password.");
-        // Auto-move to Step 2 after email is accepted
-        if (data?.token) {
-          setToken(data.token); // if backend sends token
-        } else {
-          // If backend doesn't send token, create one locally for demo
-          const fakeToken = Math.random().toString(36).substring(2, 15);
-          setToken(fakeToken);
-        }
+        setMessage("✅ Reset email sent! You can now enter a new password.");
+        // ✅ Move to step 2 immediately
         setStep(2);
       } else {
         setMessage(data.message || "⚠️ Failed to send reset email.");
@@ -50,19 +42,20 @@ const ResetPassword = () => {
     }
   };
 
-  // ✅ Step 2: Reset password
+  // ✅ Step 2: Reset password (auto-detect token from backend)
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
 
     try {
+      // ✅ We will request backend to find token by email (MVP shortcut)
       const res = await fetch(
-        `https://manwellback.onrender.com/api/auth/reset-password/${token}`,
+        `https://manwellback.onrender.com/api/auth/reset-password`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ password: newPassword }),
+          body: JSON.stringify({ email, password: newPassword }),
         }
       );
 
