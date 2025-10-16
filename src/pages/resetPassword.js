@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./pages.css";
 
 const ResetPassword = () => {
@@ -7,11 +7,22 @@ const ResetPassword = () => {
   const [token, setToken] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [step, setStep] = useState(1); // ✅ Always start at step 1
+  const [step, setStep] = useState(1); // Always start with enter email
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
 
-  // ✅ Step 1: Request password reset email
+  // ✅ If URL contains a token (clicked from email), automatically go to step 2
+  useEffect(() => {
+    const pathParts = location.pathname.split("/");
+    const maybeToken = pathParts[pathParts.length - 1];
+    if (maybeToken && maybeToken.length > 10) {
+      setToken(maybeToken);
+      setStep(2); // Show enter new password directly
+    }
+  }, [location.pathname]);
+
+  // Step 1: Request password reset email
   const handleRequestReset = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -40,7 +51,7 @@ const ResetPassword = () => {
     }
   };
 
-  // ✅ Step 2: Reset password using token
+  // Step 2: Reset password using token
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setLoading(true);
