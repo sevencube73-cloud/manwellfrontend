@@ -7,7 +7,7 @@ const HomePage = () => {
     <div className="products-section">
       {/* Hero Section */}
       <section>
-        <h2 className="section-title">Welcome.Manwell Store</h2>
+        <h2 className="section-title">Welcome, Manwell Store</h2>
         <ProductList />
       </section>
     </div>
