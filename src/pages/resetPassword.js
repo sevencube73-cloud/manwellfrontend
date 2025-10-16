@@ -7,18 +7,19 @@ const ResetPassword = () => {
   const [token, setToken] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [step, setStep] = useState(1); // Always start with enter email
+  const [step, setStep] = useState(1); // Step 1 = Enter Email, 2 = Confirm Email Sent, 3 = Enter New Password
   const [loading, setLoading] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
 
-  // ✅ If URL contains a token (clicked from email), automatically go to step 2
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // ✅ Detect token from URL (clicked from email link)
   useEffect(() => {
     const pathParts = location.pathname.split("/");
     const maybeToken = pathParts[pathParts.length - 1];
     if (maybeToken && maybeToken.length > 10) {
       setToken(maybeToken);
-      setStep(2); // Show enter new password directly
+      setStep(3); // Directly show Enter New Password
     }
   }, [location.pathname]);
 
@@ -41,6 +42,7 @@ const ResetPassword = () => {
       const data = await res.json();
       if (res.ok) {
         setMessage("✅ Reset link sent to your email! Check your inbox.");
+        setStep(2); // Show "confirm email received" step
       } else {
         setMessage(data.message || "⚠️ Failed to send reset email.");
       }
@@ -51,7 +53,7 @@ const ResetPassword = () => {
     }
   };
 
-  // Step 2: Reset password using token
+  // Step 3: Reset password using token
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -86,7 +88,7 @@ const ResetPassword = () => {
       <h2 className="page-title">Reset Password</h2>
       {message && <p className="form-message">{message}</p>}
 
-      {step === 1 ? (
+      {step === 1 && (
         <form className="return-form" onSubmit={handleRequestReset}>
           <input
             type="email"
@@ -104,7 +106,23 @@ const ResetPassword = () => {
             {loading ? "Sending..." : "Send Reset Email"}
           </button>
         </form>
-      ) : (
+      )}
+
+      {step === 2 && (
+        <div className="return-form">
+          <p>
+            ✅ We sent a reset link to <strong>{email}</strong>. Have you received it?
+          </p>
+          <button
+            className="form-button"
+            onClick={() => setStep(3)}
+          >
+            Yes, reset my password
+          </button>
+        </div>
+      )}
+
+      {step === 3 && (
         <form className="return-form" onSubmit={handleResetPassword}>
           <input
             type="password"
