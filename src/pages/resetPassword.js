@@ -1,16 +1,29 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./pages.css";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
+  const [token, setToken] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
 
-  // ✅ Step 1: Request password reset
+  // ✅ When user clicks the email link, detect token from URL
+  // Example link: https://yourfrontend.com/reset-password/abcd1234
+  useEffect(() => {
+    const pathParts = location.pathname.split("/");
+    const maybeToken = pathParts[pathParts.length - 1];
+    if (maybeToken && maybeToken.length > 10) {
+      setToken(maybeToken);
+      setStep(2); // ✅ Directly show "enter new password"
+    }
+  }, [location.pathname]);
+
+  // ✅ Step 1: Request password reset email
   const handleRequestReset = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -27,11 +40,8 @@ const ResetPassword = () => {
       );
 
       const data = await res.json();
-
       if (res.ok) {
-        setMessage("✅ Reset email sent! You can now enter a new password.");
-        // ✅ Move to step 2 immediately
-        setStep(2);
+        setMessage("✅ Reset link sent to your email. Please check your inbox!");
       } else {
         setMessage(data.message || "⚠️ Failed to send reset email.");
       }
@@ -42,32 +52,31 @@ const ResetPassword = () => {
     }
   };
 
-  // ✅ Step 2: Reset password (auto-detect token from backend)
+  // ✅ Step 2: Reset password using token from URL
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
 
     try {
-      // ✅ We will request backend to find token by email (MVP shortcut)
       const res = await fetch(
-        `https://manwellback.onrender.com/api/auth/reset-password`,
+        `https://manwellback.onrender.com/api/auth/reset-password/${token}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password: newPassword }),
+          body: JSON.stringify({ password: newPassword }),
         }
       );
 
       const data = await res.json();
       if (res.ok) {
         setMessage("✅ Password reset successful! Redirecting to login...");
-        setTimeout(() => navigate("/login"), 2000);
+        setTimeout(() => navigate("/login"), 2500);
       } else {
         setMessage(data.message || "⚠️ Failed to reset password.");
       }
     } catch (error) {
-      setMessage("❌ Error. Please try again.");
+      setMessage("❌ Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
