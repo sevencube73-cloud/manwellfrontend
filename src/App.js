@@ -53,6 +53,10 @@ import ManwellPay from "./pages/manderapay";
 import ManwellFood from "./pages/manderafood";
 import ManwellTravel from "./pages/ManderifyTravel";
 
+
+
+
+
 // ✅ PrivateRoute for v6
 const PrivateRoute = ({ children, roles }) => {
   const { user } = React.useContext(AuthContext);
@@ -106,7 +110,10 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin/support" element={<SupportMessages />} />
 
-
+           
+            {/* other routes */}
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
+          
             
 
 
