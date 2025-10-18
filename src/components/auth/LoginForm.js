@@ -59,12 +59,12 @@ const LoginForm = () => {
         </div>
       )}
       <p style={{ marginTop: '18px', fontSize: '15px' }}>
-        Don’t have an account?{' '}
+        {' '}
         <Link to="/register" className="auth-form-link">Register</Link>
       </p>
       <p style={{ marginTop: '18px', fontSize: '15px' }}>
-        Forgot password?{' '}
-        <Link to="/reset-password" className="auth-form-link">reset password</Link>
+        {' '}
+        <Link to="/reset-password" className="auth-form-link">Reset password</Link>
       </p>
     </div>
   );
