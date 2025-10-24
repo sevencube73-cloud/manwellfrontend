@@ -4,6 +4,17 @@ import { Helmet } from "react-helmet";
 import "./HomePage.css";
 
 const HomePage = () => {
+  const getTimeBasedGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) {
+      return "Good Morning";
+    } else if (hour >= 12 && hour < 18) {
+      return "Good Afternoon";
+    } else {
+      return "Good Evening";
+    }
+  };
+
   return (
     <div className="products-section">
       <Helmet>
@@ -31,7 +42,8 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <section>
-        <h2 className="section-title">Welcome, Manwell Store</h2>
+        <h2 className="section-title">{getTimeBasedGreeting()}, Manwell Store</h2>
+        <p className="section-tagline">Your one-stop destination for trendy fashion in Eastleigh</p>
         <ProductList />
       </section>
     </div>
