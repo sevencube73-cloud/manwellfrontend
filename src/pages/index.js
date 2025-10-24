@@ -42,8 +42,8 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <section>
-        <h2 className="section-title">{getTimeBasedGreeting()}, Manwell Store</h2>
-        <p className="section-tagline">Your one-stop destination for trendy fashion in Eastleigh</p>
+        <h2 className="section-title">{getTimeBasedGreeting()}</h2>
+        <p className="section-tagline">Manwell Store, Your one-stop destination for trendy fashion in Eastleigh</p>
         <ProductList />
       </section>
     </div>
