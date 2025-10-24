@@ -84,17 +84,15 @@ const ProductCard = ({ product }) => {
   const hasDiscount = discountedPrice < originalPrice;
 
   return (
-    <div className="shop-item-card">
-      <Link to={`/product/${product._id}`} className="shop-item-link">
-        <div className="shop-item-image-container">
-          {hasDiscount && <span className="discount-badge">{discountLabel}</span>}
-          <img
-            src={product.image || product.images?.[0]?.url || ""}
-            alt={product.name}
-            className="shop-item-image"
-          />
-        </div>
-      </Link>
+    <Link to={`/product/${product._id}`} className="shop-item-card">
+      <div className="shop-item-image-container">
+        {hasDiscount && <span className="discount-badge">{discountLabel}</span>}
+        <img
+          src={product.image || product.images?.[0]?.url || ""}
+          alt={product.name}
+          className="shop-item-image"
+        />
+      </div>
 
       <div className="shop-item-info">
         <h3 className="shop-item-name">{product.name}</h3>
@@ -109,14 +107,8 @@ const ProductCard = ({ product }) => {
             <span>KES {originalPrice.toFixed(2)}</span>
           )}
         </div>
-
-        <Link to={`/product/${product._id}`} className="shop-item-btn" >
-          Add to Cart
-        </Link>
-
-        {showToast && <div className="shop-item-toast">Added to cart</div>}
       </div>
-    </div>
+    </Link>
   );
 };
 

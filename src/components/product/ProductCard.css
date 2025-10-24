@@ -1,4 +1,5 @@
 .shop-item-card {
+  display: block;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
@@ -6,6 +7,8 @@
   text-align: center;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .shop-item-card:hover {
