@@ -465,6 +465,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  background-color: #fff;
   background-position: center;
   background-repeat: no-repeat;
   padding: 2rem;
