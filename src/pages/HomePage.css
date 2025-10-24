@@ -58,9 +58,10 @@ body {
   justify-content: flex-start;
   padding: 40px;
   margin-bottom: 30px;
-  background-image: url('https://res.cloudinary.com/dummyimageurl/banner-image.jpg');
+  background-image: url('https://github.com/Muzamilafey/myassets/blob/main/Mandera%20-%201.png?raw=true');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   min-height: 250px;
 }
 
@@ -382,6 +383,8 @@ body {
   align-items: center;
   justify-content: center;
   transition: background-image 0.5s ease-in-out;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .hero-content {
@@ -465,7 +468,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background-color: #fff;
+  background-color: #7e7cd8;
   padding: 2rem;
   overflow: hidden;
 }
