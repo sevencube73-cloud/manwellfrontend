@@ -5,6 +5,7 @@ import './ProductList.css';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([]);
@@ -24,12 +25,15 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        setLoading(true);
         const { data } = await api.get('/products', {
           params: { keyword, category },
         });
         setProducts(data);
+        setLoading(false);
       } catch (err) {
         console.error('Error loading products:', err);
+        setLoading(false);
       }
     };
     fetchProducts();
@@ -63,7 +67,19 @@ const ProductList = () => {
 
       {/* 🛍 Products Grid */}
       <div className="products-grid">
-        {products.length > 0 ? (
+        {loading ? (
+          // show skeletons while loading
+          Array.from({ length: 8 }).map((_, i) => (
+            <div className="skeleton-card" key={i}>
+              <div className="skeleton-image" />
+              <div className="skeleton-body">
+                <div className="skeleton-line short" />
+                <div className="skeleton-line" />
+                <div className="skeleton-line tiny" />
+              </div>
+            </div>
+          ))
+        ) : products.length > 0 ? (
           products.map((product) => (
             <ProductCard
               key={product._id}
