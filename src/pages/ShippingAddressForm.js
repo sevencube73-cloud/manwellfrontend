@@ -11,12 +11,30 @@ const kenyaCounties = [
   "Trans Nzoia", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot"
 ];
 
+// East African countries (common grouping plus nearby island nations)
+const eastAfricanCountries = [
+  "Kenya",
+  "Uganda",
+  "Tanzania",
+  "Rwanda",
+  "Burundi",
+  "South Sudan",
+  "Ethiopia",
+  "Somalia",
+  "Djibouti",
+  "Eritrea",
+  "Seychelles",
+  "Comoros",
+  "Madagascar",
+  "Mauritius"
+];
+
 const ShippingAddressForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
     address: "",
-    city: "", // will hold county
+    city: "", // will hold county or city
     postalCode: "",
     country: "Kenya",
   });
@@ -64,20 +82,31 @@ const ShippingAddressForm = ({ onSubmit }) => {
         ></textarea>
 
         <div className="form-row">
-          {/* Dropdown for Kenyan counties */}
-          <select
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select County</option>
-            {kenyaCounties.map((county) => (
-              <option key={county} value={county}>
-                {county}
-              </option>
-            ))}
-          </select>
+          {/* County selector when Kenya is selected, otherwise free-text city/region */}
+          {formData.country === "Kenya" ? (
+            <select
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select County</option>
+              {kenyaCounties.map((county) => (
+                <option key={county} value={county}>
+                  {county}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <input
+              type="text"
+              name="city"
+              placeholder="City / Region"
+              value={formData.city}
+              onChange={handleChange}
+              required
+            />
+          )}
 
           <input
             type="text"
@@ -89,12 +118,16 @@ const ShippingAddressForm = ({ onSubmit }) => {
           />
         </div>
 
-        <input
-          type="text"
-          name="country"
-          value={formData.country}
-          readOnly
-        />
+        {/* Country select: East African countries + UK + US */}
+        <select name="country" value={formData.country} onChange={handleChange} required>
+          {eastAfricanCountries.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="United States">United States</option>
+        </select>
 
         <button type="submit" className="shipping-btn">
           Continue to Payment
