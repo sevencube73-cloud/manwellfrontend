@@ -6,7 +6,7 @@ import "./Payment.css";
 
 const Payment = ({ shippingAddress, discount = { type: null, value: 0 }, couponCode = null }) => {
   const { cartItems, clearCart } = useContext(CartContext);
-  const [paymentMethod, setPaymentMethod] = useState("Mpesa");
+  const [paymentMethod, setPaymentMethod] = useState("Pay on Delivery");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -133,7 +133,7 @@ const Payment = ({ shippingAddress, discount = { type: null, value: 0 }, couponC
       </div>
 
       <div className="payment-options">
-        <label className="option">
+        <label className="option" style={{ display: "none" }}>
           <input
             type="radio"
             name="paymentMethod"
@@ -156,7 +156,7 @@ const Payment = ({ shippingAddress, discount = { type: null, value: 0 }, couponC
       </div>
 
       {paymentMethod === "Mpesa" && (
-        <div className="mpesa-input-box">
+        <div className="mpesa-input-box" style={{ display: "none" }}>
           <label>Enter M-PESA Number</label>
           <input
             type="tel"

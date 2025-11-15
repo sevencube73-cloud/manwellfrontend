@@ -37,7 +37,7 @@ const OrdersPage = () => {
         {orders.map((order) => (
           <div key={order._id} className="order-card">
             <p><strong>Order ID:</strong> {order.orderId}</p>
-            <p><strong>Total:</strong> ${(Number(order?.totalPrice) || 0).toFixed(2)}</p>
+            <p><strong>Total:</strong> KES {(Number(order?.totalPrice) || 0).toFixed(2)}</p>
             <p>
               <strong>Status:</strong>
               <span
@@ -64,7 +64,7 @@ const OrdersPage = () => {
                       <div><strong>Description:</strong> {item.product.description}</div>
                     )}
                     <div><strong>Quantity:</strong> {item.qty}</div>
-                    <div><strong>Price:</strong> ${(Number(item?.price) || 0).toFixed(2)}</div>
+                    <div><strong>Price:</strong> KES {(Number(item?.price) || 0).toFixed(2)}</div>
                   </div>
                 ))}
               </div>
