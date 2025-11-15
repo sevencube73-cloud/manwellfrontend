@@ -46,7 +46,7 @@ const Footer = () => {
           <ul>
             <li><FaStore /> Fashion Store</li>
             <li><FaMapMarkerAlt /> 6th Street Tower (Eastleigh), Nairobi</li>
-            <li><FaPhoneAlt /> +254 722 617362</li>
+            <li><FaPhoneAlt /> +254 794 701 113</li>
             <li><FaEnvelope /> manwellstore@gmail.com</li>
           </ul>
         </div>

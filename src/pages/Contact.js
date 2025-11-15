@@ -31,7 +31,7 @@ const Contact = () => {
         <div className="contact-info">
           <h2>Our Contact Details</h2>
           <p><strong> Address:</strong> Eastleigh, Nairobi, Kenya</p>
-          <p><strong> Phone:</strong> +254 712 345 678</p>
+          <p><strong> Phone:</strong> 0794 701 113</p>
           <p><strong> Email:</strong> manwellstore@gmail.com</p>
           <p><strong> Working Hours:</strong> Mon - Sat: 9am - 7pm</p>
         </div>

@@ -99,7 +99,7 @@ export default function AboutManwell() {
             <div className="visit-details">
               <div><h4>Address</h4><p>Eastleigh, Nairobi, Kenya — (Find us on the main market street)</p></div>
               <div><h4>Store Hours</h4><p>Mon–Sat: 9:00 AM — 7:00 PM • Sun: 10:00 AM — 4:00 PM</p></div>
-              <div><h4>Contact</h4><p>Phone: +254 700 000 000 • Email: manwellstore@gmail.com</p></div>
+              <div><h4>Contact</h4><p>Phone: +254 794 701 113 • Email: manwellstore@gmail.com</p></div>
               <a href="mailto:manwellstore@gmail.com" className="btn-secondary">Email Us</a>
             </div>
           </div>
