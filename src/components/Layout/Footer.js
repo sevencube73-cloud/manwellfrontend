@@ -58,7 +58,7 @@ const Footer = () => {
         <p className="footer-credit">
           Designed & Developed by{" "}
           <a
-            href="https://manderasoftwares.netlify.app"
+            href="https://manderasoft.onrender.com"
             target="_blank"
             rel="noopener noreferrer"
           >
